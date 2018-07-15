@@ -33,6 +33,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'factory_bot_rails'
   gem 'pry-byebug'
 end
 
@@ -48,7 +49,6 @@ group :test do
   gem 'ffaker'
   gem 'database_cleaner'
   gem 'shoulda-matchers'
-  gem 'factory_girl_rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
