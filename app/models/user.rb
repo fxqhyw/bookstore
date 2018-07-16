@@ -2,5 +2,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :password, length: { minimum: 8 }
+  validates_length_of :password, in: 8..30
 end
