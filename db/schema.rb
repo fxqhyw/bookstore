@@ -1,4 +1,4 @@
-ActiveRecord::Schema.define(version: 2018_07_15_172338) do
+ActiveRecord::Schema.define(version: 2018_07_16_104836) do
   enable_extension "plpgsql"
 
   create_table "authors", force: :cascade do |t|
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(version: 2018_07_15_172338) do
     t.decimal "depth", precision: 4, scale: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_books_on_category_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "books", "categories"
 end
