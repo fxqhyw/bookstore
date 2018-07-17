@@ -47,6 +47,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rubocop'
   gem 'pry-rails'
+  gem 'rails_refactor'
 end
 
 group :test do
