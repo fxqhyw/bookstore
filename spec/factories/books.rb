@@ -10,6 +10,6 @@ FactoryBot.define do
     height 6.9
     width 5.1
     depth 0.8
-    category_id 1
+    category_id { FactoryBot.create(:category).id }
   end
 end

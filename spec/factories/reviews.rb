@@ -5,6 +5,6 @@ FactoryBot.define do
     title FFaker::Lorem.phrase
     description FFaker::Lorem.paragraphs
     rating 1
-    status "MyString"
+    status FFaker::Lorem.phrase
   end
 end
