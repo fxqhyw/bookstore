@@ -4,13 +4,14 @@ User.create(email: 'test@test.com', password: '12345678', password_confirmation:
 
 Category.create([{ title: 'Mobile Development' }, { title: 'Web Design' }, { title: 'Photo' }, { title: 'Web Development' }])
 materials = ['paper, brick, hardcove', 'paper stocks, glossym', 'lace, slate, sand', 'lace, man-made fibres']
+prices = [39.99, 59.99, 25.99, 69.99]
 
 Category.find_each do |category|
-  15.times do
+  16.times do
     book = Book.create(title: FFaker::Book.title,
                        description: FFaker::Book.description,
                        published_at: FFaker::Vehicle.year,
-                       price: 39.99,
+                       price: prices[rand(0..3)],
                        materials: materials[rand(0..3)],
                        height: 6.9,
                        width: 5.1,
