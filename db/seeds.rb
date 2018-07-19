@@ -9,7 +9,7 @@ prices = [39.99, 59.99, 25.99, 69.99]
 Category.find_each do |category|
   16.times do
     book = Book.create(title: FFaker::Book.title,
-                       description: FFaker::Book.description,
+                       description: FFaker::Lorem.paragraph,
                        published_at: FFaker::Vehicle.year,
                        price: prices[rand(0..3)],
                        materials: materials[rand(0..3)],

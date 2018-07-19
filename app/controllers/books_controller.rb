@@ -3,6 +3,10 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.page(params[:page])
+    respond_to do |format|
+      format.html { @books }
+      format.js { @books }
+    end
   end
 
   def show
