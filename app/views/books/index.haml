@@ -61,10 +61,7 @@
           %a{href: "#"} Price: Low to hight
         %li
           %a{href: "#"} Price: Hight to low
-  .mb-120
-    - @books.in_groups_of(4, false) do |group|
-      .row
-        - group.each do |book|
-          = render book
-  .text-center
-    %button.btn.btn-primary View More
+  .mb-120#books-container
+    = render 'books'
+  .text-center#view-more-books-container
+    = link_to_next_page @books, 'View More', id: 'view-more-books', class: 'btn btn-primary', remote: true

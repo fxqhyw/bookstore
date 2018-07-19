@@ -9,7 +9,8 @@
           %a.thumb-hover-link{href: "#"}
             %i.fa.fa-shopping-cart.thumb-icon
   .general-thumb-info
-    %p.title= book.title
-    %p.font-16.in-gold-500= price_to_euro(book.price)
+    .space-between
+      %p.title= book.title
+      %p.font-16.in-gold-500= price_to_euro(book.price)
     %span.divider-sm
     %p.lead.small= authors_list(book)

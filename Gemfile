@@ -12,6 +12,7 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
+gem 'kaminari'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
