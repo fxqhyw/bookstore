@@ -6,32 +6,17 @@
         %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
           Newest first
           %i.fa.fa-angle-down.dropdown-icon.pull-right
-        %ul.dropdown-menu
-          %li
-            %a{href: "#"} Newest first
-          %li
-            %a{href: "#"} Popular first
-          %li
-            %a{href: "#"} Price: Low to hight
-          %li
-            %a{href: "#"} Price: Hight to low
+        = render 'filter'
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
-        %a.filter-link{href: "#"}
+        = link_to catalog_path, class: "filter-link" do
           All
-          %span.badge.general-badge 135
-      %li.mr-35
-        %a.filter-link{href: "#"}
-          Mobile Development
-          %span.badge.general-badge 135
-      %li.mr-35
-        %a.filter-link{href: "#"}
-          Photo
-          %span.badge.general-badge 135
-      %li.mr-35
-        %a.filter-link{href: "#"}
-          Web Design
-          %span.badge.general-badge 135
+          %span.badge.general-badge= @categories.sum(&:books_count)
+      - @categories.each do |category|
+        %li.mr-35
+          = link_to catalog_path(category: category.id), class: "filter-link" do
+            = category.title
+            %span.badge.general-badge= category.books_count
   .dropdowns.mb-25.visible-xs
     %p.lead.small.mb-10 Filter by category
     .dropdown
@@ -40,27 +25,16 @@
         %i.fa.fa-angle-down.dropdown-icon.pull-right
       %ul.dropdown-menu
         %li
-          %a{href: "#"} Newest first
-        %li
-          %a{href: "#"} Popular first
-        %li
-          %a{href: "#"} Price: Low to hight
-        %li
-          %a{href: "#"} Price: Hight to low
+          = link_to "All (#{@categories.sum(&:books_count)})", catalog_path          
+        - @categories.each do |category|
+          %li
+            = link_to "#{category.title} (#{category.books_count})", catalog_path(category: category.id)
     %p.lead.small.mb-10 Sort by
     .dropdown
       %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
         Newest first
         %i.fa.fa-angle-down.dropdown-icon.pull-right
-      %ul.dropdown-menu
-        %li
-          %a{href: "#"} Newest first
-        %li
-          %a{href: "#"} Popular first
-        %li
-          %a{href: "#"} Price: Low to hight
-        %li
-          %a{href: "#"} Price: Hight to low
+      = render 'filter'
   .mb-120#books-container
     = render 'books'
   .text-center#view-more-books-container
