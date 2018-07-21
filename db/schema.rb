@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_21_151653) do
+ActiveRecord::Schema.define(version: 2018_07_21_153701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,35 @@ ActiveRecord::Schema.define(version: 2018_07_21_151653) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "book_id"
+    t.bigint "cart_id"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_order_items_on_book_id"
+    t.index ["cart_id"], name: "index_order_items_on_cart_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.decimal "total_price"
+    t.string "status"
+    t.bigint "shipping_address_id"
+    t.bigint "billing_address_id"
+    t.bigint "user_id"
+    t.bigint "delivery_id"
+    t.bigint "credit_card_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["billing_address_id"], name: "index_orders_on_billing_address_id"
+    t.index ["credit_card_id"], name: "index_orders_on_credit_card_id"
+    t.index ["delivery_id"], name: "index_orders_on_delivery_id"
+    t.index ["shipping_address_id"], name: "index_orders_on_shipping_address_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -132,6 +161,14 @@ ActiveRecord::Schema.define(version: 2018_07_21_151653) do
 
   add_foreign_key "books", "categories"
   add_foreign_key "carts", "users"
+  add_foreign_key "order_items", "books"
+  add_foreign_key "order_items", "carts"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "billing_addresses"
+  add_foreign_key "orders", "credit_cards"
+  add_foreign_key "orders", "deliveries"
+  add_foreign_key "orders", "shipping_addresses"
+  add_foreign_key "orders", "users"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
 end
