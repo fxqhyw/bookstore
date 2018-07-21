@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :delivery do
-    method "MyString"
-    price "9.99"
-    duration "MyString"
+    method { FFaker::Lorem.word }
+    price { rand 4.99..14.99 }
+    duration 'few days'
   end
 end
