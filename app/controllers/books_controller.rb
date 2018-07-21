@@ -3,7 +3,7 @@ class BooksController < ApplicationController
 
   def index
     @categories = Category.with_books_count
-    @books = BooksFilter.new(Book.all, permited_params).call.page(params[:page])
+    @books = BooksFilter.new(params: permited_params).call.page(params[:page])
   end
 
   def show

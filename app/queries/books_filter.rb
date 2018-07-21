@@ -1,5 +1,5 @@
 class BooksFilter
-  def initialize(books, params)
+  def initialize(books: Book.all, params:)
     @books = books
     @params = params
   end

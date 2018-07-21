@@ -10,7 +10,7 @@ Category.find_each do |category|
   16.times do
     book = Book.create(title: FFaker::Book.title,
                        description: FFaker::Lorem.paragraph,
-                       published_at: FFaker::Vehicle.year,
+                       published_at: rand(1999..2018),
                        price: prices[rand(0..3)],
                        materials: materials[rand(0..3)],
                        height: 6.9,
