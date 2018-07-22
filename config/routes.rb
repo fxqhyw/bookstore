@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root 'home#index'
   match '/catalog', to: 'books#index', via: 'get'
   resources :books
+  resource :cart, only: [:show]
 end
