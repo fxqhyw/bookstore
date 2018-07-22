@@ -1,5 +1,6 @@
 class Book < ApplicationRecord
   has_and_belongs_to_many :authors
+  has_many :order_items
   belongs_to :category
 
   validates :title, :description, :price, :published_at, :height, :width, :depth, presence: true
