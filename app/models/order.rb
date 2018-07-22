@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  has_many :order_items
+  has_many :order_items, dependent: :destroy
   belongs_to :shipping_address
   belongs_to :billing_address
   belongs_to :user
