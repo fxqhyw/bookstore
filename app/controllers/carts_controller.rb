@@ -4,7 +4,7 @@ class CartsController < ApplicationController
   end
 
   def update
-    current_order.update_attributes(coupon_id: coupon.id) if coupon
+    current_order.update_attributes(coupon_id: @coupon.id) if coupon
     redirect_to cart_path
   end
 
