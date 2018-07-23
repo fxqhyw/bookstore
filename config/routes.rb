@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   root 'home#index'
   match '/catalog', to: 'books#index', via: 'get'
   resources :books
+  resources :order_items, only: [:create, :update, :destroy]
   resource :cart, only: [:show]
 end

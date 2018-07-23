@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_order
-  
-  def current_order
-    Order.find_or_initialize_by(id: session[:order_id])
+  helper_method :current_cart
+
+  def current_cart
+    if user_signed_in?
+      current_user.cart ||= Cart.create(user_id: current_user.id)
+    else
+      cart = Cart.find_by_id(session[:cart_id]) || Cart.create
+      session[:cart_id] = cart.id
+      cart
+    end
   end
 end

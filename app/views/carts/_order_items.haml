@@ -1,0 +1,34 @@
+.hidden-xs
+  %table.table.table-hover
+    %tr.no-hover
+      %th.col-pic.pl-0
+        %span.in-grey-600 Product
+      %th.col-title
+      %th.col-price
+        %span.in-grey-600 Price
+      %th.col-quantity
+        %span.in-grey-600 Quantity
+      %th.col-total
+        %span.in-grey-600 SubTotal
+      %th.col-close
+    - @order_items.each do |item|
+      %tr
+        %td
+          .general-img-wrap-table
+            %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+        %td
+          %p.title= item.book.title
+        %td
+          %span.font-16.in-gold-500= price_to_euro(item.book.price)
+        %td
+          .input-group
+            %a.input-link{href: "#"}
+              %i.fa.fa-minus.line-heaght-40
+            %input.form-control.quantity-input{type: "text"}
+            %a.input-link{href: "#"}
+              %i.fa.fa-plus.line-heaght-40
+        %td
+          %span.font-16.in-gold-500= price_to_euro(item.total_price)
+        %td
+          %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
+            %span{'aria-hidden': "true"} &times;

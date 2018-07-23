@@ -9,10 +9,10 @@
       %a.navbar-brand Bookstore
       %a.shop-link.pull-right.visible-xs{href: "#{cart_path}"}
         %span.shop-icon
-          %span.shop-quantity=  current_order.order_items.size
+          %span.shop-quantity=  current_cart.order_items.size
     %a.shop-link.pull-right.hidden-xs{href: "#{cart_path}"}
       %span.shop-icon
-        %span.shop-quantity= current_order.order_items.size
+        %span.shop-quantity= current_cart.order_items.size
     #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
       .visible-xs
         %button.close{type: "button", 'aria-label': "Close"}
