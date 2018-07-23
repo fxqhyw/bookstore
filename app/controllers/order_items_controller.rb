@@ -1,13 +1,11 @@
 class OrderItemsController < ApplicationController
-  respond_to :html, :js, only: [:index]
-
   def create
-    @order_item = OrderItem.create(book_id: params[:order_item][:book_id], cart_id: current_cart.id)
+    @order_item = OrderItem.create(order_item_params)
   end
 
   private
 
   def order_item_params
-    params.require(:order_item).permit(:quantity, :book_id)
+    params.require(:order_item).permit(:quantity, :book_id, :cart_id)
   end
 end
