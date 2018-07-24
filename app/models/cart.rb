@@ -14,4 +14,10 @@ class Cart < ApplicationRecord
   def order_total
     subtotal - discount
   end
+
+  def items_count
+    count = order_items.collect(&:quantity).compact.sum
+    return if count.zero?
+    count
+  end
 end
