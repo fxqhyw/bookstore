@@ -7,6 +7,9 @@ class Order < ApplicationRecord
   belongs_to :delivery
   belongs_to :credit_card
 
+  validates :total_price, :status, presence: true
+  validates :total_price, numericality: { greater_than: 0 }
+
   def subtotal
     order_items.sum(&:total_price)
   end

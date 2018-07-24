@@ -3,6 +3,8 @@ class OrderItem < ApplicationRecord
   belongs_to :cart
   belongs_to :order, optional: true
 
+  validates :quantity, numericality: { greater_than: 0 }
+
   def total_price
     book.price * quantity
   end
