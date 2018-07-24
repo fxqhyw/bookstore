@@ -1,4 +1,4 @@
-.hidden-xs
+.hidden-xs#item_table
   %table.table.table-hover
     %tr.no-hover
       %th.col-pic.pl-0
@@ -11,7 +11,7 @@
       %th.col-total
         %span.in-grey-600 SubTotal
       %th.col-close
-    - @order_items.each do |item|
+    - current_cart.order_items.each do |item|
       %tr
         %td
           .general-img-wrap-table

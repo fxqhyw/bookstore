@@ -1,7 +1,7 @@
-.visible-xs
-  - @order_items.each do |item|
+.visible-xs#mobile_item_table
+  - current_cart.order_items.each do |item|
     .general-cart-item.divider-lg-bottom
-      = link_to item, method: :delete, class: 'close general-cart-close' do
+      = link_to item, method: :delete, class: 'close general-cart-close', remote: true do
         %span{'aria-hidden': "true"} &times;
       .general-img-wrap-table
         %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
