@@ -1,5 +1,5 @@
 %main.container.general-main-wrap
-  %h1.general-title-margin Cart
+  %h1.general-title-margin= t('cart.cart')
   = render 'carts/mobile_order_items'
   = render 'carts/order_items'
   .general-order-wrap
@@ -7,28 +7,28 @@
       .col-sm-4
         = form_with url: cart_path, method: :put do |f|
           .input-group.general-input-group
-            %label.input-label Enter Your Coupon Code
-            = f.text_field :coupon_code, placeholder: "Enter Your Coupon Code ", class: 'form-control mb-30'
+            %label.input-label= t('cart.coupon')
+            = f.text_field :coupon_code, placeholder: t('cart.coupon'), class: 'form-control mb-30'
           %div
-            = f.submit "Apply Coupon", class: "btn btn-primary mb-15 res-block"
+            = f.submit t('cart.apply_coupon'), class: "btn btn-primary mb-15 res-block"
       .col-sm-8
         .res-mr-200.text-center.general-text-right
-          %p.in-gold-500.font-18 Order Summary
+          %p.in-gold-500.font-18= t('cart.summary')
           %table.general-summary-table.general-summary-table-right.general-text-right
             %tr
               %td
-                %p.font-16 Subtotal:
+                %p.font-16= t('cart.subtotal')
               %td
                 %p.font-16= price_to_euro(@cart.subtotal)
             %tr
               %td
-                %p.font-16 Coupon:
+                %p.font-16= t('cart.coupon')
               %td
                 %p.font-16= price_to_euro(@cart.discount)
             %tr
               %td
-                %strong.font-18 Order Total:
+                %strong.font-18= t('cart.total')
               %td
                 %strong.font-18= price_to_euro(@cart.order_total)
-          %button.btn.btn-default.mb-20.visible-xs-inline-block Checkout
-  %button.btn.btn-default.mb-20.hidden-xs.center-block Checkout
+          %button.btn.btn-default.mb-20.visible-xs-inline-block= t('cart.checkout')
+  %button.btn.btn-default.mb-20.hidden-xs.center-block= t('cart.checkout')

@@ -1,7 +1,7 @@
 %ul.list-inline.pt-10.mb-25.mr-240
   %li.mr-35
     = link_to catalog_path, class: "filter-link" do
-      All
+      = t('button.all')
       %span.badge.general-badge= @categories.sum(&:books_count)
   - @categories.each do |category|
     %li.mr-35

@@ -16,10 +16,10 @@
               %p.lead= latest_book.description
               %p.lead.small= authors_list(latest_book)
               .general-align
-                %button.disabled.btn Buy Now      
+                = button_to t('button.by_now'), order_items_path(order_item: {book_id: latest_book.id, cart_id: current_cart.id, quantity: 1}), method: :post, class: 'btn btn-primary', remote: true
   %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
     %span.icon-prev{'aria-hidden': "true"}
-    %span.sr-only Previous
+    %span.sr-only= t('page.home.carusel.prev')
   %a.right.carousel-control{href: "#slider", role: "button", 'data-slide': "next"}
     %span.icon-next{'aria-hidden': "true"}
-    %span.sr-only Next
+    %span.sr-only= t('page.home.carusel.next')

@@ -9,7 +9,7 @@ class CartsController < ApplicationController
       current_cart.update_attributes(coupon_id: @coupon.id)
       redirect_to cart_path
     else
-      redirect_to cart_path, alert: "Wrong coupon"
+      redirect_to cart_path, notice: 'Wrong coupon'
     end
   end
 end

@@ -9,12 +9,12 @@
       %table.table
         %tr
           %td
-            %span.in-grey-600 Price
+            %span.in-grey-600= t('cart.price')
           %td
             %span.font-16.in-gold-500= price_to_euro(item.book.price)
         %tr
           %td.vertical-middle
-            %span.in-grey-600 Quantity
+            %span.in-grey-600= t('cart.quantity')
           %td
             .input-group
               = link_to order_item_path(id: item.id, order_item: {quantity: item.quantity - 1}), class: 'input-link', id: "order_#{item.id}_minus", method: :put, remote: true do
@@ -24,6 +24,6 @@
                 %i.fa.fa-plus.line-heaght-40
         %tr
           %td
-            %span.in-grey-600 SubTotal
+            %span.in-grey-600= t('cart.subtotal')
           %td
             %span.font-16.in-gold-500= price_to_euro(item.total_price)

@@ -1,5 +1,5 @@
 %main.container
-  %h1.general-title-margin Сatalog
+  %h1.general-title-margin= t('page.book.index.catalog')
   .hidden-xs.clearfix
     .dropdowns.pull-right
       .dropdown.width-240
@@ -12,4 +12,4 @@
   .mb-120#books-container
     = render 'books'
   .text-center#view-more-books-container
-    = link_to_next_page @books, 'View More', id: 'view-more-books', class: 'btn btn-primary', remote: true
+    = link_to_next_page @books, t('button.view_more'), id: 'view-more-books', class: 'btn btn-primary', remote: true

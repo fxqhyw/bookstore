@@ -6,7 +6,7 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand Bookstore
+      %a.navbar-brand= t('header.logo')
       = link_to cart_path, class: 'shop-link pull-right visible-xs' do
         %span.shop-icon
           %span.shop-quantity=  current_cart.items_count
@@ -19,40 +19,42 @@
           %span{'aria-hidden': "true"} &times;
         %ul.nav.navbar-nav
           %li
-            = link_to 'Home', root_path
+            = link_to t('button.home'), root_path
           %li
-            %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"} Shop
+            %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"}= t('header.shop')
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
-              %li
-                %a.collapse-link{href: "#"} Mobile development
-              %li
-                %a.collapse-link{href: "#"} Photo
-              %li
-                %a.collapse-link{href: "#"} Web design
-          %li
-            %a{href: "#"} My account
-      .hidden-xs
-        %ul.nav.navbar-nav
-          %li
-            = link_to 'Home', root_path
-          %li.dropdown
-            %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} Shop
-            %ul.dropdown-menu
-              %li
-                %a{href: "#"} Mobile development
-              %li
-                %a{href: "#"} Photo
-              %li
-                %a{href: "#"} Web design
-              %li.divider{role: "separator"}
-
+              - categories.each do |category|
+                %li
+                  = link_to category.title, catalog_path(category: category.id), class: 'collapse-link'            
           - if user_signed_in?
             %li
               = link_to 'Log out', destroy_user_session_path, method: :delete
+            %li
+              %a{href: "#"}= t('button.my_account')
           - else
             %li
               = link_to 'Log in', new_user_session_path
             %li
               = link_to 'Sign up', new_user_registration_path
+      .hidden-xs
+        %ul.nav.navbar-nav
+          %li
+            = link_to t('button.home'), root_path
+          %li.dropdown
+            %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}= t('header.shop')
+            %ul.dropdown-menu
+              - categories.each do |category|
+                %li
+                  = link_to category.title, catalog_path(category: category.id), class: 'collapse-link'
+              %li.divider{role: "separator"}
+
+          - if user_signed_in?
             %li
-              %a{href: "#"} My account
+              = link_to 'Log out', destroy_user_session_path, method: :delete
+              %li
+                %a{href: "#"}= t('button.my_account')
+          - else
+            %li
+              = link_to 'Log in', new_user_session_path
+            %li
+              = link_to 'Sign up', new_user_registration_path

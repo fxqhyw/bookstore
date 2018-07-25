@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_cart
+  helper_method :current_cart, :categories
 
   def current_cart
     if user_signed_in?
@@ -9,5 +9,9 @@ class ApplicationController < ActionController::Base
       session[:cart_id] = cart.id
       cart
     end
+  end
+
+  def categories
+    @categories = Category.with_books_count
   end
 end

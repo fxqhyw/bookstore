@@ -1,33 +1,70 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  button:
+    home: 'Home'
+    shop: 'Shop'
+    orders: 'Orders'
+    settings: 'Settings'
+    log_out: 'Log out'
+    log_in: 'Log in'
+    my_account: 'My account'
+    sign_up: 'Sign up'
+    back_to_store: 'Back to Store'
+    back_to_orders: 'Back to Orders'
+    forgot_password: 'Forgot password?'
+    resend_passwd_instruction: 'Email Instructions'
+    type_new_passwd: 'Type a new Password'
+    confirm_passwd: 'Confirm Password'
+    change: 'Change'
+    by_now: 'Buy Now'
+    back_to_results: 'Back to results'
+    add_to_cart: 'Add to Cart'
+    read_more: 'Read More'
+    view_more: 'View More'
+    all: 'All'
+    newest_first: 'Newest first'
+    popular_first: 'Popular first'
+    low_to_hight: 'Price: Low to hight'
+    hight_to_low: 'Price: Hight to low'
+    title_A-Z: 'Title A - Z'
+    title_Z-A: 'Title Z - A'
+    get_started: 'Get Started'
+    post: 'Post'
+  
+  header:
+    logo: 'Bookstore'
+    shop: 'Shop'
+
+  page:
+    home:
+      carusel:
+        prev: 'Previous'
+        next: 'Next'
+      greeting: 'Welcome to our amazing Bookstore!'
+      text: 'We pore through hundreds of new books each month and select the five best we can find to share with our members.'
+      best_sellers: 'Best Sellers'
+
+    book:
+      show:
+        description: 'Description'
+        materials: 'Materials'
+        dimension: 'Dimensions'
+        published_at: 'Year of publication'
+
+      index:
+        by_category: 'Filter by category'
+        sort_by: 'Sort by'
+        catalog: 'Catalog'
+        
+  cart:
+    cart: 'Cart'
+    product: 'Product'
+    price: 'Price'
+    quantity: 'Quantity'
+    subtotal: 'SubTotal:'
+    checkout: 'Checkout'
+    coupon: 'Enter Your Coupon Code'
+    apply_coupon: 'Apply Coupon'
+    update: 'Update cart'
+    summary: 'Order Summary:'
+    coupon: 'Coupon:'
+    total: 'Order Total:'

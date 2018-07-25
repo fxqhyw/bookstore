@@ -1,11 +1,11 @@
 module BooksHelper
   TITLES = {
-    newest: 'Newest first',
-    popular: 'Popular first',
-    low_to_high_price: 'Price: Low to high',
-    high_to_low_price: 'Price: High to low',
-    title_a_z: 'A - Z',
-    title_z_a: 'Z - A'
+    newest: I18n.t('button.newest_first'),
+    popular: I18n.t('button.popular_first'),
+    low_to_high_price: I18n.t('button.low_to_hight'),
+    high_to_low_price: I18n.t('button.hight_to_low'),
+    title_a_z: I18n.t('button.title_A-Z'),
+    title_z_a: I18n.t('button.title_Z-A')
   }.freeze
 
   def dimension(book)
