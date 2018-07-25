@@ -4,11 +4,12 @@ class CartsController < ApplicationController
   end
 
   def update
-  end
-
-  private
-
-  def coupon
-    @coupon ||= Coupon.find_by_code(params[:coupon_code])
+    @coupon = Coupon.find_by_code(params[:coupon_code])
+    if @coupon
+      current_cart.update_attributes(coupon_id: @coupon.id)
+      redirect_to cart_path
+    else
+      redirect_to cart_path, alert: "Wrong coupon"
+    end
   end
 end

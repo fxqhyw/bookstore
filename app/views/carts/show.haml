@@ -5,11 +5,12 @@
   .general-order-wrap
     .row
       .col-sm-4
-        .input-group.general-input-group
-          %label.input-label Enter Your Coupon Code
-          %input.form-control.mb-30{type: "text", placeholder: "Enter Your Coupon Code "}
+        = form_with url: cart_path, method: :put do |f|
+          .input-group.general-input-group
+            %label.input-label Enter Your Coupon Code
+            = f.text_field :coupon_code, placeholder: "Enter Your Coupon Code ", class: 'form-control mb-30'
           %div
-            %button.btn.btn-primary.mr-5.mb-15 Apply Coupon
+            = f.submit "Apply Coupon", class: "btn btn-primary mb-15 res-block"
       .col-sm-8
         .res-mr-200.text-center.general-text-right
           %p.in-gold-500.font-18 Order Summary

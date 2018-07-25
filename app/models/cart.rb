@@ -12,7 +12,7 @@ class Cart < ApplicationRecord
   end
 
   def order_total
-    subtotal - discount
+    subtotal > discount ? subtotal - discount : 0.00
   end
 
   def items_count

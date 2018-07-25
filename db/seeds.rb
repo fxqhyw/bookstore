@@ -20,3 +20,6 @@ Category.find_each do |category|
     category.books << book
   end
 end
+
+Coupon.create!(code: 'BOOKER', discount: 5.00)
+Coupon.create!(code: 'LIBRARIAN', discount: 10.00)
