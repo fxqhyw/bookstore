@@ -1,5 +1,5 @@
 %main.container
-  =link_to :back, class: 'general-back-link' do
+  =link_to catalog_path, class: 'general-back-link' do
     %i.fa.fa-long-arrow-left.mr-15
       = t('button.back_to_results')
   .row
@@ -23,10 +23,10 @@
             %p.h1.in-gold-500.mt-10= price_to_euro(@book.price)
           .col-xs-5.col-md-3
             .input-group.general-position
-              %a.input-link{href: "#"}
+              %a.input-link.quantity-minus{href: "#"}
                 %i.fa.fa-minus.line-height-40
-                  = f.text_field :quantity, value: 1, class: 'form-control quantity-input', min: 1
-              %a.input-link{href: "#"}
+              = f.text_field :quantity, value: 1, class: 'form-control quantity-input', id: 'quantity', min: 1
+              %a.input-link.quantity-plus{href: "#"}
                 %i.fa.fa-plus.line-height-40
           .col-xs-7.col-md-5
             = f.hidden_field :cart_id, value: current_cart.id
