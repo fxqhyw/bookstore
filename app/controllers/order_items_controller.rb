@@ -12,7 +12,7 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-    @order_item.update_attributes(order_item_params)
+    @order_item.update(quantity: order_item_params[:quantity])
   end
 
   def destroy
