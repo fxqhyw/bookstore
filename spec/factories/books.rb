@@ -8,6 +8,7 @@ FactoryBot.define do
     height 6.9
     width 5.1
     depth 0.8
+    quantity { rand(111..222) }
     category_id { FactoryBot.create(:category).id }
   end
 end

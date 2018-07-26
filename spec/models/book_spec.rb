@@ -8,11 +8,11 @@ RSpec.describe Book, type: :model do
   end
 
   context 'validations' do
-    %i[title description price published_at height width depth].each do |field|
+    %i[title description price published_at height width depth quantity].each do |field|
       it { is_expected.to validate_presence_of(field) }
     end
 
-    %i[price height width depth].each do |field|
+    %i[price height width depth quantity].each do |field|
       it { is_expected.to validate_numericality_of(field).is_greater_than(0) }
     end
 

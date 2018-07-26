@@ -1,6 +1,4 @@
 class BooksController < ApplicationController
-  before_action :authenticate_user!
-
   def index
     @category_id = params[:category]
     @categories = categories
