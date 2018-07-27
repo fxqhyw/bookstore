@@ -13,6 +13,7 @@ Category.find_each do |category|
                        published_at: rand(1999..2018),
                        price: prices[rand(0..3)],
                        materials: materials[rand(0..3)],
+                       quantity: 100,
                        height: 6.9,
                        width: 5.1,
                        depth: 0.8)
@@ -21,5 +22,5 @@ Category.find_each do |category|
   end
 end
 
-Coupon.create!(code: 'BOOKER', discount: 5.00)
-Coupon.create!(code: 'LIBRARIAN', discount: 10.00)
+Coupon.create(code: 'BOOKER', discount: 5.00)
+Coupon.create(code: 'LIBRARIAN', discount: 10.00)

@@ -1,0 +1,18 @@
+.row
+  - @best_sellers.each do |bestseller|
+    .col-sm-6.col-md-3
+      .general-thumb-wrap
+        .thumbnail.general-thumbnail
+          %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+          .thumb-hover
+            .general-thumb-link-wrap
+              = link_to bestseller, class: 'thumb-hover-link' do
+                %i.fa.fa-eye.thumb-icon{'aria-hidden': 'true'}
+              = link_to order_items_path(order_item: { book_id: bestseller.id, cart_id: current_cart.id, quantity: 1 }), method: :post, class: 'thumb-hover-link', remote: true do
+                %i.fa.fa-shopping-cart.thumb-icon
+      .mb-35
+        .clearfix
+          %p.pull-right.font-16.in-gold-500= price_to_euro(bestseller.price)
+          %p.title.mr-55= bestseller.title
+        %span.divider-sm
+        %p.lead.small= authors_list(bestseller)

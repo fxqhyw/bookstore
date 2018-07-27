@@ -11,7 +11,7 @@ default: &default
 development:
   <<: *default
   database: bookstore_app_development
-test:
+test: &test
   <<: *default
   database: bookstore_app_test
 
@@ -21,3 +21,6 @@ production:
   database: bookstore_app_production
   username: bookstore_app
   password: <%= ENV['BOOKSTORE_DATABASE_PASSWORD'] %>
+
+cucumber:
+  <<: *test
