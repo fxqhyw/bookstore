@@ -12,4 +12,4 @@
   .mb-120#books-container
     = render 'books'
   .text-center#view-more-books-container
-    = link_to_next_page @books, t('button.view_more'), id: 'view-more-books', class: 'btn btn-primary', remote: true
+    = link_to t('button.view_more'),catalog_path(page: @books.current_page + 1, category: @category_id, filter: @filter), id: 'view-more-books', class: 'btn btn-primary', remote: true

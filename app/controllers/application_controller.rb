@@ -12,6 +12,6 @@ class ApplicationController < ActionController::Base
   end
 
   def categories
-    @categories = Category.with_books_count
+    Category.with_books_count
   end
 end

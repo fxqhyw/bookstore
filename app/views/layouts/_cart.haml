@@ -1,8 +1,0 @@
-= link_to cart_path, class: 'shop-link pull-right visible-xs' do
-  %span.shop-icon
-    - if current_cart.order_items.any?
-      %span.shop-quantity=  current_cart.items_count
-= link_to cart_path, class: 'shop-link pull-right hidden-xs' do
-%span.shop-icon
-  - if current_cart.order_items.any?
-    %span.shop-quantity=  current_cart.items_count

@@ -7,7 +7,7 @@ materials = ['paper, brick, hardcove', 'paper stocks, glossym', 'lace, slate, sa
 prices = [39.99, 59.99, 25.99, 69.99]
 
 Category.find_each do |category|
-  16.times do
+  rand(15..30).times do
     book = Book.create(title: FFaker::Book.title,
                        description: FFaker::Lorem.paragraph,
                        published_at: rand(1999..2018),

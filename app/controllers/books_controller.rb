@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   def index
     @category_id = params[:category]
+    @filter = params[:filter]
     @categories = categories
     @books = BooksFilter.new(params: permited_params).call.page(params[:page])
   end
