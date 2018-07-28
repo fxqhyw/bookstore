@@ -18,6 +18,7 @@ RSpec.feature 'Home Page', type: :feature do
 
     scenario 'click on Get Started link' do
       click_link('Get Started')
+      expect(page).to have_http_status(:success)
       expect(page).to have_current_path('/catalog')
     end
   end
