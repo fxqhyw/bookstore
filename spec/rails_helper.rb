@@ -7,7 +7,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'capybara/rails'
 require_relative 'support/selectors'
-
+require_relative 'support/wait_for_ajax'
 
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -32,4 +32,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
 
   config.include Selectors
+
+  config.include WaitForAjax, type: :feature
+
 end

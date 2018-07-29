@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Catalog Page', type: :feature do
-  describe 'links on book icons' do
+  context 'links on book icons' do
     before(:all) { @book = FactoryBot.create(:book) }
     before(:each) { visit('/catalog') }
     let(:shop_icon) { page.find('a.hidden-xs>span.shop-icon') }
@@ -18,7 +18,7 @@ RSpec.feature 'Catalog Page', type: :feature do
     end
   end
 
-  describe 'filters by category' do
+  context 'filters by category' do
     let(:filter_menu) { page.find('ul.list-inline.pt-10.mb-25.mr-240') }
 
     before(:all) do
@@ -32,28 +32,22 @@ RSpec.feature 'Catalog Page', type: :feature do
 
     before { visit('/catalog') }
 
-    context 'All (by default)' do
-      it 'show all books' do
-        expect(page).to have_selector('div.col-xs-6.col-sm-3', count: 12)
-      end
+    scenario 'show all books(by default)' do
+      expect(page).to have_selector('div.col-xs-6.col-sm-3', count: 12)
     end
 
-    context 'Web design' do
-      it 'show filtered books' do
-        filter_menu.find(:filter_by_category, @web_design.id).click
-        expect(page).to have_selector('div.col-xs-6.col-sm-3', count: 8)
-      end
+    scenario 'show Web design books' do
+      filter_menu.find(:filter_by_category, @web_design.id).click
+      expect(page).to have_selector('div.col-xs-6.col-sm-3', count: 8)
     end
 
-    context 'Mobile development' do
-      it 'show filtered books' do
-        filter_menu.find(:filter_by_category, @mobile_development.id).click
-        expect(page).to have_selector('div.col-xs-6.col-sm-3', count: 4)
-      end
+    scenario 'show Mobile development books' do
+      filter_menu.find(:filter_by_category, @mobile_development.id).click
+      expect(page).to have_selector('div.col-xs-6.col-sm-3', count: 4)
     end
   end
 
-  describe 'sorts' do
+  context 'sorts' do
     before { visit('/catalog') }
 
     it { expect(page).to have_content 'Catalog' }

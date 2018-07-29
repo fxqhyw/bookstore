@@ -14,7 +14,7 @@ RSpec.feature 'Book page', type: :feature do
   end
 
   context 'short description' do
-    it "'Read More' button absent", js: true do
+    scenario "'Read More' button absent", js: true do
       @book.description = 'short description '
       @book.save!
       visit book_path(@book)
@@ -23,7 +23,7 @@ RSpec.feature 'Book page', type: :feature do
   end
 
   context 'long description' do
-    it "'Read More' button present", js: true do
+    scenario "'Read More' button present", js: true do
       @book.description = 'long description ' * 100
       @book.save!
       visit book_path(@book)
@@ -31,31 +31,34 @@ RSpec.feature 'Book page', type: :feature do
     end
   end
 
-  describe 'Add to Cart' do
-    let(:shop_icon) { page.find('a.hidden-xs>span.shop-icon') }
+  context 'Add to Cart' do
+    let(:shop_icon) { find('a.hidden-xs>span.shop-icon') }
     let(:plus) { find('i.fa.fa-plus.line-height-40') }
     let(:minus) { find('i.fa.fa-minus.line-height-40') }
+    let(:qtty_input) { find('#order_item_quantity') }
 
     before { visit book_path(@book) }
 
-    it 'add one item into cart', js: true do
+    scenario 'add one item into cart', js: true do
       click_on I18n.t('button.add_to_cart')
+      wait_for_ajax
       expect(shop_icon).to have_content('1')
     end
 
-    it 'inreases quantity counter', js: true do
+    scenario 'increase quantity counter', js: true do
       plus.trigger('click')
-      expect(page.find('#order_item_quantity').value).to eq('2')
+      expect(qtty_input.value).to eq('2')
     end
 
-    it 'not deasreses counter less then 1', js: true do
+    scenario 'not decrease counter less then 1', js: true do
       minus.trigger('click')
-      expect(page.find('#order_item_quantity').value).to eq('1')
+      expect(qtty_input.value).to eq('1')
     end
 
-    it 'add four items into cart', js: true do
+    scenario 'add four items into cart', js: true do
       fill_in 'order_item[quantity]', with: '4'
       click_on I18n.t('button.add_to_cart')
+      wait_for_ajax
       expect(shop_icon).to have_content('4')
     end
   end

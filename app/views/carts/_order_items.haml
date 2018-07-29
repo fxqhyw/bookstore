@@ -17,18 +17,19 @@
           .general-img-wrap-table
             %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
         %td
-          %p.title= item.book.title
+          =link_to book_path(item.book), class: 'text-as-link' do
+            %p.title= item.book.title
         %td
           %span.font-16.in-gold-500= price_to_euro(item.book.price)
         %td
           .input-group
-            = link_to order_item_path(id: item.id, order_item: {quantity: item.quantity - 1}), class: 'input-link', id: "order_#{item.id}_minus", method: :put, remote: true do
+            = link_to order_item_path(id: item.id, order_item: {quantity: item.quantity - 1}), class: 'input-link', id: "item_#{item.id}_minus", method: :put, remote: true do
               %i.fa.fa-minus.line-heaght-40
             %input.form-control.quantity-input{type: "text", value: item.quantity}
-            = link_to order_item_path(id: item.id, order_item: {quantity: item.quantity + 1}), class: 'input-link', id: "order_#{item.id}_plus", method: :put, remote: true do
+            = link_to order_item_path(id: item.id, order_item: {quantity: item.quantity + 1}), class: 'input-link', id: "item_#{item.id}_plus", method: :put, remote: true do
               %i.fa.fa-plus.line-heaght-40
         %td
           %span.font-16.in-gold-500= price_to_euro(item.total_price)
         %td
-          = link_to item, method: :delete, class: 'close general-cart-close', remote: true do
+          = link_to order_item_path(item), method: :delete, class: 'close general-cart-close', remote: true do
             %span{'aria-hidden': "true"} &times;
