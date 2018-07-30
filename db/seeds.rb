@@ -17,11 +17,10 @@ Category.find_each do |category|
                        height: 6.9,
                        width: 5.1,
                        depth: 0.8)
-    rand(1..3).times { book.authors << Author.create(name: FFaker::Name.name) }
+    rand(1..3).times { book.authors << Author.create(first_name: FFaker::Name.first_name, last_name: FFaker::Name.last_name) }
     category.books << book
   end
 end
 
 Coupon.create(code: 'BOOKER', discount: 5.00)
 Coupon.create(code: 'LIBRARIAN', discount: 10.00)
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

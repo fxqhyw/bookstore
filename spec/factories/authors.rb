@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :author do
-    name { FFaker::Book.author }
+    first_name { FFaker::Name.first_name }
+    last_name { Ffaker::Mame.last_name }
   end
 end

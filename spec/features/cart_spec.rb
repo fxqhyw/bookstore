@@ -27,7 +27,7 @@ RSpec.feature 'Cart page', type: :feature do
 
     scenario 'increase quantity field by click plus', js: true do
       expect(qtty_input.value).to eq('1')
-      plus.trigger('click')
+      plus.click
       wait_for_ajax
       expect(qtty_input.value).to eq('2')
     end

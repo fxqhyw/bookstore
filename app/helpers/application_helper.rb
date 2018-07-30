@@ -1,6 +1,6 @@
 module ApplicationHelper
   def authors_list(book)
-    book.authors.map(&:name).join(', ')
+    book.authors.map { |author| "#{author.first_name} #{author.last_name}" }.join(', ')
   end
 
   def flash_class(level)
