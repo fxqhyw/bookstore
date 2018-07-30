@@ -1,6 +1,6 @@
 require 'ffaker'
 
-User.create(email: 'test@test.com', password: '12345678', password_confirmation: '12345678')
+AdminUser.create!(email: 'admin@admin.com', password: '12345678', password_confirmation: '12345678')
 
 Category.create([{ title: 'Mobile Development' }, { title: 'Web Design' }, { title: 'Photo' }, { title: 'Web Development' }])
 materials = ['paper, brick, hardcove', 'paper stocks, glossym', 'lace, slate, sand', 'lace, man-made fibres']
@@ -24,3 +24,4 @@ end
 
 Coupon.create(code: 'BOOKER', discount: 5.00)
 Coupon.create(code: 'LIBRARIAN', discount: 10.00)
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
