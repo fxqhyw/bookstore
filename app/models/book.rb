@@ -4,7 +4,7 @@ class Book < ApplicationRecord
   belongs_to :category
 
   validates :title, :description, :price, :published_at, :height, :width, :depth, :quantity, presence: true
-  validates :price, :height, :width, :depth, :quantity, numericality: { greater_than: 0 }
+  validates :price, :height, :width, :depth, :quantity, numericality: { greater_than_or_equal_to: 0.01 }
   validates :published_at, numericality: { less_than_or_equal_to: Time.current.year }
 
   scope :latest, -> { order(created_at: :desc).limit(3) }

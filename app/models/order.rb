@@ -3,7 +3,7 @@ class Order < ApplicationRecord
   belongs_to :coupon, optional: true
   belongs_to :shipping_address
   belongs_to :billing_address, optional: true
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :delivery
   belongs_to :credit_card
 
