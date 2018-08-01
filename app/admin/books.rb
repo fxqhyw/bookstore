@@ -1,8 +1,5 @@
 ActiveAdmin.register Book do
-  permit_params :id, :category_id, :authors, :title, :price, :description, :materials, :height, :weight, :depth, :published_at, :active, author_ids: []
-  authors = proc do
-    Author.all.map { |author| ["#{author.first_name} #{author.last_name}", author.id] }
-  end
+  permit_params :id, :category_id, :title, :price, :description, :materials, :height, :weight, :depth, :published_at, :active, author_ids: [] 
 
   index do
     selectable_column
@@ -20,7 +17,6 @@ ActiveAdmin.register Book do
 
   filter :category
   filter :title
-  filter :authors, collection: authors.call
   filter :price
   filter :published_at
 
@@ -31,7 +27,7 @@ ActiveAdmin.register Book do
       f.input :category, as: :select, collection:
         Category.pluck(:title, :id), include_blank: false
       f.input :authors, as: :check_boxes, collection:
-        authors.call, include_blank: false
+        Author.all.map { |author| ["#{author.first_name} #{author.last_name}", author.id] }, include_blank: false
       f.input :published_at
       f.input :quantity
       f.input :materials

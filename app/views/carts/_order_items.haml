@@ -11,7 +11,7 @@
       %th.col-total
         %span.in-grey-600= t('cart.subtotal')
       %th.col-close
-    - current_cart.order_items.created.each do |item|
+    - @cart.order_items.each do |item|
       %tr
         %td
           .general-img-wrap-table

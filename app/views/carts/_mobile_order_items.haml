@@ -1,5 +1,5 @@
 .visible-xs#mobile_item_table
-  - current_cart.order_items.each do |item|
+  - @cart.order_items.each do |item|
     .general-cart-item.divider-lg-bottom
       = link_to order_item_path(item), method: :delete, class: 'close general-cart-close', remote: true do
         %span{'aria-hidden': "true"} &times;
