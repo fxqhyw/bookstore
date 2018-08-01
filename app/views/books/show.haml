@@ -53,7 +53,7 @@
           %p.pull-left= t('page.book.show.materials')
           %p.lead.small.pull-right= @book.materials
   .mb-80
-    - if @book.reviews.any?
+    - if @reviews.any?
       %h3.in-gold-500.mb-25= "Reviews (#{@book.reviews.count})"
       = render 'reviews'
     - if can? :create, Review
