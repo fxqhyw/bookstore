@@ -10,10 +10,6 @@ RSpec.describe CartsController, type: :controller do
     it 'renders :show template' do
       expect(response).to render_template(:show)
     end
-
-    it 'assigns requested cart to @cart' do
-      expect(assigns(:cart)).to eq(cart)
-    end
   end
 
   describe 'PUT #update' do

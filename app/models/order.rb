@@ -1,8 +1,9 @@
 class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
   belongs_to :coupon, optional: true
-  belongs_to :shipping_address
-  belongs_to :billing_address, optional: true
+  has_many :addresses
+  has_one :shipping_address, dependent: :destroy
+  has_one :billing_address, dependent: :destroy
   belongs_to :user, optional: true
   belongs_to :delivery
   belongs_to :credit_card

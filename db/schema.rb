@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_30_213636) do
+ActiveRecord::Schema.define(version: 2018_08_02_130934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,24 @@ ActiveRecord::Schema.define(version: 2018_07_30_213636) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "type", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "string"
+    t.string "city"
+    t.string "zip"
+    t.string "country"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_addresses_on_order_id"
+    t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -56,18 +74,6 @@ ActiveRecord::Schema.define(version: 2018_07_30_213636) do
   create_table "authors_books", id: false, force: :cascade do |t|
     t.bigint "author_id", null: false
     t.bigint "book_id", null: false
-  end
-
-  create_table "billing_addresses", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "address"
-    t.string "city"
-    t.string "zip"
-    t.string "country"
-    t.string "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "books", force: :cascade do |t|
@@ -141,19 +147,17 @@ ActiveRecord::Schema.define(version: 2018_07_30_213636) do
   create_table "orders", force: :cascade do |t|
     t.decimal "total_price"
     t.string "status"
-    t.bigint "shipping_address_id"
-    t.bigint "billing_address_id"
     t.bigint "user_id"
     t.bigint "delivery_id"
     t.bigint "credit_card_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "coupon_id"
-    t.index ["billing_address_id"], name: "index_orders_on_billing_address_id"
+    t.bigint "address_id"
+    t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["credit_card_id"], name: "index_orders_on_credit_card_id"
     t.index ["delivery_id"], name: "index_orders_on_delivery_id"
-    t.index ["shipping_address_id"], name: "index_orders_on_shipping_address_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -168,18 +172,6 @@ ActiveRecord::Schema.define(version: 2018_07_30_213636) do
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_reviews_on_book_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
-  end
-
-  create_table "shipping_addresses", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "address"
-    t.string "city"
-    t.string "zip"
-    t.string "country"
-    t.string "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -201,17 +193,18 @@ ActiveRecord::Schema.define(version: 2018_07_30_213636) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "addresses", "orders"
+  add_foreign_key "addresses", "users"
   add_foreign_key "books", "categories"
   add_foreign_key "carts", "coupons"
   add_foreign_key "carts", "users"
   add_foreign_key "order_items", "books"
   add_foreign_key "order_items", "carts"
   add_foreign_key "order_items", "orders"
-  add_foreign_key "orders", "billing_addresses"
+  add_foreign_key "orders", "addresses"
   add_foreign_key "orders", "coupons"
   add_foreign_key "orders", "credit_cards"
   add_foreign_key "orders", "deliveries"
-  add_foreign_key "orders", "shipping_addresses"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"

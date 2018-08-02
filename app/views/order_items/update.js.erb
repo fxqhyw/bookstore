@@ -1,3 +1,3 @@
 $('#item_table').replaceWith("<%= j(render template: 'carts/_order_items') %>")
 $('#mobile_item_table').replaceWith("<%= j(render template: 'carts/_mobile_order_items') %>")
-$('span.shop-quantity').text(<%= @cart.items_count %>)
+$('span.shop-quantity').text(<%= current_cart.items_count %>)

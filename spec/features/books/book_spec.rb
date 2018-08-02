@@ -33,8 +33,8 @@ RSpec.feature 'Book page', type: :feature do
 
   context 'Add to Cart' do
     let(:shop_icon) { find('a.hidden-xs>span.shop-icon') }
-    let(:plus) { find('i.fa.fa-plus.line-height-40') }
-    let(:minus) { find('i.fa.fa-minus.line-height-40') }
+    let(:plus) { find('a.input-link.quantity-plus') }
+    let(:minus) { find('a.input-link.quantity-minus') }
     let(:qtty_input) { find('#order_item_quantity') }
 
     before { visit book_path(@book) }
@@ -56,7 +56,7 @@ RSpec.feature 'Book page', type: :feature do
     end
 
     scenario 'add four items into cart', js: true do
-      fill_in 'order_item[quantity]', with: '4'
+      fill_in 'order_item_quantity', with: '4'
       click_on I18n.t('button.add_to_cart')
       wait_for_ajax
       expect(shop_icon).to have_content('4')

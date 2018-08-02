@@ -7,7 +7,7 @@ RSpec.describe OrderItemsController, type: :controller do
   describe 'POST #create' do
     context 'order item already exist' do
       it 'increases order item quantity' do
-        post :create, xhr: true, params: { order_item: { book_id: order_item.book_id, quantity: 1 } }
+        post :create, xhr: true, params: { book_id: order_item.book_id, quantity: 1 }
         order_item.reload
         expect(order_item.quantity).to eq(2)
       end
@@ -17,7 +17,7 @@ RSpec.describe OrderItemsController, type: :controller do
       let(:cart) { FactoryBot.create(:cart) }
       it 'creates new order item in the database' do
         expect {
-          post :create, xhr: true, params: { order_item: { book_id: book.id, quantity: 1, cart_id: cart.id } }
+          post :create, xhr: true, params: { book_id: book.id, quantity: 1, cart_id: cart.id }
         }.to change(OrderItem, :count).by(1)
       end
     end
@@ -25,7 +25,7 @@ RSpec.describe OrderItemsController, type: :controller do
 
   describe 'PUT #update' do
     it 'changes order item quantity' do
-      put :update, xhr: true, params: { id: order_item.id, order_item: { quantity: 3 } }
+      put :update, xhr: true, params: { id: order_item.id, quantity: 3 }
       order_item.reload
       expect(order_item.quantity).to eq(3)
     end

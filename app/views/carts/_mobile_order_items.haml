@@ -1,5 +1,5 @@
 .visible-xs#mobile_item_table
-  - @cart.order_items.each do |item|
+  - current_cart.order_items.created.each do |item|
     .general-cart-item.divider-lg-bottom
       = link_to order_item_path(item), method: :delete, class: 'close general-cart-close', remote: true do
         %span{'aria-hidden': "true"} &times;
@@ -18,10 +18,10 @@
             %span.in-grey-600= t('cart.quantity')
           %td
             .input-group
-              = link_to order_item_path(id: item.id, order_item: {quantity: item.quantity - 1}), class: 'input-link', id: "item_#{item.id}_minus", method: :put, remote: true do
+              = link_to order_item_path(id: item.id, quantity: item.quantity - 1), class: 'input-link', id: "item_#{item.id}_minus", method: :put, remote: true do
                 %i.fa.fa-minus.line-heaght-40
               %input.form-control.quantity-input{type: "text", value: item.quantity}
-              = link_to order_item_path(id: item.id, order_item: {quantity: item.quantity + 1}), class: 'input-link', id: "item_#{item.id}_plus", method: :put, remote: true do
+              = link_to order_item_path(id: item.id, quantity: item.quantity + 1), class: 'input-link', id: "item_#{item.id}_plus", method: :put, remote: true do
                 %i.fa.fa-plus.line-heaght-40
         %tr
           %td

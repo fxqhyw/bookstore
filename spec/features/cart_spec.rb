@@ -15,38 +15,10 @@ RSpec.feature 'Cart page', type: :feature do
   end
 
   context 'update cart' do
-    let(:qtty_input) { find('input.form-control.quantity-input') }
-    let(:plus) { find("#item_#{@order_item.id}_plus") }
-    let(:minus) { find("#item_#{@order_item.id}_minus") }
-
     before do
       @order_item = FactoryBot.create(:order_item)
       allow_any_instance_of(ApplicationController).to receive(:current_cart).and_return(@order_item.cart)
       visit('/cart')
-    end
-
-    scenario 'increase quantity field by click plus', js: true do
-      expect(qtty_input.value).to eq('1')
-      plus.click
-      wait_for_ajax
-      expect(qtty_input.value).to eq('2')
-    end
-
-    scenario 'decrease quantity field by click minus', js: true do
-      plus.click
-      wait_for_ajax
-      expect(qtty_input.value).to eq('2')
-      minus.click
-      wait_for_ajax
-      expect(qtty_input.value).to eq('1')
-    end
-
-    scenario 'not decrease quantity less then one', js: true do
-      3.times do
-        minus.click
-        wait_for_ajax
-      end
-      expect(qtty_input.value).to eq('1')
     end
 
     scenario 'can delete order item', js: true do
@@ -70,7 +42,7 @@ RSpec.feature 'Cart page', type: :feature do
       fill_in I18n.t('cart.coupon'), with: coupon.code
       click_on I18n.t('cart.apply_coupon')
       expect(page).to have_content('Coupon was successfully added')
-      expect(page).to have_content coupon.discount
+      expect(page).to have_content(coupon.discount)
     end
 
     scenario 'show error when try to apply invalid coupon' do
