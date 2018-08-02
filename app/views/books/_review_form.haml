@@ -2,7 +2,7 @@
   = form_for Review.new do |f|
     = f.hidden_field(:book_id, value: @book.id)
     .form-group
-      = f.label :rating, 'Rating: ', class: 'control-label'
+      = f.label :rating, t('review.rating'), class: 'control-label'
       - 5.times do |rate|
         = f.radio_button :rating, "#{rate + 1}"
     .form-group

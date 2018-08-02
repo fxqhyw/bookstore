@@ -54,7 +54,7 @@
           %p.lead.small.pull-right= @book.materials
   .mb-80
     - if @reviews.any?
-      %h3.in-gold-500.mb-25= "Reviews (#{@book.reviews.count})"
+      %h3.in-gold-500.mb-25= "#{t('review.reviews')} (#{@book.reviews.count})"
       = render 'reviews'
     - if can? :create, Review
       = render 'review_form'
