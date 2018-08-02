@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   has_many :orders
   has_one :cart, dependent: :destroy
   has_one :billing_address, dependent: :destroy
