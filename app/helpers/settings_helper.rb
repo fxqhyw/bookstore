@@ -1,5 +1,5 @@
 module SettingsHelper
-  def has_error?(type, field)
+  def error?(type, field)
     return unless correct_type?(type)
     @address.errors.include?(field)
   end
@@ -13,11 +13,6 @@ module SettingsHelper
     address = address(type)
     return @address[field] if @address.try(:[], field) && correct_type?(type)
     address[field] if address
-  end
-
-  def tab?(tab)
-    return true if !params.key?(:tab) && tab == 'address'
-    params[:tab] == tab
   end
 
   private
