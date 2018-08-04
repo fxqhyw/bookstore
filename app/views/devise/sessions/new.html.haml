@@ -3,7 +3,6 @@
     %h3.general-login-title Log In
     = render 'devise/shared/omniauth'
   = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "general-form" }) do |f|
-    = devise_error_messages!
     .form-group.mb-30
       = f.label :email, class: "control-label input-label"
       = f.email_field :email, id: "email", class: "form-control", autofocus: true, placeholder: "Enter Email"

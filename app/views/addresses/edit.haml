@@ -2,7 +2,7 @@
   %h1.general-title-margin= t('settings.settings')
   %ul.nav.clearfix.mb-20{role: "tablist"}
     %li.tab-item{role: "presentation"}
-      = link_to t('settings.address'), addresses_path, class: 'tab-link filter-link active'
+      = link_to t('settings.address'), addresses_path, class: 'tab-link text-as-link'
     %li.tab-item{role: "presentation"}
       = link_to t('settings.privacy'), privacy_path, class: 'tab-link'
   .tab-content
