@@ -39,6 +39,33 @@ en:
     signup: "Sign up"
     login: "Log in"
     logout: "Log out"
+  
+  settings:
+    settings: 'Settings'
+    address: 'Address'
+    privacy: 'Privacy'
+    billing: 'Billing Address'
+    shipping: 'Shipping Address'
+    use_billing: 'Use Billing Adress'
+    save: 'Save'
+    e-mail: 'Email'
+    enter_e-mail: 'Enter Email'
+    enter_your_e-mail: 'Enter your email'
+    password: 'Password'
+    old_password: 'Old Password'
+    new_password: 'New Password'
+    confirm_password: 'Confirm Password'
+    remove_account: 'Remove Account'
+    please_remove_account: 'Please Remove My Account'
+    im_agree_lost_all_data: 'I understand that all data will be lost'
+    first_name: 'First Name'
+    last_name: 'Last Name'
+    city: 'City'
+    zip: 'Zip'
+    country: 'Country'
+    country_select: 'Select a country'
+    save: 'Save'
+    phone_placeholder: 'Example +1 541 754 3010'
 
   page:
     home:

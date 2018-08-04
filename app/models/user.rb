@@ -1,9 +1,10 @@
 class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
-  has_many :orders
+  has_many :orders, dependent: :nullify
   has_one :cart, dependent: :destroy
-  has_one :billing_address, dependent: :destroy
+  has_many :addresses, dependent: :destroy
   has_one :shipping_address, dependent: :destroy
+  has_one :billing_address, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,
