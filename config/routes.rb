@@ -10,6 +10,11 @@ Rails.application.routes.draw do
   resource :cart, only: [:show, :update]
   resources :reviews, only: :create
 
-  get 'settings', to: 'settings#edit'
-  resource :settings, only: [:update]
+  scope '/settings' do
+    get '/addresses', to: 'addresses#edit'
+    resources :addresses, only: [:update]
+    as :user do
+      get 'privacy', to: 'devise/registrations#edit'
+    end
+  end
 end
