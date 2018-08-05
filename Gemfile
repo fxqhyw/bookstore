@@ -17,6 +17,7 @@ gem 'font-awesome-rails'
 gem 'kaminari'
 gem 'aasm'
 gem 'country_select'
+gem 'wicked'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
@@ -28,7 +29,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'spring-commands-cucumber'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
