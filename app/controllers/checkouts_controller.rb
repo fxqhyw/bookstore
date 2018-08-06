@@ -3,6 +3,10 @@ class CheckoutsController < ApplicationController
 
   steps :address, :delivery, :payment, :confirm, :complete
 
+  def show
+    render_wizard
+  end
+
   private
 
   def initialize_order

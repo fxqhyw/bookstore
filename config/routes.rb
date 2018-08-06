@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :order_items, only: [:create, :update, :destroy]
   resource :cart, only: [:show, :update]
   resources :reviews, only: :create
+  resources :checkouts
 
   scope '/settings' do
     get '/addresses', to: 'addresses#edit'

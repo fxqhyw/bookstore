@@ -30,5 +30,5 @@
                 %strong.font-18= t('cart.total')
               %td
                 %strong.font-18= price_to_euro(current_cart.order_total)
-          %button.btn.btn-default.mb-20.visible-xs-inline-block= t('cart.checkout')
-  %button.btn.btn-default.mb-20.hidden-xs.center-block= t('cart.checkout')
+          = button_to t('cart.checkout'), checkouts_path, method: :get, class: "btn btn-default mb-20 visible-xs-inline-block"
+  = button_to t('cart.checkout'), checkouts_path, method: :get, class: "btn btn-default mb-20 hidden-xs center-block"
