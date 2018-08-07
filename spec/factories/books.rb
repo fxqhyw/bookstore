@@ -9,6 +9,7 @@ FactoryBot.define do
     width 5.1
     depth 0.8
     quantity { rand(111..222) }
-    category { FactoryBot.create(:category) }
+    category
+    authors { [FactoryBot.create(:author)] }
   end
 end

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe CartsController, type: :controller do
-  let(:cart) { FactoryBot.create(:cart) }
-  before { allow_any_instance_of(ApplicationController).to receive(:current_cart).and_return(cart) }
+  let(:order) { FactoryBot.create(:order) }
+  before { allow_any_instance_of(ApplicationController).to receive(:current_order).and_return(order) }
 
   describe 'GET #show' do
     before { get :show }
@@ -21,9 +21,9 @@ RSpec.describe CartsController, type: :controller do
         expect(response).to redirect_to(cart_path)
       end
 
-      it 'updates cart in the database' do
-        cart.reload
-        expect(cart.coupon).to eq(coupon)
+      it 'updates order in the database' do
+        order.reload
+        expect(order.coupon_id).to eq(coupon.id)
       end
 
       it 'shows success message' do
@@ -39,7 +39,7 @@ RSpec.describe CartsController, type: :controller do
       end
 
       it 'shows error message' do
-        expect(flash[:notice]).to eq('Coupon is invalid')
+        expect(flash[:alert]).to eq('Coupon is invalid')
       end
     end
   end

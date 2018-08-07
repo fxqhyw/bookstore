@@ -2,6 +2,6 @@ require 'ffaker'
 
 FactoryBot.define do
   factory :category do
-    title { FFaker::Book.unique.genre }
+    title { FFaker::Lorem.word }
   end
 end

@@ -4,7 +4,6 @@ RSpec.describe User, type: :model do
   context 'associations' do
     it { is_expected.to have_many(:reviews).dependent(:destroy) }
     it { is_expected.to have_many(:orders) }
-    it { is_expected.to have_one(:cart).dependent(:destroy) }
     it { is_expected.to have_one(:billing_address).dependent(:destroy) }
     it { is_expected.to have_one(:shipping_address).dependent(:destroy) }
   end

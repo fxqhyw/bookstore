@@ -1,8 +1,7 @@
 FactoryBot.define do
   factory :order_item do
-    book { FactoryBot.create(:book) }
+    book
     quantity 1
-    order_id nil
-    cart { FactoryBot.create(:cart) }
+    order
   end
 end
