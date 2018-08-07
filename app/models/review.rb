@@ -24,7 +24,7 @@ class Review < ApplicationRecord
     end
 
     event :unprocess do
-      transitions from: [:rejected, :approved], to: :unprocessed
+      transitions from: %i[rejected approved], to: :unprocessed
     end
   end
 end
