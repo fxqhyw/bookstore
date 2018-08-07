@@ -1,16 +1,16 @@
 class ApplicationController < ActionController::Base
-  helper_method :categories, :current_cart
+  helper_method :categories, :current_order
 
-  def current_cart
+  def current_order
     if user_signed_in?
-      return current_user.cart if current_user.cart
-      Cart.create(user_id: current_user.id)
+      return current_user.orders.in_progress.first if current_user.orders.in_progress.first
+      Order.create(user_id: current_user.id)
     else
-      cart = Cart.find_by_id(session[:cart_id])
-      return cart if cart
-      cart = Cart.create
-      session[:cart_id] = cart.id
-      cart
+      order = Order.find_by_id(session[:order_id])
+      return order if order
+      order = Order.create
+      session[:order_id] = order.id
+      order
     end
   end
 

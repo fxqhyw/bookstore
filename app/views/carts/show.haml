@@ -1,7 +1,7 @@
 %main.container.general-main-wrap
   %h1.general-title-margin= t('cart.cart')
-  = render 'carts/mobile_order_items'
-  = render 'carts/order_items'
+  = render 'mobile_order_items'
+  = render 'order_items'
   .general-order-wrap
     .row
       .col-sm-4
@@ -11,24 +11,6 @@
             = f.text_field :coupon_code, placeholder: t('cart.coupon'), class: 'form-control mb-30'
           %div
             = f.submit t('cart.apply_coupon'), class: "btn btn-primary mb-15 res-block"
-      .col-sm-8
-        .res-mr-200.text-center.general-text-right
-          %p.in-gold-500.font-18= t('cart.summary')
-          %table.general-summary-table.general-summary-table-right.general-text-right
-            %tr
-              %td
-                %p.font-16= t('cart.subtotal')
-              %td
-                %p.font-16= price_to_euro(current_cart.subtotal)
-            %tr
-              %td
-                %p.font-16= t('cart.coupon')
-              %td
-                %p.font-16= price_to_euro(current_cart.discount)
-            %tr
-              %td
-                %strong.font-18= t('cart.total')
-              %td
-                %strong.font-18= price_to_euro(current_cart.order_total)
-          = button_to t('cart.checkout'), checkouts_path, method: :get, class: "btn btn-default mb-20 visible-xs-inline-block"
+      = render 'order_summary'
+      = button_to t('cart.checkout'), checkouts_path, method: :get, class: "btn btn-default mb-20 visible-xs-inline-block"
   = button_to t('cart.checkout'), checkouts_path, method: :get, class: "btn btn-default mb-20 hidden-xs center-block"

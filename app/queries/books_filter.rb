@@ -7,7 +7,6 @@ class BooksFilter
   def call
     @books = by_category if @params[:category]
     @books = by_filter
-    @books
   end
 
   private

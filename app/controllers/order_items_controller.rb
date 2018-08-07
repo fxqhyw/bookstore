@@ -2,7 +2,7 @@ class OrderItemsController < ApplicationController
   before_action :order_item, only: [:update, :destroy]
 
   def create
-    @order_item = current_cart.order_items.find_by(book_id: permited_params[:book_id])
+    @order_item = current_order.order_items.find_by(book_id: permited_params[:book_id])
     if @order_item
       @order_item.quantity += permited_params[:quantity].to_i
       @order_item.save!
@@ -22,7 +22,7 @@ class OrderItemsController < ApplicationController
   private
 
   def permited_params
-    params.permit(:id, :quantity, :book_id, :cart_id)
+    params.permit(:quantity, :book_id, :order_id)
   end
 
   def order_item

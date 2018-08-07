@@ -1,8 +1,8 @@
 class Order < ApplicationRecord
   include AASM
 
-  belongs_to :coupon, optional: true
   belongs_to :user, optional: true
+  belongs_to :coupon, optional: true
   belongs_to :delivery, optional: true
   belongs_to :credit_card, optional: true
   has_many :order_items, dependent: :destroy
@@ -10,8 +10,7 @@ class Order < ApplicationRecord
   has_one :shipping_address, dependent: :destroy
   has_one :billing_address, dependent: :destroy
 
-  validates :total_price, :status, presence: true
-  validates :total_price, numericality: { greater_than: 0 }
+  validates :status, presence: true
 
   scope :in_progress, -> { where(status: :in_progress) }
   scope :in_queue, -> { where(status: :in_queue) }
@@ -27,11 +26,11 @@ class Order < ApplicationRecord
     end
 
     event :start_delivery do
-      transitions from :in_queue, to: :in_delivery
+      transitions from: :in_queue, to: :in_delivery
     end
 
     event :finish_delivery do
-      transitions from :in_delivery, to: :delivered
+      transitions from: :in_delivery, to: :delivered
     end
 
     event :cancel do
@@ -49,5 +48,11 @@ class Order < ApplicationRecord
 
   def order_total
     subtotal - discount
+  end
+
+  def items_count
+    count = order_items.collect(&:quantity).compact.sum
+    return if count.zero?
+    count
   end
 end

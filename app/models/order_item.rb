@@ -1,7 +1,6 @@
 class OrderItem < ApplicationRecord
   belongs_to :book
-  belongs_to :cart
-  belongs_to :order, optional: true
+  belongs_to :order
 
   validates :quantity, numericality: { greater_than: 0 }
 
@@ -10,8 +9,6 @@ class OrderItem < ApplicationRecord
   def total_price
     book.price * quantity
   end
-
-  private
 
   def book_presents
     return unless book.quantity < quantity

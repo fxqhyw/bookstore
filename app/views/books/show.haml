@@ -29,7 +29,7 @@
               %a.input-link.quantity-plus{href: "#"}
                 %i.fa.fa-plus.line-height-40
           .col-xs-7.col-md-5
-            = f.hidden_field :cart_id, value: current_cart.id
+            = f.hidden_field :order_id, value: current_order.id
             = f.hidden_field :book_id, value: @book.id
             = f.submit t('button.add_to_cart'), class: 'btn btn-default pull-right general-position'
       .general-info-wrap.divider-lg
