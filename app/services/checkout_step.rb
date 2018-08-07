@@ -1,4 +1,4 @@
-class CheckoutSteps
+class CheckoutStep
   def initialize(order:, steps:)
     @order = order
     @steps = steps

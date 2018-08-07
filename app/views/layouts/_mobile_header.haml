@@ -18,7 +18,7 @@
           %li
             = link_to t('header.orders'), root_path, class: "collapse-link" #todo
           %li
-            = link_to t('header.settings'), edit_user_registration_path, class: "collapse-link"
+            = link_to t('header.settings'), address_path, class: "collapse-link"
           %li
             = link_to t('header.logout'), destroy_user_session_path, method: :delete, class: "collapse-link"
     - else

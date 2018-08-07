@@ -1,4 +1,4 @@
-= form_for(Address.new, url: addresses_path, html: {method: :put, class: "general-form-md"}) do |f|
+= form_for(Address.new, url: address_path, html: {method: :put, class: "general-form-md"}) do |f|
   = f.hidden_field :type, value: type
   = f.hidden_field :user_id, value: current_user.id
   .visible-xs.visible-sm

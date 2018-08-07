@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks', registrations: 'registrations' }
 
   root 'home#index'
-  match '/catalog', to: 'books#index', via: 'get'
+  get '/catalog', to: 'books#index'
   resources :books, only: [:index, :show]
   resources :order_items, only: [:create, :update, :destroy]
   resource :cart, only: [:show, :update]
@@ -12,10 +12,10 @@ Rails.application.routes.draw do
   resources :checkouts
 
   scope '/settings' do
-    get '/addresses', to: 'addresses#edit'
-    resources :addresses, only: [:update]
+    resource :address, only: [:update]
+    get '/address', to: 'addresses#edit'
     as :user do
-      get 'privacy', to: 'devise/registrations#edit'
+      get '/privacy', to: 'devise/registrations#edit'
     end
   end
 end

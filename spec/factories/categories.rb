@@ -2,6 +2,6 @@ require 'ffaker'
 
 FactoryBot.define do
   factory :category do
-    title { FFaker::Lorem.word }
+    title { FFaker::Lorem.unique.word }
   end
 end

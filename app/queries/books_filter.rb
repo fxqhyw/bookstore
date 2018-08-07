@@ -12,7 +12,7 @@ class BooksFilter
   private
 
   def by_category
-    Book.where(category_id: @params[:category])
+    @books.where(category_id: @params[:category])
   end
 
   def by_filter
