@@ -23,10 +23,10 @@
           %span.font-16.in-gold-500= price_to_euro(item.book.price)
         %td
           .input-group
-            = link_to order_item_path(id: item.id, quantity: item.quantity - 1), class: 'input-link', method: :put, remote: true do
+            = link_to order_item_path(id: item.id, quantity: item.quantity - 1), class: 'input-link', id: "minus_#{item.id}", method: :put, remote: true do
               %i.fa.fa-minus.line-height-40 &nbsp;
-            %input.form-control.quantity-input{type: "text", value: item.quantity}
-            = link_to order_item_path(id: item.id, quantity: item.quantity + 1), class: 'input-link', method: :put, remote: true do
+            %input.form-control.quantity-input{id: "quantity_input_#{item.id}", type: "text", value: item.quantity}
+            = link_to order_item_path(id: item.id, quantity: item.quantity + 1), class: 'input-link', id: "plus_#{item.id}", method: :put, remote: true do
               %i.fa.fa-plus.line-height-40 &nbsp;
         %td
           %span.font-16.in-gold-500= price_to_euro(item.total_price)

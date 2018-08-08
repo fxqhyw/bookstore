@@ -51,7 +51,7 @@ RSpec.feature 'Book page', type: :feature do
     end
 
     scenario 'not decrease counter less then 1', js: true do
-      minus.trigger('click')
+      3.times { minus.trigger('click') }
       expect(qtty_input.value).to eq('1')
     end
 

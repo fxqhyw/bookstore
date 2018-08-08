@@ -5,32 +5,49 @@ RSpec.feature 'Cart page', type: :feature do
     before { visit('/cart') }
 
     it { expect(page).to have_content 'Cart' }
-    it { expect(page).to have_content 'Checkout' }
     it { expect(page).to have_content 'Order Summary' }
     it { expect(page).to have_content 'SubTotal:' }
     it { expect(page).to have_content 'Coupon:' }
     it { expect(page).to have_content 'Order Total:' }
-    it { expect(page).to have_content 'Coupon' }
     it { expect(page).to have_content 'Quantity' }
   end
 
   context 'update cart' do
     before do
       @order_item = FactoryBot.create(:order_item)
-      allow_any_instance_of(ApplicationController).to receive(:current_cart).and_return(@order_item.cart)
+      allow_any_instance_of(ApplicationController).to receive(:current_order).and_return(@order_item.order)
       visit('/cart')
     end
 
-    scenario 'can delete order item', js: true do
-      expect {
-        find('.general-cart-close', match: :first).click
+    scenario 'change order item quantity', js: true do
+      expect(find("#quantity_input_#{@order_item.id}").value).to eq('1')
+      find("#plus_#{@order_item.id}").click
+      wait_for_ajax
+      expect(find("#quantity_input_#{@order_item.id}").value).to eq('2')
+      find("#minus_#{@order_item.id}").click
+      wait_for_ajax
+      expect(find("#quantity_input_#{@order_item.id}").value).to eq('1')
+    end
+
+    scenario 'can not change item quantity to less than 1', js: true do
+      expect(find("#quantity_input_#{@order_item.id}").value).to eq('1')
+      3.times do
+        find("#minus_#{@order_item.id}").click
         wait_for_ajax
-      }.to change(OrderItem, :count).from(1).to(0)
+      end
+      expect(find("#quantity_input_#{@order_item.id}").value).to eq('1')
     end
 
     scenario 'redirect to book page when click book details' do
       click_link(@order_item.book.title, match: :first)
       expect(page.current_path).to eq book_path(@order_item.book)
+    end
+
+    scenario 'delete order item', js: true do
+      expect {
+        find('.general-cart-close', match: :first).click
+        wait_for_ajax
+      }.to change(OrderItem, :count).from(1).to(0)
     end
   end
 
