@@ -34,5 +34,4 @@ RSpec.configure do |config|
   config.include Selectors
 
   config.include WaitForAjax, type: :feature
-
 end

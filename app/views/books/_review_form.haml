@@ -1,6 +1,7 @@
 .col-sm-8
   = form_for Review.new do |f|
-    = f.hidden_field(:book_id, value: @book.id)
+    = f.hidden_field :book_id, value: @book.id
+    = f.hidden_field :user_id, value: current_user.id
     .form-group
       = f.label :rating, t('review.rating'), class: 'control-label'
       - 5.times do |rate|
