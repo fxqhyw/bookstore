@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.feature 'Catalog Page', type: :feature do
+  subject { page }
+
   context 'links on book icons' do
     before(:all) { @book = FactoryBot.create(:book) }
     before(:each) { visit('/catalog') }
-    let(:shop_icon) { page.find('a.hidden-xs>span.shop-icon') }
+    let(:shop_icon) { find('a.hidden-xs>span.shop-icon') }
 
     scenario 'can add book to cart', js: true do
       first('i.fa.fa-shopping-cart.thumb-icon').click
@@ -19,7 +21,7 @@ RSpec.feature 'Catalog Page', type: :feature do
   end
 
   context 'filters by category' do
-    let(:filter_menu) { page.find('ul.list-inline.pt-10.mb-25.mr-240') }
+    let(:filter_menu) { find('ul.list-inline.pt-10.mb-25.mr-240') }
 
     before(:all) do
       FactoryBot.create(:category, title: 'Web design')

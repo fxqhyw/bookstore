@@ -15,7 +15,8 @@ RSpec.describe CartsController, type: :controller do
   describe 'PUT #update' do
     context 'valid coupon' do
       let(:coupon) { FactoryBot.create(:coupon) }
-      before { put :update, params: { coupon_code: coupon.code } }
+
+      before { put :update, params: { coupon_code: coupon.code, order_id: order.id } }
 
       it 'redirects to carts#show' do
         expect(response).to redirect_to(cart_path)

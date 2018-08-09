@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature 'Home Page', type: :feature do
+  subject { page }
+
   context 'content' do
     before { visit('/') }
 

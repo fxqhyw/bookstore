@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Book page', type: :feature do
+  subject { page }
   before(:all) { @book = FactoryBot.create(:book) }
 
   describe 'content' do

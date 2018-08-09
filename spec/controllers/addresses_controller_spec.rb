@@ -3,13 +3,15 @@ require 'rails_helper'
 RSpec.describe AddressesController, type: :controller do
   describe 'PUT #update' do
     let(:address) { FactoryBot.create(:address) }
+    let(:user) { FactoryBot.create(:user) }
+    let(:valid_params) { FactoryBot.build(:address, user_id: user.id).attributes }
 
-    before do
-      sign_in(address.user)
-      put :update, params: { address: { user_id: address.user_id, type: address.type, zip: '123', country: 'Bookstoria' } }
-    end
+    context 'address already exist' do
+      before do
+        sign_in(address.user)
+        put :update, params: { address: { user_id: address.user_id, type: address.type, zip: '123', country: 'Bookstoria' } }
+      end
 
-    context 'address exist' do
       it 'redirects to addresses#edit' do
         expect(response).to redirect_to(address_path)
       end
@@ -21,9 +23,27 @@ RSpec.describe AddressesController, type: :controller do
       end
     end
 
-    context 'address does not exist' do
-      it 'redirects to addresses#edit' do
-        expect(response).to redirect_to(address_path)
+    context 'address does not exist yet' do
+      before { sign_in(user) }
+
+      context 'full valid params' do
+        it 'creates new address in the database' do
+          expect {
+            put :update, params: { address: valid_params }
+          }.to change(Address, :count).by(1)
+        end
+
+        it 'shows notice message' do
+          put :update, params: { address: valid_params }
+          expect(flash[:notice]).to eq('Updated!')
+        end
+      end
+
+      context 'not full valid params' do
+        it 'redirects to addresses#edit' do
+          put :update, params: { address: { user_id: user.id, type: 'BillingAddress', first_name: 'John', last_name: 'Cena' } }
+          expect(response).to render_template(:edit)
+        end
       end
     end
   end

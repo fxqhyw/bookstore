@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature 'Cart page', type: :feature do
+  subject { page }
+
   context 'content' do
     before { visit('/cart') }
 
@@ -14,9 +16,14 @@ RSpec.feature 'Cart page', type: :feature do
 
   context 'update cart' do
     before do
-      @order_item = FactoryBot.create(:order_item)
-      allow_any_instance_of(ApplicationController).to receive(:current_order).and_return(@order_item.order)
-      visit('/cart')
+      @user = FactoryBot.create(:user)
+      @order = FactoryBot.create(:order, user: @user)
+      @order_item = FactoryBot.create(:order_item, order: @order)
+      visit '/users/sign_in'
+      fill_in 'email', with: @user.email
+      fill_in 'password', with: 'qwerty123'
+      click_on 'Back to Store'
+      visit '/cart'
     end
 
     scenario 'change order item quantity', js: true do

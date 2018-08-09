@@ -9,6 +9,7 @@
           .input-group.general-input-group
             %label.input-label= t('cart.coupon')
             = f.text_field :coupon_code, placeholder: t('cart.coupon'), class: 'form-control mb-30'
+            = f.hidden_field :order_id, value: @current_order.id
           %div
             = f.submit t('cart.apply_coupon'), class: "btn btn-primary mb-15 res-block"
       = render 'order_summary'
