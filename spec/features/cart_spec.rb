@@ -29,7 +29,7 @@ RSpec.feature 'Cart page', type: :feature do
       expect(find("#quantity_input_#{@order_item.id}").value).to eq('1')
     end
 
-    scenario 'can not change item quantity to less than 1', js: true do
+    scenario 'can not decrease item quantity to less than 1', js: true do
       expect(find("#quantity_input_#{@order_item.id}").value).to eq('1')
       3.times do
         find("#minus_#{@order_item.id}").click

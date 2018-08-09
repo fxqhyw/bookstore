@@ -16,7 +16,7 @@ class CheckoutStep
   def completed?(step)
     case step
     when :address
-      @order.addresses.first
+      @order.addresses.try(:persisted?)
     when :delivery
       @order.delivery
     when :payment

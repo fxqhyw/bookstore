@@ -7,12 +7,8 @@
         %span.icon-bar
         %span.icon-bar
       %a.navbar-brand= t('header.logo')
-      = link_to cart_path, class: 'shop-link pull-right visible-xs' do
-        %span.shop-icon
-          %span.shop-quantity=  current_order.items_count
-    = link_to cart_path, class: 'shop-link pull-right hidden-xs' do
-      %span.shop-icon
-        %span.shop-quantity=  current_order.items_count
+      = render 'layouts/mobile_cart_quantity'    
+    = render 'layouts/cart_quantity'
     #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
       = render 'layouts/mobile_header'
       .hidden-xs
