@@ -4,8 +4,8 @@ class CheckoutsController < ApplicationController
   steps :address, :delivery, :payment, :confirm, :complete
 
   def show
-    return redirect_to cart_path, alert: 'Cart is empty' if empty_cart?
-    jump_to(CheckoutStep.new(steps: steps, order: @current_order).call)
+    showable_step = CheckoutStep.new(steps: steps, current_step: step, order: @current_order, edit: params[:edit]).call
+    jump_to(showable_step) unless step == showable_step
     render_wizard
   end
 

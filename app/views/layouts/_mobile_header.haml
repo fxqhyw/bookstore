@@ -7,7 +7,7 @@
     %li
       %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"}= t('header.shop')
       %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
-        - categories.each do |category|
+        - @categories.each do |category|
           %li
             = link_to category.title, catalog_path(category: category.id), class: "collapse-link"
     %li

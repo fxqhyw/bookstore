@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :categories
-  before_action :current_order
+  before_action :current_order, :categories
 
   private
 
@@ -14,6 +13,6 @@ class ApplicationController < ActionController::Base
   end
 
   def categories
-    Category.with_books_count
+    @categories = Category.with_books_count
   end
 end
