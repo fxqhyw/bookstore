@@ -1,8 +1,9 @@
 class CheckoutStep
-  def initialize(order:, steps:, current_step:, edit: false)
+  def initialize(order:, steps:, current_step:, user:, edit: false)
     @order = order
     @steps = steps
     @current_step = current_step
+    @user = user
     @editable = edit
   end
 
@@ -18,6 +19,8 @@ class CheckoutStep
 
   def completed?(step)
     case step
+    when :login
+      @user
     when :address
       #@order.addresses.try(:persisted?)
       true
