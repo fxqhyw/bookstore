@@ -1,6 +1,6 @@
 %main.container
   = render 'checkouts/progress'
-  %form.res-mb-100
+  = form_tag(wizard_path, method: :put) do
     .hidden-xs.hidden-sm
       .row
         .col-md-5
@@ -9,66 +9,8 @@
         .col-md-5.col-md-offset-1
           %h3.general-subtitle Shipping Address
     .row
-      .col-md-5.mb-40
-        .visible-xs.visible-sm
-          %h3.general-subtitle Billing Address
-          %p.general-info-text all fields are required
-        .form-group.has-error
-          %label.control-label.input-label{for: "firstName"} First Name
-          %input#firstName.form-control{name:"fname", type: "text", placeholder: "First Name"}
-          %span.help-block Please enter your first name
-        .form-group
-          %label.control-label.input-label{for: "lastName"} Last Name
-          %input#lastName.form-control{name:"lname", type: "text", placeholder: "Last Name"}
-        .form-group
-          %label.control-label.input-label{for: "address"} Address
-          %input#address.form-control{name: "address", type: "text", placeholder: "Address"}
-        .form-group
-          %label.control-label.input-label{for: "city"} City
-          %input#city.form-control{name: "city", type: "text", placeholder: "City"}
-        .form-group
-          %label.control-label.input-label{for: "zip"} Zip
-          %input#zip.form-control{name: "zip", type: "text", placeholder: "Zip"}
-        .form-group
-          %label.control-label.input-label{for: "сountry"} Country
-          %input#country.form-control{name: "country", type: "text", placeholder: "Select a country"}
-        .form-group
-          %label.control-label.input-label{for: "phone"} Phone
-          %input#phone.form-control{name: "phone", type: "tel", placeholder: "Example +355 66 123 4567"}
-      .col-md-5.col-md-offset-1.mb-60
-        .visible-xs.visible-sm
-          %h3.general-subtitle Shipping Address
-        .form-group.has-error
-          %label.control-label.input-label{for: "firstName"} First Name
-          %input#firstName.form-control{name:"fname", type: "text", placeholder: "First Name"}
-          %span.help-block Please enter your first name
-        .form-group
-          %label.control-label.input-label{for: "lastName"} Last Name
-          %input#lastName.form-control{name:"lname", type: "text", placeholder: "Last Name"}
-        .form-group
-          %label.control-label.input-label{for: "address"} Address
-          %input#address.form-control{name: "address", type: "text", placeholder: "Address"}
-        .form-group
-          %label.control-label.input-label{for: "city"} City
-          %input#city.form-control{name: "city", type: "text", placeholder: "City"}
-        .form-group
-          %label.control-label.input-label{for: "zip"} Zip
-          %input#zip.form-control{name: "zip", type: "text", placeholder: "Zip"}
-        .form-group
-          %label.control-label.input-label{for: "сountry"} Country
-          %select#country.form-control{name: "country", placeholder: "Select a country"}
-            %option London
-            %option London
-            %option London
-        .form-group
-          %label.control-label.input-label{for: "phone"} Phone
-          %input#phone.form-control{name: "phone", type: "tel", placeholder: "Example +355 66 123 4567"}
-        .form-group.checkbox
-          %label.checkbox-label
-            %input.checkbox-input{type: "checkbox", hidden: "true"}
-            %span.checkbox-icon
-              %i.fa.fa-check
-            %span.checkbox-text Use Billing Adress
+      = render partial: "address_form", locals: { type: "BillingAddress", tag: "billing" }
+      = render partial: "address_form", locals: { type: "ShippingAddress", tag: "shipping" }
     .general-text-align.mb-60
       %p.in-gold-500.font-18 Order Summary
       %table.general-summary-table
@@ -82,4 +24,4 @@
             %p.font-16 Order Total:
           %td
             %p.font-16 €117.69
-      = link_to 'Save and Continue', next_wizard_path, class: 'btn center-block mb-20'
+    = submit_tag t('checkout.save_and_continue'), method: :put, class: "btn btn-default center-block mb-20"

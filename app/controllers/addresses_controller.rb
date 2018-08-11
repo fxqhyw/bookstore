@@ -7,7 +7,7 @@ class AddressesController < ApplicationController
     if @address.update(address_params)
       redirect_to address_path, notice: 'Updated!'
     else
-      render 'edit'
+      render :edit
     end
   end
 

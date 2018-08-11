@@ -1,0 +1,38 @@
+.col-md-5.col-md-offset-1.mb-60{id: tag}
+  .visible-xs.visible-sm
+    %h3.general-subtitle= type
+  .form-group{class: "#{"has-error" if address_error?(type, :first_name)}"}
+    %label.control-label.font-weight-light{for: "firstName"}= t('settings.first_name')
+    = text_field_tag "#{tag}[first_name]", "#{address_saved_value(type, :first_name)}", placeholder: t('settings.first_name'), id: "firstName", class: "form-control"
+    %span.help-block= address_error_message(type, :first_name)
+  .form-group{class: "#{"has-error" if address_error?(type, :last_name)}"}
+    %label.control-label.font-weight-light{for: "lastName"}= t('settings.last_name')
+    = text_field_tag "#{tag}[last_name]", "#{address_saved_value(type, :last_name)}", placeholder: t('settings.last_name'), id: "lastName", class: "form-control"
+    %span.help-block= address_error_message(type, :last_name)
+  .form-group{class: "#{"has-error" if address_error?(type, :address)}"}
+    %label.control-label.font-weight-light{for: "address"}= t('settings.address')
+    = text_field_tag "#{tag}[address]", "#{address_saved_value(type, :address)}", placeholder: t('settings.address'), id: "address", class: "form-control"
+    %span.help-block= address_error_message(type, :address)
+  .form-group{class: "#{"has-error" if address_error?(type, :city)}"}
+    %label.control-label.font-weight-light{for: "city"}= t('settings.city')
+    = text_field_tag "#{tag}[city]", "#{address_saved_value(type, :city)}", id: "city", placeholder: t('settings.city'), class: "form-control"
+    %span.help-block= address_error_message(type, :city)
+  .form-group{class: "#{"has-error" if address_error?(type, :zip)}"}
+    %label.control-label.font-weight-light{for: "zip"}= t('settings.zip')
+    = text_field_tag "#{tag}[zip]", "#{address_saved_value(type, :zip)}", id: "zip", placeholder: t('settings.zip'), class: "form-control"
+    %span.help-block= address_error_message(type, :zip)
+  .form-group{class: "#{"has-error" if address_error?(type, :country)}"}
+    %label.control-label.font-weight-light{for: "сountry"}= t('settings.country')
+    = select_tag "#{tag}[country]", options_from_collection_for_select(ISO3166::Country.countries.sort_by(&:name), 'un_locode', 'name', ['UA']), class: "form-control"
+    %span.help-block= address_error_message(type, :country)
+  .form-group{class: "#{"has-error" if address_error?(type, :phone)}"}
+    %label.control-label.font-weight-light{for: "phone"}= t('settings.phone')
+    = text_field_tag "#{tag}[phone]", "#{address_saved_value(type, :phone)}", placeholder: t('settings.phone_placeholder'), id: "phone", class: "form-control"
+    %span.help-block= address_error_message(type, :phone)
+  - if tag == 'shipping'
+    .form-group.checkbox
+      %label.font-weight-light.pl-0
+        = check_box :use_billing, true, id: 'use_billing', class: "checkbox-input", hidden: 'true'
+        %span.checkbox-icon
+          %i.fa.fa-check
+      %span.checkbox-text= t('settings.use_billing')

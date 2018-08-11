@@ -108,3 +108,6 @@ en:
     thanks_message: 'Thanks for Review. It will be published as soon as Admin will approve it.'
     incorrect: 'Incorrect review format'
     rating: 'Rating'
+  
+  checkout:
+    save_and_continue: 'Save and Continue'
