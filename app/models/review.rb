@@ -6,7 +6,7 @@ class Review < ApplicationRecord
 
   validates :title, :description, :rating, :status, presence: true
   validates :title, length: { maximum: 50 }
-  validates :description, length: { maximum: 500 }
+  validates :description, length: { maximum: 500 }, format: { with: /\A[a-zA-Z\d\s]+[-!#$%&'*+\/=?^_`{|}~.,]?[a-zA-Z\d\s]*\z/ }
   validates :rating, numericality: { greater_than: 0, less_than_or_equal_to: 5 }
 
   scope :approved, -> { where(status: :approved).order(created_at: :desc) }

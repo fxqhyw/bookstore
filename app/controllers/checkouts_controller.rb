@@ -17,7 +17,7 @@ class CheckoutsController < ApplicationController
       @addresses[:shipping] = ShippingAddress.find_by(order_id: shipping_params[:order_id]) || ShippingAddress.new(shipping_params)
       @addresses[:billing] = BillingAddress.find_by(order_id: billing_params[:order_id]) || BillingAddress.new(billing_params)
 
-      if params[:use_billing][:true] == '1'
+      if params[:use_billing]['true'] == '1'
         unless @addresses[:billing].update(billing_params)
           render :address
         else

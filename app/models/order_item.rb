@@ -9,9 +9,4 @@ class OrderItem < ApplicationRecord
   def total_price
     book.price * quantity
   end
-
-  def book_presents
-    return unless book.quantity < quantity
-    errors.add(:order_item, 'Not available')
-  end
 end
