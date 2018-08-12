@@ -18,7 +18,7 @@ module SettingsHelper
   private
 
   def address(type)
-    current_user.addresses.select { |address| address.type == type }.first
+    current_user.addresses.find_by_type(type)
   end
 
   def correct_type?(type)

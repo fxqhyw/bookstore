@@ -3,27 +3,29 @@ module CheckoutsHelper
     'active' if current_step == step
   end
 
-  def address_error?(type, field)
-    address = order_address(type)
-    address.errors.include?(field) if address
+  def address_error?(field:, tag:)
+    return @addresses[tag.to_sym].errors.include?(field) if @addresses.try(:[], tag.to_sym)
   end
 
-  def address_error_message(type, field)
-    address = order_address(type)
-    address.errors.messages[field][0] if address
+  def address_error_message(field:, tag:)
+    return @addresses[tag.to_sym].errors.messages[field][0] if address_error?(field: field, tag: tag)
   end
 
-  def address_saved_value(type, field)
-    order_address(type).try(:[], field) || user_address(type).try(:[], field)
+  def address_saved_value(type:, field:, tag:)
+    user_address_field(type, field) || order_address_field(type, field) || inputed_address_field(tag, field)
   end
 
   private
 
-  def user_address(type)
-    current_user.addresses.select { |address| address.type == type }.first
+  def user_address_field(type, field)
+    current_user.addresses.find_by_type(type).try(:[], field)
   end
 
-  def order_address(type)
-    @current_order.addresses.select { |address| address.type == type }.first
+  def order_address_field(type, field)
+    @current_order.addresses.find_by_type(type).try(:[], field)
+  end
+
+  def inputed_address_field(tag, field)
+    @addresses.try(:[], tag.to_sym).try(:[], field)
   end
 end

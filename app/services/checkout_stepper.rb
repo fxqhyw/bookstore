@@ -1,4 +1,4 @@
-class CheckoutStep
+class CheckoutStepper
   def initialize(order:, steps:, current_step:, user:, edit: false)
     @order = order
     @steps = steps
@@ -22,11 +22,9 @@ class CheckoutStep
     when :login
       @user
     when :address
-      #@order.addresses.try(:persisted?)
-      true
+      @order.billing_address
     when :delivery
       #@order.delivery
-      true
     when :payment
       @order.credit_card
     when :confirm
