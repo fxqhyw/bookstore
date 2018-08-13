@@ -25,7 +25,7 @@ RSpec.feature 'Book page', type: :feature do
 
   context 'long description' do
     scenario "'Read More' button present", js: true do
-      @book.description = 'long description ' * 100
+      @book.description = 'description ' * 100
       @book.save!
       visit book_path(@book)
       expect(page).to have_content('Read More')

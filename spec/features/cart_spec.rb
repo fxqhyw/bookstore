@@ -47,7 +47,7 @@ RSpec.feature 'Cart page', type: :feature do
 
     scenario 'redirect to book page when click book details' do
       click_link(@order_item.book.title, match: :first)
-      expect(page.current_path).to eq book_path(@order_item.book)
+      expect(page).to have_current_path book_path(@order_item.book)
     end
 
     scenario 'delete order item', js: true do

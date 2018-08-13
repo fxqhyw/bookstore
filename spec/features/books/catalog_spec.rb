@@ -4,18 +4,20 @@ RSpec.feature 'Catalog Page', type: :feature do
   subject { page }
 
   context 'links on book icons' do
-    before(:all) { @book = FactoryBot.create(:book) }
-    before(:each) { visit('/catalog') }
     let(:shop_icon) { find('a.hidden-xs>span.shop-icon') }
 
+    before do
+      @book = FactoryBot.create(:book)
+      visit('/catalog')
+    end
+
     scenario 'can add book to cart', js: true do
-      first('i.fa.fa-shopping-cart.thumb-icon').click
+      find("#book#{@book.id}_cart_icon").click
       expect(shop_icon).to have_content('1')
     end
 
     scenario 'click on show book link' do
-      find(:linkhref, book_path(@book)).click
-      expect(page).to have_http_status(:success)
+      find("#book#{@book.id}_link").click
       expect(page).to have_current_path("/books/#{@book.id}")
     end
   end
@@ -24,10 +26,8 @@ RSpec.feature 'Catalog Page', type: :feature do
     let(:filter_menu) { find('ul.list-inline.pt-10.mb-25.mr-240') }
 
     before(:all) do
-      FactoryBot.create(:category, title: 'Web design')
-      FactoryBot.create(:category, title: 'Mobile development')
-      @web_design = Category.find_by_title('Web design')
-      @mobile_development = Category.find_by_title('Mobile development')
+      @web_design = FactoryBot.create(:category, title: 'Web design')
+      @mobile_development = FactoryBot.create(:category, title: 'Mobile development')
       FactoryBot.create_list(:book, 8, category: @web_design)
       FactoryBot.create_list(:book, 4, category: @mobile_development)
     end
@@ -39,12 +39,12 @@ RSpec.feature 'Catalog Page', type: :feature do
     end
 
     scenario 'show Web design books' do
-      filter_menu.find(:filter_by_category, @web_design.id).click
+      filter_menu.click_on('Web design').click
       expect(page).to have_selector('div.col-xs-6.col-sm-3', count: 8)
     end
 
     scenario 'show Mobile development books' do
-      filter_menu.find(:filter_by_category, @mobile_development.id).click
+      filter_menu.click_on('Mobile development')
       expect(page).to have_selector('div.col-xs-6.col-sm-3', count: 4)
     end
   end

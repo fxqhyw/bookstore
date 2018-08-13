@@ -5,31 +5,22 @@ RSpec.feature 'Home Page', type: :feature do
 
   context 'content' do
     before { visit('/') }
+    it { expect(page.find('#slider')).not_to be_nil }
+    it { expect(page).to have_content('Get Started') }
+    it { expect(page).to have_content('Best Sellers') }
+  end
 
-    scenario 'Ccn see Latest Books' do
-      expect(find('#slider')).not_to be_nil
-    end
-
-    scenario 'can see Get Started' do
-      expect(page).to have_content('Get Started')
-    end
-
-    scenario 'can see Best Sellers' do
-      expect(page).to have_content('Best Sellers')
-    end
-
-    scenario 'click on Get Started link' do
-      click_link('Get Started')
-      expect(page).to have_http_status(:success)
-      expect(page).to have_current_path('/catalog')
-    end
+  scenario 'click on Get Started link' do
+    visit('/')
+    click_link('Get Started')
+    expect(page).to have_current_path('/catalog')
   end
 
   context 'add books to cart' do
     let(:shop_icon) { page.find('a.hidden-xs>span.shop-icon') }
 
     before do
-      @book = FactoryBot.create_list(:book, 4)
+      FactoryBot.create_list(:book, 4)
       visit('/')
     end
 

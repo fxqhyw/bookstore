@@ -44,7 +44,7 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'capybara-webkit'
+  gem 'capybara-webkit', github: 'thoughtbot/capybara-webkit', branch: 'master'
   gem 'database_cleaner'
   gem 'shoulda-matchers'
   gem 'factory_bot_rails'
