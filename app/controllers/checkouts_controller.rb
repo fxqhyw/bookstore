@@ -40,10 +40,10 @@ class CheckoutsController < ApplicationController
   end
 
   def update_billing
-    unless @addresses[:billing].update(billing_params)
-      render :address
-    else
+    if @addresses[:billing].update(billing_params)
       render_wizard
+    else
+      render :address
     end
   end
 
