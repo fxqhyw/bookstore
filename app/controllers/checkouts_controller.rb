@@ -13,23 +13,14 @@ class CheckoutsController < ApplicationController
   def update
     case step
     when :address
-      @addresses = {}
-      @addresses[:shipping] = ShippingAddress.find_by(order_id: shipping_params[:order_id]) || ShippingAddress.new(shipping_params)
-      @addresses[:billing] = BillingAddress.find_by(order_id: billing_params[:order_id]) || BillingAddress.new(billing_params)
+      @addresses = CheckoutAddresser.new(billing_params: billing_params, shipping_params: shipping_params).call
 
       if params[:use_billing]['true'] == '1'
-        unless @addresses[:billing].update(billing_params)
-          render :address
-        else
-          render_wizard
-        end
+        update_billing
       else
-        unless @addresses[:billing].update(billing_params) || @addresses[:shipping].update(shipping_params)
-          render :address
-        else
-          render_wizard
-        end
+        update_billing_and_shipping
       end
+    when :delivery
     end
   end
 
@@ -45,5 +36,21 @@ class CheckoutsController < ApplicationController
 
   def empty_cart?
     @current_order.order_items.empty?
+  end
+
+  def update_billing
+    unless @addresses[:billing].update(billing_params)
+      render :address
+    else
+      render_wizard
+    end
+  end
+
+  def update_billing_and_shipping
+    unless @addresses[:billing].update(billing_params) || @addresses[:shipping].update(shipping_params)
+      render :address
+    else
+      render_wizard
+    end
   end
 end

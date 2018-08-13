@@ -4,9 +4,8 @@ RSpec.describe ReviewsController, type: :controller do
   describe 'POST #create' do
     let(:user) { FactoryBot.create(:user) }
     let(:book) { FactoryBot.create(:book) }
-    let(:review_params) do
-      { title: 'just review', description: FFaker::Lorem.paragraph, rating: 5, user_id: user.id, book_id: book.id }
-    end
+    let(:review_params) { { title: 'title', description: 'some description', rating: 5, user_id: user.id, book_id: book.id } }
+
     before { sign_in(user) }
     context 'valid params' do
       it 'creates a new review' do
@@ -21,7 +20,7 @@ RSpec.describe ReviewsController, type: :controller do
       end
 
       it 'shows thanks notice message' do
-        post :create, params: { review: review_params }
+        post :create, params: { review: review_params } 
         expect(flash[:notice]).to eq(I18n.t('review.thanks_message'))
       end
     end

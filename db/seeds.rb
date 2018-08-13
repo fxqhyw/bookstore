@@ -24,3 +24,7 @@ end
 
 Coupon.create(code: 'BOOKER', discount: 5.00)
 Coupon.create(code: 'LIBRARIAN', discount: 10.00)
+
+Delivery.create(name: 'Delivery Next Day!', duration: '1 day', price: 10)
+Delivery.create(name: 'Express', duration: '2 to 5 days', price: 5)
+Delivery.create(name: 'Pick Up In-Store', duration: '3 to 7 days', price: 0)

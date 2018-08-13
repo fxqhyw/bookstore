@@ -10,5 +10,5 @@ class Address < ApplicationRecord
   validates :address, format: { with: /\A[A-z0-9\s.,-]+\z/ }
   validates :zip, length: { maximum: 10 }, format: { with: /\A[0-9]+\z/, message: 'Must contain only digits' }
   validates :phone, length: { maximum: 20 }, format: { with: /\A^\+[0-9]+\z/,
-                                                       message: "Must starts with '+' and contain onlu digits" }
+                                                       message: "Must starts with '+' and contain only digits" }
 end

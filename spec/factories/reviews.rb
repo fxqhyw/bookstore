@@ -4,5 +4,7 @@ FactoryBot.define do
     description { FFaker::Lorem.paragraphs }
     rating 1
     status :unprocessed
+    book
+    user
   end
 end
