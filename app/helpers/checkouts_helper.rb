@@ -4,11 +4,13 @@ module CheckoutsHelper
   end
 
   def address_error?(field:, tag:)
-    return @addresses[tag.to_sym].errors.include?(field) if @addresses.try(:[], tag.to_sym)
+    return @billing.errors.include?(field) if @billing && tag == 'billing'
+    @shipping.errors.include?(field) if @shipping && tag == 'shipping'
   end
 
   def address_error_message(field:, tag:)
-    return @addresses[tag.to_sym].errors.messages[field][0] if address_error?(field: field, tag: tag)
+    return @billing.errors.messages[field][0] if @billing && tag == 'billing'
+    @shipping.errors.messages[field][0] if @shipping && tag == 'shipping'
   end
 
   def address_saved_value(type:, field:, tag:)
@@ -30,6 +32,7 @@ module CheckoutsHelper
   end
 
   def inputed_address_field(tag, field)
-    @addresses.try(:[], tag.to_sym).try(:[], field)
+    return @billing.try(:[], field) if tag == 'billing'
+    @shipping.try(:[], field) if tag == 'shipping'
   end
 end

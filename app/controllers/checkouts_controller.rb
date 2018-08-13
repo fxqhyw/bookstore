@@ -13,7 +13,8 @@ class CheckoutsController < ApplicationController
   def update
     case step
     when :address
-      @addresses = CheckoutAddresser.new(billing_params: billing_params, shipping_params: shipping_params).call
+      @billing = CheckoutAddresser.call(billing: billing_params)
+      @shipping = CheckoutAddresser.call(shipping: shipping_params)
 
       if params[:use_billing]['true'] == '1'
         update_billing
@@ -40,7 +41,7 @@ class CheckoutsController < ApplicationController
   end
 
   def update_billing
-    if @addresses[:billing].update(billing_params)
+    if @billing.update(billing_params)
       render_wizard
     else
       render :address
@@ -48,7 +49,7 @@ class CheckoutsController < ApplicationController
   end
 
   def update_billing_and_shipping
-    unless @addresses[:billing].update(billing_params) || @addresses[:shipping].update(shipping_params)
+    unless @billing.update(billing_params) || @shipping.update(shipping_params)
       render :address
     else
       render_wizard
