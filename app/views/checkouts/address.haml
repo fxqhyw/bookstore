@@ -11,17 +11,5 @@
     .row
       = render partial: "address_form", locals: { type: "BillingAddress", tag: "billing" }
       = render partial: "address_form", locals: { type: "ShippingAddress", tag: "shipping" }
-    .general-text-align.mb-60
-      %p.in-gold-500.font-18 Order Summary
-      %table.general-summary-table
-        %tr
-          %td
-            %p.font-16 Item Total:
-          %td
-            %p.font-16 €117.69
-        %tr
-          %td
-            %p.font-16 Order Total:
-          %td
-            %p.font-16 €117.69
+    = render 'order_summary'
       = submit_tag t('checkout.save_and_continue'), method: :put, class: "btn btn-default center-block mb-20"

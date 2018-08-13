@@ -24,7 +24,7 @@ class CheckoutStepper
     when :address
       @order.billing_address
     when :delivery
-      #@order.delivery
+      @order.delivery
     when :payment
       @order.credit_card
     when :confirm

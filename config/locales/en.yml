@@ -111,3 +111,10 @@ en:
   
   checkout:
     save_and_continue: 'Save and Continue'
+
+  delivery:
+    delivery_method: 'Shipping Method'
+    method: 'Method'
+    days: 'Days'
+    price: 'Price'
+    pickup: 'Please, pick up Delivery type!'

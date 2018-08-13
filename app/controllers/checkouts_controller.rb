@@ -21,6 +21,7 @@ class CheckoutsController < ApplicationController
         update_billing_and_shipping
       end
     when :delivery
+      update_delivery
     end
   end
 
@@ -49,6 +50,15 @@ class CheckoutsController < ApplicationController
   def update_billing_and_shipping
     unless @addresses[:billing].update(billing_params) || @addresses[:shipping].update(shipping_params)
       render :address
+    else
+      render_wizard
+    end
+  end
+
+  def update_delivery
+    if params[:delivery_id]
+      @current_order.delivery_id = params[:delivery_id]
+      render_wizard @current_order
     else
       render_wizard
     end

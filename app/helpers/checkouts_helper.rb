@@ -15,6 +15,10 @@ module CheckoutsHelper
     user_address_field(type, field) || order_address_field(type, field) || inputed_address_field(tag, field)
   end
 
+  def checked_delivery?(delivery_id)
+    @current_order.delivery_id == delivery_id
+  end
+
   private
 
   def user_address_field(type, field)
