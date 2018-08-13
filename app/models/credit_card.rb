@@ -1,5 +1,5 @@
 class CreditCard < ApplicationRecord
-  has_many :orders, dependent: :nullify
+  belongs_to :order
 
   validates :first_name, :last_name, :number, :expiration_date, :cvv, presence: true
   validates :first_name, :last_name, length: { maximum: 30 }, format: { with: /\A[a-zA-Z]\z/,

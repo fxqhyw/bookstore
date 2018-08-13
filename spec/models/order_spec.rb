@@ -2,13 +2,14 @@ require 'rails_helper'
 
 RSpec.describe Order, type: :model do
   context 'associations' do
-    %i[coupon user delivery credit_card].each do |field|
+    %i[coupon user delivery].each do |field|
       it { is_expected.to belong_to(field) }
+    end
+    %i[shipping_address billing_address credit_card].each do |field|
+      it { is_expected.to have_one(field).dependent(:destroy) }
     end
     it { is_expected.to have_many(:order_items).dependent(:destroy) }
     it { is_expected.to have_many(:addresses) }
-    it { is_expected.to have_one(:shipping_address).dependent(:destroy) }
-    it { is_expected.to have_one(:billing_address).dependent(:destroy) }
   end
 
   context 'validations' do

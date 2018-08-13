@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CreditCard, type: :model do
   context 'associations' do
-    it { is_expected.to have_many(:orders) }
+    it { is_expected.to belong_to(:order) }
   end
 
   context 'validations' do
