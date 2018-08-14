@@ -9,8 +9,8 @@ module CheckoutsHelper
   end
 
   def address_error_message(field:, tag:)
-    return @billing.errors.messages[field][0] if @billing && tag == 'billing'
-    @shipping.errors.messages[field][0] if @shipping && tag == 'shipping'
+    return @billing.errors[field].to_sentence if @billing && tag == 'billing'
+    @shipping.errors[field].to_sentence if @shipping && tag == 'shipping'
   end
 
   def address_saved_value(type:, field:, tag:)
@@ -19,6 +19,18 @@ module CheckoutsHelper
 
   def checked_delivery?(delivery_id)
     @current_order.delivery_id == delivery_id
+  end
+
+  def card_error?(field)
+    @credit_card.errors.include?(field) if @credit_card
+  end
+
+  def card_error_message(field)
+    @credit_card.errors[field].to_sentence if @credit_card
+  end
+
+  def card_saved_value(field)
+    @current_order.credit_card.try(:[], field) || @credit_card.try(field)
   end
 
   private

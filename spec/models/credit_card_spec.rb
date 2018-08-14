@@ -13,6 +13,6 @@ RSpec.describe CreditCard, type: :model do
     it { is_expected.to validate_length_of(:name).is_at_most(30) }
     it { is_expected.to validate_length_of(:number).is_at_least(13).is_at_most(18) }
     it { is_expected.to validate_length_of(:expiration_date).is_equal_to(5) }
-    it { is_expected.to validate_length_of(:cvv).is_equal_to(3) }
+    it { is_expected.to validate_length_of(:cvv).is_at_least(3).is_at_most(4) }
   end
 end

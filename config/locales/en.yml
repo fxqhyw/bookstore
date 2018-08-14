@@ -126,3 +126,4 @@ en:
     name_on_card: 'Name on Card'
     mm_yy: 'MM / YY'
     cvv: 'CVV'
+    hint: '3-digit security code, usually found on the back of your card. American Express cards has 4-digit code, located on the front'

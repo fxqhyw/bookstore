@@ -1,25 +1,29 @@
 %main.container.mb-res-50
   = render 'progress'
   %h3.general-subtitle= t('payment.credit_card')
-  = form_for(CreditCard.new, url: wizard_path, method: :put, class: "max-600 mb-80") do |f|
+  = form_for CreditCard.new, url: wizard_path, method: :put, html: { class: 'max-600 mb-80' } do |f|
+    = f.hidden_field :order_id, value: @current_order.id
     .form-group{class: "#{'has-error' if card_error?(:number)}"}
-      %label.control-label.input-label{for: "cardNumber"}= t('payment.card_number')
+      %label.control-label.input-label= t('payment.card_number')
       = f.text_field :number, value: card_saved_value(:number), placeholder: t('payment.card_number'), class: "form-control", id: 'number'
       %span.help-block= card_error_message(:number)
     .row
       .col-sm-6
-        .form-group
-          %label.control-label.input-label{for: "cardName"}= t('payment.name_on_card')
-          %input#cardName.form-control{type: "text", name: "ccname", placeholder: t('payment.name_on_card')}
+        .form-group{class: "#{'has-error' if card_error?(:name)}"}
+          %label.control-label.input-label= t('payment.name_on_card')
+          = f.text_field :name, value: card_saved_value(:name), placeholder: t('payment.name_on_card'), class: "form-control", id: 'name'
+          %span.help-block= card_error_message(:name)
       .col-sm-3
-        .form-group
-          %label.control-label.input-label{for: "firstName"}= t('payment.mm_yy')
-          %input#firstName.form-control{name: "exp-date", type: "text", placeholder: t('payment.mm_yy')}
+        .form-group{class: "#{'has-error' if card_error?(:expiration_date)}"}
+          %label.control-label.input-label= t('payment.mm_yy')
+          = f.text_field :expiration_date, value: card_saved_value(:expiration_date), placeholder: t('payment.mm_yy'), class: "form-control", id: 'exp-date'
+          %span.help-block= card_error_message(:expiration_date)
       .col-sm-3
-        .form-group.relative
-          %label.control-label.input-label{for: "firstName"}= t('payment.cvv')
-          %input#firstName.form-control{name: "cvc", type: "number", placeholder: t('payment.cvv')}
-          %i.fa.fa-question-circle.general-form-help
-  = render 'order_summary'
-  .text-center
-    = link_to 'Save and Continue', next_wizard_path, class: 'btn btn-default mb-80'
+        .form-group.relative{class: "#{'has-error' if card_error?(:cvv)}"}
+          %label.control-label.input-label= t('payment.cvv')
+          = f.text_field :cvv, value: card_saved_value(:cvv), placeholder: t('payment.cvv'), class: "form-control", id: 'cvv'
+          %span.help-block= card_error_message(:cvv)
+          %i.fa.fa-question-circle.general-form-help{'data-toggle': 'tooltip', 'data-placement': :top, title: t('payment.hint')}
+    = render 'order_summary'
+    .text-center
+      = f.submit t('checkout.save_and_continue'), class: 'btn btn-default mb-80'
