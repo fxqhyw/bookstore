@@ -15,12 +15,7 @@ class CheckoutsController < ApplicationController
     when :address
       @billing = CheckoutAddresser.call(billing: billing_params)
       @shipping = CheckoutAddresser.call(shipping: shipping_params)
-
-      if params[:use_billing]['true'] == '1'
-        update_billing
-      else
-        update_billing_and_shipping
-      end
+      update_addresses
     when :delivery
       update_delivery
     end
@@ -40,19 +35,13 @@ class CheckoutsController < ApplicationController
     @current_order.order_items.empty?
   end
 
-  def update_billing
-    if @billing.update(billing_params)
-      render_wizard
+  def update_addresses
+    @billing.update(billing_params)
+    if params[:use_billing]['true'] == '1'
+      render_wizard @billing
     else
-      render :address
-    end
-  end
-
-  def update_billing_and_shipping
-    unless @billing.update(billing_params) || @shipping.update(shipping_params)
-      render :address
-    else
-      render_wizard
+      @shipping.update(shipping_params)
+      render_wizard @shipping
     end
   end
 
