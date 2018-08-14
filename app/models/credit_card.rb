@@ -1,9 +1,9 @@
 class CreditCard < ApplicationRecord
   belongs_to :order
 
-  validates :first_name, :last_name, :number, :expiration_date, :cvv, presence: true
-  validates :first_name, :last_name, length: { maximum: 30 }, format: { with: /\A[a-zA-Z]\z/,
-                                                                        message: "Must contain only letters" }
+  validates :name, :number, :expiration_date, :cvv, presence: true
+  validates :name, length: { maximum: 30 }, format: { with: /\A[a-zA-Z]\z/,
+                                                      message: "Must contain only letters" }
   validates :number, length: { minimum: 13, maximum: 18 }, format: { with: /\A[0-9]+\z/,
                                                                      message: "Invalid card number!"}
   validates :expiration_date, length: { is: 5 }, format: { with: /\A(0{1}([0-9]){1}|1{1}([0-2]){1})\/\d{2}\z/,

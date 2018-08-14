@@ -1,13 +1,13 @@
 %main.container
-  = render 'checkouts/progress'
+  = render 'progress'
   = form_tag(wizard_path, method: :put) do
     .hidden-xs.hidden-sm
       .row
         .col-md-5
-          %h3.general-subtitle Billing Address
-          %p.general-info-text all fields are required
+          %h3.general-subtitle= t('settings.billing')
+          %p.general-info-text= t('checkout.fields_required')
         .col-md-5.col-md-offset-1
-          %h3.general-subtitle Shipping Address
+          %h3.general-subtitle= t('settings.shipping')
     .row
       = render partial: "address_form", locals: { type: "BillingAddress", tag: "billing" }
       = render partial: "address_form", locals: { type: "ShippingAddress", tag: "shipping" }

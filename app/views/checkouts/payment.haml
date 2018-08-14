@@ -1,25 +1,25 @@
 %main.container.mb-res-50
-  = render 'checkouts/progress'
-  %h3.general-subtitle Credit Card
-  %form.max-600.mb-80
-    .form-group.has-error
-      %label.control-label.input-label{for: "cardNumber"} Card Number
-      %input#cardNumber.form-control{type: "number", name: "cardnumber", placeholder: "Card Number"}
-      %span.help-block Please enter a valid credit card number
+  = render 'progress'
+  %h3.general-subtitle= t('payment.credit_card')
+  = form_for(CreditCard.new, url: wizard_path, method: :put, class: "max-600 mb-80") do |f|
+    .form-group{class: "#{'has-error' if card_error?(:number)}"}
+      %label.control-label.input-label{for: "cardNumber"}= t('payment.card_number')
+      = f.text_field :number, value: card_saved_value(:number), placeholder: t('payment.card_number'), class: "form-control", id: 'number'
+      %span.help-block= card_error_message(:number)
     .row
       .col-sm-6
         .form-group
-          %label.control-label.input-label{for: "cardName"} Name on Card
-          %input#cardName.form-control{type: "text", name: "ccname", placeholder: "Name on Card"}
+          %label.control-label.input-label{for: "cardName"}= t('payment.name_on_card')
+          %input#cardName.form-control{type: "text", name: "ccname", placeholder: t('payment.name_on_card')}
       .col-sm-3
         .form-group
-          %label.control-label.input-label{for: "firstName"} MM / YY
-          %input#firstName.form-control{name: "exp-date", type: "text", placeholder: "MM / YY"}
+          %label.control-label.input-label{for: "firstName"}= t('payment.mm_yy')
+          %input#firstName.form-control{name: "exp-date", type: "text", placeholder: t('payment.mm_yy')}
       .col-sm-3
         .form-group.relative
-          %label.control-label.input-label{for: "firstName"} CVV
-          %input#firstName.form-control{name: "cvc", type: "number", placeholder: "CVV"}
+          %label.control-label.input-label{for: "firstName"}= t('payment.cvv')
+          %input#firstName.form-control{name: "cvc", type: "number", placeholder: t('payment.cvv')}
           %i.fa.fa-question-circle.general-form-help
-  -# = render 'checkout/order_summary'
+  = render 'order_summary'
   .text-center
     = link_to 'Save and Continue', next_wizard_path, class: 'btn btn-default mb-80'

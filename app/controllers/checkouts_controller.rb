@@ -18,6 +18,7 @@ class CheckoutsController < ApplicationController
       update_addresses
     when :delivery
       update_delivery
+    when :payment
     end
   end
 
@@ -46,11 +47,7 @@ class CheckoutsController < ApplicationController
   end
 
   def update_delivery
-    if params[:delivery_id]
-      @current_order.delivery_id = params[:delivery_id]
-      render_wizard @current_order
-    else
-      render_wizard
-    end
+    @current_order.delivery_id = params[:delivery_id] if params[:delivery_id]
+    render_wizard @current_order
   end
 end
