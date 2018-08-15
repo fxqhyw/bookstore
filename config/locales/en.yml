@@ -112,6 +112,7 @@ en:
   checkout:
     save_and_continue: 'Save and Continue'
     fields_required: 'all fields are required'
+    item_total: 'Item Total:'
 
   delivery:
     delivery_method: 'Shipping Method'

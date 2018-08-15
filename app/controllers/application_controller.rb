@@ -5,10 +5,10 @@ class ApplicationController < ActionController::Base
 
   def current_order
     if user_signed_in?
-      @current_order = current_user.orders.in_progress.first || Order.create(user_id: current_user.id)
+      @current_order = current_user.orders.in_progress.first.decorate || Order.create(user_id: current_user.id).decorate
     else
-      @current_order = Order.find_by_id(session[:order_id]) || Order.create
-      session[:order_id] = @current_order.id
+      @current_order = Order.find_by_id(cookies.encrypted[:order_id]).decorate || Order.create.decorate
+      cookies.encrypted[:order_id] = { value: @current_order.id, expires: 1.mouth.from_now }
     end
   end
 

@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @latest_books = Book.latest
-    @best_sellers = Book.first(4) # TO DO
+    @latest_books = Book.latest.decorate
+    @best_sellers = Book.latest.decorate # TO DO
   end
 end
