@@ -13,8 +13,8 @@ module CheckoutsHelper
     @shipping.errors[field].to_sentence if @shipping && tag == 'shipping'
   end
 
-  def address_saved_value(type:, field:, tag:)
-    user_address_field(type, field) || order_address_field(type, field) || inputed_address_field(tag, field)
+  def address_saved_value(field:, tag:)
+    order_address_field(tag, field) || user_address_field(tag, field) || inputed_address_field(tag, field)
   end
 
   def checked_delivery?(delivery_id)
@@ -30,21 +30,23 @@ module CheckoutsHelper
   end
 
   def card_saved_value(field)
-    @current_order.credit_card.try(:[], field) || @credit_card.try(field)
+    @current_order.credit_card.try(field) || @credit_card.try(field)
   end
 
   private
 
-  def user_address_field(type, field)
-    current_user.addresses.find_by_type(type).try(:[], field)
+  def user_address_field(tag, field)
+    return current_user.billing_address.try(field) if tag == 'billing'
+    current_user.shipping_address.try(field) if tag == 'shipping'
   end
 
-  def order_address_field(type, field)
-    @current_order.addresses.find_by_type(type).try(:[], field)
+  def order_address_field(tag, field)
+    return @current_order.billing_address.try(field) if tag == 'billing'
+    @current_order.shipping_address.try(field) if tag == 'shipping'
   end
 
   def inputed_address_field(tag, field)
-    return @billing.try(:[], field) if tag == 'billing'
-    @shipping.try(:[], field) if tag == 'shipping'
+    return @billing.try(field) if tag == 'billing'
+    @shipping.try(field) if tag == 'shipping'
   end
 end

@@ -9,7 +9,6 @@ RSpec.describe Order, type: :model do
       it { is_expected.to have_one(field).dependent(:destroy) }
     end
     it { is_expected.to have_many(:order_items).dependent(:destroy) }
-    it { is_expected.to have_many(:addresses) }
   end
 
   context 'validations' do
