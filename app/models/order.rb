@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+  include OrderSummary
   include AASM
 
   belongs_to :user, optional: true

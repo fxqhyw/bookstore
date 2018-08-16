@@ -1,0 +1,11 @@
+%p.general-address
+  = client_name(@current_order.billing_address)
+  = link_to 'edit', wizard_path(:address, edit: true), class: "general-edit"
+  %br
+  = @current_order.billing_address.address
+  %br
+  = @current_order.billing_address.city
+  %br
+  = @current_order.billing_address.country
+  %br
+  = "Phone " + @current_order.billing_address.phone

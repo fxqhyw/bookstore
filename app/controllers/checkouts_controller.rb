@@ -4,6 +4,7 @@ class CheckoutsController < ApplicationController
   steps :login, :address, :delivery, :payment, :confirm, :complete
 
   def show
+    @placed_order = current_user.order.in_queue.first
     showable_step = CheckoutStepper.new(steps: steps, current_step: step, order: @current_order,
                                         edit: params[:edit], user: current_user).call
     jump_to(showable_step) unless step == showable_step
@@ -18,6 +19,9 @@ class CheckoutsController < ApplicationController
       update_delivery
     when :payment
       update_credit_card
+    when :confirm
+      @current_order.confirm
+      render_wizard @current_order
     end
   end
 

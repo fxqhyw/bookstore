@@ -15,12 +15,11 @@ RSpec.feature 'Cart page', type: :feature do
   end
 
   context 'update cart' do
+    let(:order) { FactoryBot.create(:order) }
     before do
-      @user = FactoryBot.create(:user)
-      @order = FactoryBot.create(:order, user: @user)
-      @order_item = FactoryBot.create(:order_item, order: @order)
+      @order_item = FactoryBot.create(:order_item, order: order)
       visit '/users/sign_in'
-      fill_in 'email', with: @user.email
+      fill_in 'email', with: order.user.email
       fill_in 'password', with: 'qwerty123'
       click_on 'Back to Store'
       visit '/cart'

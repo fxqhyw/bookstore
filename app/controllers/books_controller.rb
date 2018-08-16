@@ -1,10 +1,10 @@
 class BooksController < ApplicationController
   def index
-    @books = BooksFilter.new(params: permited_params).call.page(params[:page]).decorate
+    @books = BooksFilter.new(params: permited_params).call.page(params[:page])
   end
 
   def show
-    @book = Book.find_by_id(params[:id]).decorate
+    @book = Book.find_by_id(params[:id])
     @reviews = @book.reviews.approved
   end
 

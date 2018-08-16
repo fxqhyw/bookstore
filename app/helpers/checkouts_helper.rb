@@ -33,6 +33,14 @@ module CheckoutsHelper
     @current_order.credit_card.try(field) || @credit_card.try(field)
   end
 
+  def client_name(address)
+    address.first_name + ' ' + address.last_name
+  end
+
+  def secret_card_number(number)
+    '*** *** *** ' + number[-4, 4]
+  end
+
   private
 
   def user_address_field(tag, field)

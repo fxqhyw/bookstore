@@ -3,6 +3,6 @@ FactoryBot.define do
     total_price nil
     status :in_progress
     delivery
-    user nil
+    user
   end
 end
