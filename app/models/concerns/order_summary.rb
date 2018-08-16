@@ -7,8 +7,12 @@ module OrderSummary
     coupon.try(:discount) || 0.00
   end
 
+  def delivery_price
+    delivery.try(:price) || 0.00
+  end
+
   def order_total
-    subtotal - discount
+    subtotal - discount + delivery_price
   end
 
   def items_count

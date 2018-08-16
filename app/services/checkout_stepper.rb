@@ -29,8 +29,6 @@ class CheckoutStepper
       @order.credit_card
     when :confirm
       @order.in_queue?
-    when :complete
-      false
     end
   end
 end
