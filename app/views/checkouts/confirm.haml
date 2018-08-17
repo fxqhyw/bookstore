@@ -4,12 +4,12 @@
     .col-sm-3
       %h3.general-subtitle Shipping Address
       - if @current_order.shipping_address
-        = render 'shipping_address_confirm'
+        = render partial: 'shipping_address_info', locals: { order: @current_order }
       - else
-        = render 'billing_address_confirm'
+        = render partial: 'billing_address_info', locals: { order: @current_order }
     .col-sm-3
       %h3.general-subtitle Billing Address
-      = render 'billing_address_confirm'
+      = render partial: 'billing_address_info', locals: { order: @current_order }
     .col-sm-3
       %h3.general-subtitle Shipments
       %p.general-address

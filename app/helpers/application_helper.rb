@@ -10,4 +10,8 @@ module ApplicationHelper
     when 'alert' then 'alert alert-danger'
     end
   end
+
+  def order_date(order)
+    order.created_at.strftime('%B %d, %Y')
+  end
 end

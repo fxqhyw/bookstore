@@ -29,9 +29,10 @@ module CheckoutUpdater
     end
 
     def confirm_order
-      @current_order.confirm
       @current_order.total_price = @current_order.order_total
       @current_order.number = "#R#{Time.now.nsec}" + @current_order.id.to_s
+      @current_order.confirm
+      @placed_order = @current_order
       render :complete if @current_order.save
     end
 
