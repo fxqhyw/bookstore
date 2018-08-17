@@ -21,6 +21,7 @@ class CheckoutsController < ApplicationController
     when :confirm
       @current_order.confirm
       @current_order.total_price = @current_order.order_total
+      @current_order.number = "#R#{Time.now.nsec}" + @current_order.id.to_s
       render :complete if @current_order.save
     end
   end
