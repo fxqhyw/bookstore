@@ -1,33 +1,40 @@
-%main.container
-  .row
-    .col-md-5.mb-40
-      .text-center
-        %h3.general-subtitle Returning Customer
-        %a.general-login-icon{href: "#"}
-          %i.fa.fa-facebook-official
-        %p.general-login-text or
-      %form.general-form
-        .mb-40
-          %p.mb-15 Log In with Password
-          .form-group.mb-30
-            %label.control-label.input-label{for: "email"} Enter Email
-            %input#email.form-control{name:"email", type: "email", placeholder: "Enter Email"}
-          .form-group.mb-30
-            %label.control-label.input-label{for: "password"} Password
-            %input#password.form-control{name:"password", type: "password", placeholder: "Password"}
-            %a.help-block.in-gold-500{href: "#"} Forgot password?
-        %button.btn.disabled.mb-20 Log In with Password
-    .col-md-5.col-md-offset-1.mb-60
-      .text-center
-        %h3.general-subtitle New Customer
-        %a.general-login-icon{href: "#"}
-          %i.fa.fa-facebook-official
-        %p.general-login-text or
-      %form.general-form
-        .mb-40
-          %p.mb-5 Quik Register
-          %p.general-info-text.font-12.mb-20 You’ll be able to create password later
-          .form-group.mb-30
-            %label.control-label.input-label{for: "email"} Enter Email
-            %input#email.form-control{name:"email", type: "email", placeholder: "Enter Email"}
-        %button.btn.disabled.mb-20 Continue to Checkout
+%main.container.general-main-wrap
+  .hidden-xs.hidden-sm
+    .row
+      .col-md-5.mb-40
+        .visible-xs.visible-sm
+        .text-center
+          %h3.general-subtitle.mt-0= t('checkout.returning_customer')
+          %a.general-login-icon{ href: user_facebook_omniauth_authorize_path }
+            %i.fa.fa-facebook-official
+          %p.general-login-text= t('checkout.or')
+        = form_for(User.new, url: user_session_path, html: { class: 'general-form' }) do |f|
+          .form-group.mb-40
+            %p.fw-600= t('checkout.login_with_password')
+            = f.hidden_field :transfer_order, value: true
+            = f.label :email, t('checkout.enter_email'), class: 'control-label input-label'
+            = f.email_field :email, placeholder: t('checkout.enter_email'), autofocus: true, class: 'form-control'
+          .form-group.mb-40
+            = f.label :password, t('settings.password'), class: 'control-label input-label'
+            = f.password_field :password, placeholder: t('settings.password'), class: 'form-control'
+            %a.help-block.in-gold-500{ href: new_user_password_path }= t('button.forgot_password')
+          .text-left
+          = f.submit t('checkout.login_with_password'), class: 'button btn btn-default mb-20'
+      .col-md-5.mb-40
+        .visible-xs.visible-sm
+        .text-center
+          %h3.general-subtitle.mt-0= t('checkout.new_customer')
+          %a.general-login-icon{href: user_facebook_omniauth_authorize_path}
+            %i.fa.fa-facebook-official
+          %p.general-login-text= t('checkout.or')
+        = form_for(User.new, url: user_registration_path, html: { class: 'general-form' }) do |f|
+          .form-group.mb-40
+            %p.fw-600= t('checkout.quick_register')
+            %p.fw-300= t('checkout.quick_description')
+            = f.label :email, t('checkout.enter_email'), class: 'control-label input-label'
+            = f.email_field :email, placeholder: t('checkout.enter_email'), class: 'form-control'
+            - password = Devise.friendly_token.first(8)
+            = f.hidden_field :password, value: password
+            = f.hidden_field :password_confirmation, value: password
+          .text-left
+          = f.submit t('checkout.continue'), class: 'button btn btn-default mb-20'

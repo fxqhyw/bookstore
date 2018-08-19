@@ -114,6 +114,14 @@ en:
     fields_required: 'all fields are required'
     item_total: 'Item Total:'
     delivery: 'Delivery:'
+    returning_customer: 'Returning Customer'
+    or: 'or'
+    login_with_password: 'Log in with password'
+    enter_email: 'Enter Email'
+    new_customer: 'New Customer'
+    quick_register: 'Quick Register'
+    quick_description: "You'll be able to create password later"
+    continue: 'Continue to Checkout'
 
   delivery:
     delivery_method: 'Shipping Method'

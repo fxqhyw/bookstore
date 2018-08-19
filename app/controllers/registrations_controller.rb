@@ -1,12 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   after_action :transfer_order_to_user, only: [:create]
 
-  private
-
-  def transfer_order_to_user
-    @current_order.update(user_id: @user.id)
-  end
-
   protected
 
   def update_resource(resource, params)
@@ -15,5 +9,12 @@ class RegistrationsController < Devise::RegistrationsController
     else
       resource.update_without_password(params)
     end
+  end
+
+  private
+
+  def transfer_order_to_user
+    @current_order.update(user_id: @user.id)
+    cookies.delete :order_id
   end
 end
