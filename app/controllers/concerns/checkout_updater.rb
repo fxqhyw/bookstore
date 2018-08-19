@@ -33,7 +33,12 @@ module CheckoutUpdater
       @current_order.number = "#R#{Time.now.nsec}" + @current_order.id.to_s
       @current_order.confirm
       @placed_order = @current_order
-      render :complete if @current_order.save
+      if @current_order.save
+        CheckoutMailer.with(user: current_user, order: @current_order).complete_email.deliver_later
+        render :complete
+      else
+        render_wizard
+      end
     end
 
     def billing_params

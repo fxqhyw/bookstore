@@ -3,7 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     super
-    RegistrationMailer.with(user: @user).registration_email.deliver_later if @user.save
+    RegistrationMailer.with(email: @user.email, password: @user.password).registration_email.deliver_later if @user.save
     flash[:notice] = "You have successfully registered, your account information has been sent to #{@user.email}"
   end
 
