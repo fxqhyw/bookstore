@@ -17,4 +17,12 @@ class RegistrationsController < Devise::RegistrationsController
     @current_order.update(user_id: @user.id)
     cookies.delete :order_id
   end
+
+  def after_sign_up_path_for(resource)
+    if params[:user][:from_checkout]
+      checkouts_path
+    else
+      root_path
+    end
+  end
 end

@@ -9,7 +9,7 @@ module CheckoutUpdater
       @shipping = ShippingAddress.find_by(order_id: shipping_params[:order_id]) || ShippingAddress.new
 
       @billing.update(billing_params)
-      if params[:use_billing]['true'] == '1'
+      if params[:use_billing]
         render_wizard @billing
       else
         @shipping.update(shipping_params)
