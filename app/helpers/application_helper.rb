@@ -14,4 +14,8 @@ module ApplicationHelper
   def order_date(order)
     order.created_at.strftime('%B %d, %Y')
   end
+
+  def price_to_euro(price)
+    "€#{price}"
+  end
 end

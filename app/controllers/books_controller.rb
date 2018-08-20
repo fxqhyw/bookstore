@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find_by_id(params[:id])
+    @book = Book.find_by_id(params[:id]).decorate
     @reviews = @book.reviews.approved
   end
 
