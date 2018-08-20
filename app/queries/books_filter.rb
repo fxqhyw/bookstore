@@ -32,7 +32,7 @@ class BooksFilter
   end
 
   def popular
-    @books # TO DO
+    @books.best_sellers
   end
 
   def low_to_high_price
