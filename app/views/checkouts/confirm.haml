@@ -2,23 +2,23 @@
   = render 'checkouts/progress'
   .row.mb-20
     .col-sm-3
-      %h3.general-subtitle Shipping Address
+      %h3.general-subtitle= t('settings.shipping')
       - if @current_order.shipping_address
         = render partial: 'shipping_address_info', locals: { order: @current_order }
       - else
         = render partial: 'billing_address_info', locals: { order: @current_order }
     .col-sm-3
-      %h3.general-subtitle Billing Address
+      %h3.general-subtitle= t('settings.billing')
       = render partial: 'billing_address_info', locals: { order: @current_order }
     .col-sm-3
-      %h3.general-subtitle Shipments
+      %h3.general-subtitle= t('checkout.shipments')
       %p.general-address
         = @current_order.delivery.name
         = link_to 'edit', wizard_path(:delivery, edit: true), class: "general-edit"
         %br
         = @current_order.delivery.duration
     .col-sm-3
-      %h3.general-subtitle Payment Information
+      %h3.general-subtitle= t('payment.information')
       %p.general-address
         = secret_card_number(@current_order.credit_card.number)
         = link_to 'edit', wizard_path(:payment, edit: true), class: "general-edit"
@@ -35,17 +35,17 @@
         %table.table
           %tr
             %td
-              %span.in-grey-600 Price
+              %span.in-grey-600= t('cart.price')
             %td
               %span.font-16.in-gold-500= price_to_euro(item.book.price)
           %tr
             %td.vertical-middle
-              %span.in-grey-600 Quantity
+              %span.in-grey-600= t('cart.quantity')
             %td
               %span= item.quantity
           %tr
             %td
-              %span.in-grey-600 SubTotal
+              %span.in-grey-600= t('cart.subtotal')
             %td
               %span.font-16.in-gold-500= price_to_euro(item.total_price)
   .hidden-xs.divider-lg.pt-20
@@ -53,14 +53,14 @@
       %thead
         %tr
           %th
-            %span.in-grey-600 Book
+            %span.in-grey-600= t('checkout.book')
           %th.col-method
           %th
-            %span.in-grey-600 Price
+            %span.in-grey-600= t('cart.price')
           %th
-            %span.in-grey-600 Quantity
+            %span.in-grey-600= t('cart.quantity')
           %th
-            %span.in-grey-600 Total
+            %span.in-grey-600= t('checkout.total')
       %tbody
         - @current_order.order_items.each do |item|
           %tr
@@ -79,4 +79,4 @@
               %span.font-16.in-gold-500= price_to_euro(item.total_price)
   = render 'order_summary'
   .text-center
-    = link_to 'Place Order', wizard_path, method: :put, class: 'btn btn-default mb-20'
+    = link_to t('checkout.place_order'), wizard_path, method: :put, class: 'btn btn-default mb-20'

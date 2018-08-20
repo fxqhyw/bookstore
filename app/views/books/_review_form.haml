@@ -8,9 +8,9 @@
         = f.radio_button :rating, "#{rate + 1}"
     .form-group
       %label.control-label.font-weight-light{for: "title"}= t('title')
-      = f.text_field :title, placeholder: 'Title', id: "title", class: "form-control"
+      = f.text_field :title, placeholder: t('title'), id: "title", class: "form-control"
     .form-group
-      %label.control-label.font-weight-light{for: "description"}= 'Review'
-      = f.text_area :description, placeholder: 'Review', id: "description", class: "form-control", rows: "8"
+      %label.control-label.font-weight-light{for: "description"}= t('review.review')
+      = f.text_area :description, placeholder: t('review.review'), id: "description", class: "form-control", rows: "8"
     .text-right
-      = f.submit 'Post', class: "btn btn-default mb-20"
+      = f.submit t('button.post'), class: "btn btn-default mb-20"
