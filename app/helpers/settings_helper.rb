@@ -18,7 +18,8 @@ module SettingsHelper
   private
 
   def address(type)
-    current_user.addresses.find_by_type(type)
+    return current_user.billing_address if type == 'BillingAddress'
+    current_user.shipping_address if type == 'ShippingAddress'
   end
 
   def correct_type?(type)

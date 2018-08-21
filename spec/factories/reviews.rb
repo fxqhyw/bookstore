@@ -3,7 +3,6 @@ FactoryBot.define do
     title { FFaker::Lorem.phrase }
     description { FFaker::Lorem.paragraphs }
     rating 1
-    status :unprocessed
     book
     user
   end

@@ -9,5 +9,5 @@ class Book < ApplicationRecord
   validates :published_at, numericality: { less_than_or_equal_to: Time.current.year }
 
   scope :latest, -> { order(created_at: :desc).limit(3) }
-  scope :best_sellers, -> { joins(:order_items).group('id').order('SUM(order_items.quantity) desc') }
+  scope :best_sellers, -> { joins(:order_items).group('id').order(Arel.sql('SUM(order_items.quantity) desc')) }
 end

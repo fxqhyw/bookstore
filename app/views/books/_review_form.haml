@@ -7,8 +7,8 @@
       - 5.times do |rate|
         = f.radio_button :rating, "#{rate + 1}"
     .form-group
-      %label.control-label.font-weight-light{for: "title"}= t('title')
-      = f.text_field :title, placeholder: t('title'), id: "title", class: "form-control"
+      %label.control-label.font-weight-light{for: "title"}= t('review.title')
+      = f.text_field :title, placeholder: t('review.title'), id: "title", class: "form-control"
     .form-group
       %label.control-label.font-weight-light{for: "description"}= t('review.review')
       = f.text_area :description, placeholder: t('review.review'), id: "description", class: "form-control", rows: "8"

@@ -110,6 +110,7 @@ en:
     incorrect: 'Incorrect review format'
     rating: 'Rating'
     review: 'Review'
+    title: 'Title'
   
   checkout:
     save_and_continue: 'Save and Continue'
