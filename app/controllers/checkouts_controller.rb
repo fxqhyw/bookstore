@@ -2,6 +2,8 @@ class CheckoutsController < ApplicationController
   include Wicked::Wizard
   include CheckoutUpdater
 
+  before_action :authenticate_user!, only: [:update]
+
   steps :login, :address, :delivery, :payment, :confirm
 
   def show

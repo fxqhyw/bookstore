@@ -8,12 +8,14 @@ module CheckoutUpdater
       @billing = BillingAddress.find_by(order_id: billing_params[:order_id]) || BillingAddress.new
       @shipping = ShippingAddress.find_by(order_id: shipping_params[:order_id]) || ShippingAddress.new
 
-      @billing.update(billing_params)
-      if params[:use_billing]
+      @billing.attributes = billing_params
+      if params[:use_billing]['true'] == '1'
         render_wizard @billing
       else
-        @shipping.update(shipping_params)
-        render_wizard @shipping
+        @shipping.attributes = shipping_params
+        return render_wizard @shipping if @billing.save
+        @shipping.save
+        render :address
       end
     end
 
@@ -24,7 +26,7 @@ module CheckoutUpdater
 
     def update_credit_card
       @credit_card = CreditCard.find_by(order_id: credit_card_params[:order_id]) || CreditCard.new
-      @credit_card.update(credit_card_params)
+      @credit_card.attributes = credit_card_params
       render_wizard @credit_card
     end
 

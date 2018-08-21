@@ -4,7 +4,7 @@ RSpec.describe AddressesController, type: :controller do
   describe 'PUT #update' do
     let(:address) { FactoryBot.create(:address) }
     let(:user) { FactoryBot.create(:user) }
-    let(:valid_params) { FactoryBot.build(:address, user_id: user.id).attributes }
+    let(:valid_params) { FactoryBot.attributes_for(:address, user_id: user.id) }
 
     context 'address already exist' do
       before do
