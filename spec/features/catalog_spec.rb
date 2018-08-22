@@ -48,16 +48,4 @@ RSpec.feature 'Catalog Page', type: :feature do
       expect(page).to have_selector('div.col-xs-6.col-sm-3', count: 4)
     end
   end
-
-  context 'sorts' do
-    before { visit('/catalog') }
-
-    it { expect(page).to have_content 'Catalog' }
-    it { expect(page).to have_content 'Title A - Z' }
-    it { expect(page).to have_content 'Title Z - A' }
-    it { expect(page).to have_content 'Price: Low to hight' }
-    it { expect(page).to have_content 'Price: Hight to low' }
-    it { expect(page).to have_content 'Newest first' }
-    it { expect(page).to have_content 'Newest first' }
-  end
 end

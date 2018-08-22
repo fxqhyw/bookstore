@@ -10,11 +10,8 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def update_resource(resource, params)
-    if params.include?(:current_password)
-      resource.update_with_password(params)
-    else
-      resource.update_without_password(params)
-    end
+    return super if params.include?(:current_password)
+    resource.update_without_password(email_params)
   end
 
   def after_sign_up_path_for(resource)
@@ -30,5 +27,9 @@ class RegistrationsController < Devise::RegistrationsController
   def transfer_order_to_user
     @current_order.update(user_id: @user.id)
     cookies.delete :order_id
+  end
+
+  def email_params
+    params.permit(:email)
   end
 end

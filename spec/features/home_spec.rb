@@ -3,13 +3,6 @@ require 'rails_helper'
 RSpec.feature 'Home Page', type: :feature do
   subject { page }
 
-  context 'content' do
-    before { visit('/') }
-    it { expect(page.find('#slider')).not_to be_nil }
-    it { expect(page).to have_content('Get Started') }
-    it { expect(page).to have_content('Best Sellers') }
-  end
-
   scenario 'click on Get Started link' do
     visit('/')
     click_link('Get Started')

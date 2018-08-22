@@ -3,17 +3,6 @@ require 'rails_helper'
 RSpec.feature 'Cart page', type: :feature do
   subject { page }
 
-  context 'content' do
-    before { visit('/cart') }
-
-    it { expect(page).to have_content 'Cart' }
-    it { expect(page).to have_content 'Order Summary' }
-    it { expect(page).to have_content 'SubTotal:' }
-    it { expect(page).to have_content 'Coupon:' }
-    it { expect(page).to have_content 'Order Total:' }
-    it { expect(page).to have_content 'Quantity' }
-  end
-
   context 'update cart' do
     let(:order) { FactoryBot.create(:order) }
     before do

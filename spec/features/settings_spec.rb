@@ -43,6 +43,7 @@ RSpec.feature 'Settings Page', type: :feature do
         click_button('Save')
       end
       expect(page).to have_css('div.has-error')
+      expect(page).not_to have_content('Updated!')
       expect(page).to have_content('must consist of only letters')
       expect(page).to have_content("can't be blank")
       expect(page).to have_content('must consist of only digits')
@@ -53,5 +54,6 @@ RSpec.feature 'Settings Page', type: :feature do
   end
 
   describe 'privacy tab' do
+    before { visit '/settings/privacy' }
   end
 end

@@ -4,14 +4,11 @@ RSpec.feature 'Book page', type: :feature do
   subject { page }
   before(:all) { @book = FactoryBot.create(:book) }
 
-  describe 'content' do
-    before { visit book_path(@book) }
-    it { expect(page).to have_content 'Back to results' }
-    it { expect(page).to have_content 'Year of publication' }
-    it { expect(page).to have_content 'Dimensions' }
-    it { expect(page).to have_content @book.title }
-    it { expect(page).to have_content @book.materials }
-    it { expect(page).to have_content @book.published_at }
+  scenario 'show book content' do
+    visit book_path(@book)
+    expect(page).to have_content @book.title
+    expect(page).to have_content @book.materials
+    expect(page).to have_content @book.published_at
   end
 
   context 'short description' do
