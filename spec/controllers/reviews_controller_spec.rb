@@ -20,7 +20,7 @@ RSpec.describe ReviewsController, type: :controller do
       end
 
       it 'shows thanks notice message' do
-        post :create, params: { review: review_params } 
+        post :create, params: { review: review_params }
         expect(flash[:notice]).to eq(I18n.t('review.thanks_message'))
       end
     end
