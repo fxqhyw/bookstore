@@ -16,6 +16,8 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
+ActiveJob::Base.queue_adapter = :test
+
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
