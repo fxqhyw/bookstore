@@ -11,7 +11,7 @@
     .row.mb-60
       .col-sm-5
         %p.in-gold-500.font-18.mb-25 Email
-        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'general-form-md' }) do |f|
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'general-form-md', id: 'edit_email_form' }) do |f|
           .form-group.mb-35
             = f.label :email, 'Enter Email', class: 'control-label input-label'
             = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', name:"email", type: "email"
@@ -19,7 +19,7 @@
             = f.submit t('settings.save'), class: "btn btn-default mb-35"
       .col-sm-5.col-sm-offset-1
         %p.in-gold-500.font-18.mb-25= t('settings.password')
-        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: "general-form-md, pb-25"}) do |f|
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: "general-form-md, pb-25", id: 'edit_password_form'}) do |f|
           .form-group.mb-30
             %label.control-label.font-weight-light{for: "oldPassword"}= t('settings.old_password')
             = f.password_field :current_password, autocomplete: "off", placeholder: t('settings.old_password'), id: "oldPassword", class: "form-control"
