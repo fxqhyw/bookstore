@@ -13,17 +13,16 @@ RSpec.feature 'Home Page', type: :feature do
     let(:shop_icon) { page.find('a.hidden-xs>span.shop-icon') }
 
     before do
-      @book = FactoryBot.create(:book)
-      FactoryBot.create(:order_item, book: @book)
+      FactoryBot.create(:order_item)
       visit('/')
     end
 
-    scenario 'can add latest book to cart', js: true do
+    scenario 'add latest book to cart', js: true do
       click_link('Buy Now')
       expect(shop_icon).to have_content('1')
     end
 
-    scenario 'can add bestsellers book to cart', js: true do
+    scenario 'add bestsellers book to cart', js: true do
       first('i.fa.fa-shopping-cart.thumb-icon').click
       expect(shop_icon).to have_content('1')
     end

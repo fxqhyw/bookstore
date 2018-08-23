@@ -7,7 +7,7 @@ RSpec.feature 'Settings Page', type: :feature do
     visit '/users/sign_in'
     fill_in 'email', with: address.user.email
     fill_in 'password', with: 'qwerty123'
-    click_on 'Back to Store'
+    click_button('Back to Store')
   end
 
   describe 'address tab' do

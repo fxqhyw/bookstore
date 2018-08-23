@@ -8,7 +8,7 @@
           %a.general-login-icon{ href: user_facebook_omniauth_authorize_path }
             %i.fa.fa-facebook-official
           %p.general-login-text= t('checkout.or')
-        = form_for(User.new, url: user_session_path, html: { class: 'general-form' }) do |f|
+        = form_for(User.new, url: user_session_path, html: { class: 'general-form', id: 'login_form'}) do |f|
           .form-group.mb-40
             %p.fw-600= t('checkout.login_with_password')
             = f.hidden_field :from_checkout, value: true
@@ -27,7 +27,7 @@
           %a.general-login-icon{href: user_facebook_omniauth_authorize_path}
             %i.fa.fa-facebook-official
           %p.general-login-text= t('checkout.or')
-        = form_for(User.new, url: user_registration_path, html: { class: 'general-form' }) do |f|
+        = form_for(User.new, url: user_registration_path, html: { class: 'general-form', id: 'quick_register_form'}) do |f|
           .form-group.mb-40
             %p.fw-600= t('checkout.quick_register')
             %p.fw-300= t('checkout.quick_description')

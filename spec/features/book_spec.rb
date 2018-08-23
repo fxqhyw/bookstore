@@ -38,7 +38,7 @@ RSpec.feature 'Book page', type: :feature do
     before { visit book_path(@book) }
 
     scenario 'add one item into cart', js: true do
-      click_on I18n.t('button.add_to_cart')
+      click_button I18n.t('button.add_to_cart')
       wait_for_ajax
       expect(shop_icon).to have_content('1')
     end
@@ -55,7 +55,7 @@ RSpec.feature 'Book page', type: :feature do
 
     scenario 'add four items into cart', js: true do
       fill_in 'order_item_quantity', with: '4'
-      click_on I18n.t('button.add_to_cart')
+      click_button I18n.t('button.add_to_cart')
       wait_for_ajax
       expect(shop_icon).to have_content('4')
     end

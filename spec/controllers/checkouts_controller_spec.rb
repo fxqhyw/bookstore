@@ -25,7 +25,8 @@ RSpec.describe CheckoutsController, type: :controller do
 
   describe 'PUT #update' do
     let(:user) { FactoryBot.create(:user) }
-    let(:valid_address) { FactoryBot.attributes_for(:address, user_id: user.id) }
+    let(:order) { FactoryBot.create(:order) }
+    let(:valid_address) { FactoryBot.attributes_for(:address, order_id: order.id) }
     let(:invalid_address) { FactoryBot.attributes_for(:address, zip: 'qwerty', phone: 'no phone(', user_id: user.id) }
     before { sign_in(user) }
 

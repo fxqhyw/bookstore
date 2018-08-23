@@ -10,7 +10,7 @@ RSpec.feature 'Cart page', type: :feature do
       visit '/users/sign_in'
       fill_in 'email', with: order.user.email
       fill_in 'password', with: 'qwerty123'
-      click_on 'Back to Store'
+      click_button('Back to Store')
       visit '/cart'
     end
 
@@ -52,14 +52,14 @@ RSpec.feature 'Cart page', type: :feature do
 
     scenario 'apply valid coupon' do
       fill_in I18n.t('cart.coupon'), with: coupon.code
-      click_on I18n.t('cart.apply_coupon')
+      click_button I18n.t('cart.apply_coupon')
       expect(page).to have_content('Coupon was successfully added')
       expect(page).to have_content(coupon.discount)
     end
 
     scenario 'show error when try to apply invalid coupon' do
       fill_in I18n.t('cart.coupon'), with: 'fake code'
-      click_on I18n.t('cart.apply_coupon')
+      click_button I18n.t('cart.apply_coupon')
       expect(page).to have_content('Coupon is invalid')
     end
   end
