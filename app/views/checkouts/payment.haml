@@ -1,7 +1,7 @@
 %main.container.mb-res-50
   = render 'progress'
   %h3.general-subtitle= t('payment.credit_card')
-  = form_for CreditCard.new, url: wizard_path, method: :put, html: { class: 'max-600 mb-80' } do |f|
+  = form_for CreditCard.new, url: wizard_path, method: :put, html: { class: 'max-600 mb-80', id: 'payment_form' } do |f|
     = f.hidden_field :order_id, value: @current_order.id
     .form-group{class: "#{'has-error' if card_error?(:number)}"}
       %label.control-label.input-label= t('payment.card_number')
