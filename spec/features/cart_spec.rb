@@ -4,33 +4,41 @@ RSpec.feature 'Cart page', type: :feature do
   subject { page }
 
   context 'update cart' do
-    let(:order) { FactoryBot.create(:order) }
+    let(:quantity_input) { find("#quantity_input_#{@order_item.id}") }
+    let(:shop_icon) { find('a.hidden-xs>span.shop-icon') }
+    let(:plus) { find("#plus_#{@order_item.id}", visible: true) }
+    let(:minus) { find("#minus_#{@order_item.id}", visible: true) }
+
     before do
-      @order_item = FactoryBot.create(:order_item, order: order)
-      visit '/users/sign_in'
-      fill_in 'email', with: order.user.email
-      fill_in 'password', with: 'qwerty123'
-      click_button('Back to Store')
+      @order_item = FactoryBot.create(:order_item)
+      my_jar = ActionDispatch::Request.new(Rails.application.env_config).cookie_jar
+      my_jar.signed[:order_id] = @order_item.order_id
+      create_cookie(:order_id, my_jar[:order_id])
       visit '/cart'
     end
 
     scenario 'change order item quantity', js: true do
-      expect(find("#quantity_input_#{@order_item.id}").value).to eq('1')
-      find("#plus_#{@order_item.id}").click
+      expect(quantity_input).to have_content('1')
+      expect(shop_icon).to have_content('1')
+      plus.click
       wait_for_ajax
-      expect(find("#quantity_input_#{@order_item.id}").value).to eq('2')
-      find("#minus_#{@order_item.id}").click
+      expect(shop_icon).to have_content('2')
+      expect(quantity_input).to have_content('2')
+      minus.click
       wait_for_ajax
-      expect(find("#quantity_input_#{@order_item.id}").value).to eq('1')
+      expect(shop_icon).to have_content('1')
+      expect(quantity_input).to have_content('1')
     end
 
     scenario 'can not decrease item quantity to less than 1', js: true do
-      expect(find("#quantity_input_#{@order_item.id}").value).to eq('1')
+      expect(shop_icon).to have_content('1')
+      expect(quantity_input).to have_content('1')
       3.times do
-        find("#minus_#{@order_item.id}").click
+        minus.click
         wait_for_ajax
       end
-      expect(find("#quantity_input_#{@order_item.id}").value).to eq('1')
+      expect(shop_icon).to have_content('1')
+      expect(quantity_input).to have_content('1')
     end
 
     scenario 'redirect to book page when click book details' do

@@ -17,6 +17,7 @@ gem 'font-awesome-rails'
 gem 'kaminari'
 gem 'aasm'
 gem 'country_select'
+gem "show_me_the_cookies"
 gem 'wicked'
 gem 'draper'
 gem 'ffaker'

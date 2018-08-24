@@ -16,7 +16,7 @@ class SessionsController < Devise::SessionsController
   def transfer_order_to_user
     if params[:user][:from_checkout]
       @user.orders.in_progress.destroy_all
-      @user.orders << Order.find_by_id(cookies.encrypted[:order_id])
+      @user.orders << Order.find_by_id(cookies.signed[:order_id])
       @user.save
       cookies.delete :order_id
     end
