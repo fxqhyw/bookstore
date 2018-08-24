@@ -67,6 +67,29 @@ RSpec.feature 'Checkout', type: :feature do
       visit '/checkouts'
     end
 
+    scenario 'try to pass address step with invalid data', js: true do
+      expect(page).to have_current_path('/checkouts/address')
+      within '#shipping' do
+        fill_in 'First Name', with: ''
+        fill_in 'Last Name', with: '123'
+        fill_in 'Address', with: '&*'
+        fill_in 'City', with: '34'
+        fill_in 'Zip', with: 'zip?'
+        fill_in 'Phone', with: 'No Phone'
+      end
+      click_button('Save and Continue')
+      expect(page).to have_css('div.has-error')
+      expect(page).to have_content("can't be blank and must consist of only letters")
+      expect(page).to have_content('must consist of only letters')
+      expect(page).to have_content('must consist of letters, digits and ’,’, ‘-’, ‘ ’ only, no special symbols')
+      expect(page).to have_content('must consist of only digits')
+      expect(page).to have_content("must starts with '+' and consist of only digits")
+      expect(page).to have_current_path('/checkouts/address')
+      find('.checkbox-icon').click
+      click_button('Save and Continue')
+      expect(page).to have_current_path('/checkouts/delivery')
+    end
+
     scenario 'pass all steps from address to complete', js: true do
       expect(page).to have_current_path('/checkouts/address')
       expect(page).to have_field('First Name', with: address.first_name)
