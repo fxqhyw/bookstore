@@ -6,7 +6,7 @@ class Ability
 
     if user.persisted?
       can :create, Review
-      can :read, Order, user_id: user.id
+      can %i[read create update], Order, user_id: user.id
     end
   end
 end
