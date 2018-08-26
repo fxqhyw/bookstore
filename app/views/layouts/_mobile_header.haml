@@ -16,7 +16,7 @@
         %a{type: 'button', 'data-toggle': 'collapse', href: '#account', 'aria-expanded': 'false', 'aria-controls': 'account'}= t('.header.account')
         %ul.dropdown-menu
           %li
-            = link_to t('header.orders'), root_path, class: "collapse-link" #todo
+            = link_to t('header.orders'), orders_path, class: "collapse-link"
           %li
             = link_to t('header.settings'), address_path, class: "collapse-link"
           %li

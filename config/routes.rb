@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :books, only: [:index, :show]
   resources :order_items, only: [:create, :update, :destroy]
   resource :cart, only: [:show, :update]
+  resources :orders, only: [:index]
   resources :reviews, only: :create
   resources :checkouts
 
