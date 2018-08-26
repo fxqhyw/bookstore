@@ -20,8 +20,4 @@ module OrderSummary
     return if count.zero?
     count
   end
-
-  def generate_number
-    "#R#{Time.now.nsec}" + id.to_s
-  end
 end

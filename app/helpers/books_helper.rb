@@ -1,14 +1,17 @@
 module BooksHelper
-  TITLES = {
-    newest: I18n.t('button.newest_first'),
-    popular: I18n.t('button.popular_first'),
-    low_to_high_price: I18n.t('button.low_to_hight'),
-    high_to_low_price: I18n.t('button.hight_to_low'),
-    title_a_z: I18n.t('button.title_A-Z'),
-    title_z_a: I18n.t('button.title_Z-A')
-  }.freeze
+  def filter_books_title
+    case request.GET[:filter]
+    when 'newest' then I18n.t('button.newest_first')
+    when 'popular' then I18n.t('button.popular_first')
+    when 'low_to_high_price' then I18n.t('button.low_to_hight')
+    when 'high_to_low_price' then I18n.t('button.hight_to_low')
+    when 'title_a_z' then I18n.t('button.title_A-Z')
+    when 'title_z_a' then I18n.t('button.title_Z-A')
+    else I18n.t('button.newest_first')
+    end
+  end
 
-  def filter_title
-    request.GET[:filter] ? TITLES[request.GET[:filter].to_sym] : TITLES[:newest]
+  def sort_category_title
+    request.GET[:category] ? Category.find(request.GET[:category]).title : I18n.t('button.all')
   end
 end

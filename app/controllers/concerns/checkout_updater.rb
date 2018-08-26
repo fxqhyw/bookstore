@@ -32,7 +32,7 @@ module CheckoutUpdater
 
     def confirm_order
       @current_order.total_price = @current_order.order_total
-      @current_order.number = @current_order.generate_number
+      @current_order.number = "#R#{Time.now.nsec}" + @current_order.id.to_s
       @current_order.confirm
       @placed_order = @current_order
       if @current_order.save

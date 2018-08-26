@@ -2,7 +2,7 @@
   %p.lead.small.mb-10= t('book.show.filter')
   .dropdown
     %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-      = t('button.all')
+      = sort_category_title
       %i.fa.fa-angle-down.dropdown-icon.pull-right
     %ul.dropdown-menu
       %li
@@ -13,6 +13,6 @@
   %p.lead.small.mb-10= t('page.book.index.sort_by')
   .dropdown
     %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-      = filter_title
+      = filter_books_title
       %i.fa.fa-angle-down.dropdown-icon.pull-right
     = render 'filter'

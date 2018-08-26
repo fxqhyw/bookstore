@@ -5,15 +5,15 @@ Rails.application.routes.draw do
                                     registrations: 'registrations' }
   root 'home#index'
   get '/catalog', to: 'books#index'
-  resources :books, only: [:index, :show]
-  resources :order_items, only: [:create, :update, :destroy]
-  resource :cart, only: [:show, :update]
-  resources :orders, only: [:index]
+  resources :books, only: %i[index show]
+  resources :order_items, only: %i[create update destroy]
+  resource :cart, only: %i[show update]
+  resources :orders, only: %i[index show]
   resources :reviews, only: :create
   resources :checkouts
 
   scope '/settings' do
-    resource :address, only: [:update]
+    resource :address, only: :update
     get '/address', to: 'addresses#edit'
     as :user do
       get '/privacy', to: 'devise/registrations#edit'

@@ -16,14 +16,10 @@ class CheckoutsController < ApplicationController
 
   def update
     case step
-    when :address
-      update_addresses
-    when :delivery
-      update_delivery
-    when :payment
-      update_credit_card
-    when :confirm
-      confirm_order
+    when :address then update_addresses
+    when :delivery then update_delivery
+    when :payment then update_credit_card
+    when :confirm then confirm_order
     end
   end
 

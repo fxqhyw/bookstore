@@ -14,7 +14,7 @@
     - if user_signed_in?
       %li.dropdown
         %a{type: 'button', 'data-toggle': 'collapse', href: '#account', 'aria-expanded': 'false', 'aria-controls': 'account'}= t('.header.account')
-        %ul.dropdown-menu
+        %ul#account.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': 'false'}
           %li
             = link_to t('header.orders'), orders_path, class: "collapse-link"
           %li
