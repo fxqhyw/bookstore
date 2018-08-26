@@ -154,7 +154,14 @@ en:
     hint: '3-digit security code, usually found on the back of your card. American Express cards has 4-digit code, located on the front'
   
   orders:
+    my_orders: 'My Orders'
+    sort_by: 'Sort by'
     number: 'Number'
     completed_at: 'Completed at'
     status: 'Status'
     total: 'Total'
+    waiting: 'Waiting for processing'
+    in_delivery: 'In delivery'
+    delivered: 'Delivered'
+
+

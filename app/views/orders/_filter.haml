@@ -1,0 +1,11 @@
+.dropdowns.dropdown.general-order-dropdown
+  %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+    = filter_title
+    %i.fa.fa-angle-down.dropdown-icon.pull-right
+  %ul.dropdown-menu
+    %li
+      = link_to t('orders.waiting'), orders_path(filter: 'waiting_for_proccesing')
+    %li
+      = link_to t('orders.in_delivery'), orders_path(filter: 'in_delivery')
+    %li
+      = link_to t('orders.delivered'), orders_path(filter: 'delivered')
