@@ -1,46 +1,17 @@
 %main.container.general-main-wrap
-  %h1.general-title-margin= @order.number
+  %h1.general-title-margin= t('checkout.order') + @order.number
   .row.mb-20
     .col-sm-3
-      %h3.general-subtitle.mt-0 Shipping Address
-      %p.general-address
-        John Doe
-        %span.general-edit edit
-        %br
-        44 Fifth Ave v231
-        %br
-        New York NY 1001
-        %br
-        United States
-        %br
-        Phone +16507599755
+      %h3.general-subtitle= t('settings.shipping')
+      - if @order.shipping_address
+        = render partial: 'shared/shipping_address_info', locals: { order: @order }
+      - else
+        = render partial: 'shared/billing_address_info', locals: { order: @order }
     .col-sm-3
-      %h3.general-subtitle.mt-0 Billing Address
-      %p.general-address
-        John Doe
-        %span.general-edit edit
-        %br
-        44 Fifth Ave v231
-        %br
-        New York NY 1001
-        %br
-        United States
-        %br
-        Phone +16507599755
-    .col-sm-3
-      %h3.general-subtitle.mt-0 Shipments
-      %p.general-address
-        Delivery Next Day!
-        %span.general-edit edit
-        %br
-        By train
-    .col-sm-3
-      %h3.general-subtitle.mt-0 Payment Information
-      %p.general-address
-        ** ** ** 8756
-        %span.general-edit edit
-        %br
-        12/2018
+      %h3.general-subtitle= t('settings.billing')
+      = render partial: 'shared/billing_address_info', locals: { order: @order }
+    = render partial: 'shared/shipments_info', locals: { order: @order }
+    = render partial: 'shared/payment_info', locals: { order: @order }
   .visible-xs
     .general-cart-item.divider-lg
       .general-img-wrap-table

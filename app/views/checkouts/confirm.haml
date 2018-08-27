@@ -4,26 +4,14 @@
     .col-sm-3
       %h3.general-subtitle= t('settings.shipping')
       - if @current_order.shipping_address
-        = render partial: 'shipping_address_info', locals: { order: @current_order }
+        = render partial: 'shared/shipping_address_info', locals: { order: @current_order }
       - else
-        = render partial: 'billing_address_info', locals: { order: @current_order }
+        = render partial: 'shared/billing_address_info', locals: { order: @current_order }
     .col-sm-3
       %h3.general-subtitle= t('settings.billing')
-      = render partial: 'billing_address_info', locals: { order: @current_order }
-    .col-sm-3
-      %h3.general-subtitle= t('checkout.shipments')
-      %p.general-address
-        = @current_order.delivery.name
-        = link_to 'edit', wizard_path(:delivery, edit: true), class: "general-edit"
-        %br
-        = @current_order.delivery.duration
-    .col-sm-3
-      %h3.general-subtitle= t('payment.information')
-      %p.general-address
-        = secret_card_number(@current_order.credit_card.number)
-        = link_to 'edit', wizard_path(:payment, edit: true), class: "general-edit"
-        %br
-        = @current_order.credit_card.expiration_date
+      = render partial: 'shared/billing_address_info', locals: { order: @current_order }
+    = render partial: 'shared/shipments_info', locals: { order: @current_order }
+    = render partial: 'shared/payment_info', locals: { order: @current_order }
   .visible-xs
     .general-cart-item.divider-lg
       - @current_order.order_items.each do |item|
