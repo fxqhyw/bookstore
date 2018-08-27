@@ -1,4 +1,6 @@
 class CheckoutMailer < ApplicationMailer
+  default from: 'noreply@amazingbookstore.com'
+
   def complete_email
     @user = params[:user]
     @order = params[:order]
