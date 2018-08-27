@@ -9,5 +9,6 @@ FactoryBot.define do
     phone '+387878322332'
     type 'BillingAddress'
     user
+    order nil
   end
 end

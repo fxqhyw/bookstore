@@ -3,12 +3,14 @@ require 'rails_helper'
 RSpec.feature 'Orders Page', type: :feature do
   before do
     @user = FactoryBot.create(:user)
-    @order_in_queue = FactoryBot.create(:order, :in_queue, user: @user)
+    @order_in_queue = FactoryBot.create(:order_with_delivery, :in_queue, user: @user)
     @order_item_in_queue = FactoryBot.create(:order_item, order: @order_in_queue)
-    @order_in_delivery = FactoryBot.create(:order, :in_delivery, user: @user)
-    @order_item_in_delivery = FactoryBot.create(:order_item, order: @order_in_delivery)
-    @order_delivered = FactoryBot.create(:order, :delivered, user: @user)
-    @order_item_delivered = FactoryBot.create(:order_item, order: @order_delivered)
+    FactoryBot.create(:address, order: @order_in_queue)
+    FactoryBot.create(:credit_card, order: @order_in_queue)
+    @order_in_delivery = FactoryBot.create(:order_with_delivery, :in_delivery, user: @user)
+    FactoryBot.create(:order_item, order: @order_in_delivery)
+    @order_delivered = FactoryBot.create(:order_with_delivery, :delivered, user: @user)
+    FactoryBot.create(:order_item, order: @order_delivered)
     visit '/users/sign_in'
     fill_in 'email', with: @user.email
     fill_in 'password', with: 'qwerty123'
@@ -44,7 +46,7 @@ RSpec.feature 'Orders Page', type: :feature do
     expect(page).not_to have_content(@order_delivered.total_price)
   end
 
-  scenario 'filter in_delivery orders' do
+  scenario 'filter delivered orders' do
     click_link('Delivered')
     expect(page).to have_content(@order_delivered.number)
     expect(page).to have_content(@order_delivered.total_price)
@@ -52,5 +54,21 @@ RSpec.feature 'Orders Page', type: :feature do
     expect(page).not_to have_content(@order_in_queue.total_price)
     expect(page).not_to have_content(@order_in_delivery.number)
     expect(page).not_to have_content(@order_in_delivery.total_price)
+  end
+
+  scenario 'go to the order info page' do
+    click_link(@order_in_queue.number, match: :first)
+    expect(page).to have_content(@order_in_queue.number)
+    expect(page).to have_content(@order_in_queue.billing_address.first_name)
+    expect(page).to have_content(@order_in_queue.billing_address.last_name)
+    expect(page).to have_content(@order_in_queue.billing_address.address)
+    expect(page).to have_content(@order_in_queue.billing_address.city)
+    expect(page).to have_content(@order_in_queue.billing_address.country)
+    expect(page).to have_content(@order_in_queue.billing_address.phone)
+    expect(page).to have_content(@order_in_queue.credit_card.expiration_date)
+    expect(page).to have_content(@order_in_queue.delivery.name)
+    expect(page).to have_content(@order_in_queue.delivery.duration)
+    expect(page).to have_content(@order_item_in_queue.book.title)
+    expect(page).to have_content(@order_item_in_queue.quantity)
   end
 end
