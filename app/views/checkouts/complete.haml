@@ -88,6 +88,6 @@
               %span.ml-30= item.quantity
             %td
               %span.font-16.in-gold-500= price_to_euro(item.total_price)
-  = render 'order_summary'
+  = render partial: 'shared/order_summary', locals: { order: @current_order }
   .text-center
     = link_to t('button.back_to_store'), catalog_path, class: 'btn btn-default mb-20'

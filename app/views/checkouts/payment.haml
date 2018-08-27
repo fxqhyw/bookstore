@@ -24,6 +24,6 @@
           = f.text_field :cvv, value: card_saved_value(:cvv), placeholder: t('payment.cvv'), class: "form-control", id: 'cvv'
           %span.help-block= card_error_message(:cvv)
           %i.fa.fa-question-circle.general-form-help{'data-toggle': 'tooltip', 'data-placement': :top, title: t('payment.hint')}
-    = render 'order_summary'
+    = render partial: 'shared/order_summary', locals: { order: @current_order }
     .text-center
       = f.submit t('checkout.save_and_continue'), class: 'btn btn-default mb-80'

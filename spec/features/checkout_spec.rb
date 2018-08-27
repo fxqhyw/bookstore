@@ -52,13 +52,12 @@ RSpec.feature 'Checkout', type: :feature do
   end
 
   describe 'other steps' do
-    let(:address) { FactoryBot.create(:address) }
-
     before do
       FactoryBot.create_list(:delivery, 3)
+      @address = FactoryBot.create(:address)
       @book = FactoryBot.create(:book)
       visit '/users/sign_in'
-      fill_in 'email', with: address.user.email
+      fill_in 'email', with: @address.user.email
       fill_in 'password', with: 'qwerty123'
       click_button('Back to Store')
       visit('/catalog')
@@ -92,12 +91,12 @@ RSpec.feature 'Checkout', type: :feature do
 
     scenario 'pass all steps from address to complete', js: true do
       expect(page).to have_current_path('/checkouts/address')
-      expect(page).to have_field('First Name', with: address.first_name)
-      expect(page).to have_field('Last Name', with: address.last_name)
-      expect(page).to have_field('Address', with: address.address)
-      expect(page).to have_field('City', with: address.city)
-      expect(page).to have_field('Zip', with: address.zip)
-      expect(page).to have_field('Phone', with: address.phone)
+      expect(page).to have_field('First Name', with: @address.first_name)
+      expect(page).to have_field('Last Name', with: @address.last_name)
+      expect(page).to have_field('Address', with: @address.address)
+      expect(page).to have_field('City', with: @address.city)
+      expect(page).to have_field('Zip', with: @address.zip)
+      expect(page).to have_field('Phone', with: @address.phone)
       find('.checkbox-icon').click
       click_button('Save and Continue')
       expect(page).to have_current_path('/checkouts/delivery')
@@ -112,7 +111,7 @@ RSpec.feature 'Checkout', type: :feature do
       expect(page).to have_current_path('/checkouts/confirm')
       find('#edit_address_link').click
       expect(page).to have_current_path('/checkouts/address?edit=true')
-      expect(page).to have_field('Zip', with: address.zip)
+      expect(page).to have_field('Zip', with: @address.zip)
       within '#billing' do
         fill_in 'Zip', with: '321'
       end
