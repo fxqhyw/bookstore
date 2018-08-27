@@ -13,7 +13,7 @@ RSpec.feature 'Settings Page', type: :feature do
   describe 'address tab' do
     before { visit '/settings/address' }
 
-    scenario 'show user address paramentrs' do
+    scenario 'show user address parametrs' do
       expect(page).to have_field('First Name', with: address.first_name)
       expect(page).to have_field('Last Name', with: address.last_name)
       expect(page).to have_field('Address', with: address.address)

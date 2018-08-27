@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def current_order
     if user_signed_in?
-      @current_order = current_user.orders.in_progress.first || Order.create(user_id: current_user.id)
+      @current_order = current_user.orders.in_progress.first || current_user.orders.create
     else
       @current_order = Order.find_by_id(cookies.signed[:order_id]) || Order.create
       cookies.signed[:order_id] = { value: @current_order.id, expires: 1.month.from_now }

@@ -54,10 +54,11 @@ RSpec.feature 'Checkout', type: :feature do
   describe 'other steps' do
     before do
       FactoryBot.create_list(:delivery, 3)
-      @address = FactoryBot.create(:address)
+      @user = FactoryBot.create(:user)
+      @address = FactoryBot.create(:address, user: @user)
       @book = FactoryBot.create(:book)
       visit '/users/sign_in'
-      fill_in 'email', with: @address.user.email
+      fill_in 'email', with: @user.email
       fill_in 'password', with: 'qwerty123'
       click_button('Back to Store')
       visit('/catalog')

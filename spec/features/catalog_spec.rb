@@ -24,29 +24,31 @@ RSpec.feature 'Catalog Page', type: :feature do
 
   context 'filters by category' do
     let(:filter_menu) { find('ul.list-inline.pt-10.mb-25.mr-240') }
-    let(:book_div) { 'div.col-xs-6.col-sm-3' }
 
     before(:all) do
       @web_design = FactoryBot.create(:category, title: 'Web design')
       @mobile_development = FactoryBot.create(:category, title: 'Mobile development')
-      FactoryBot.create_list(:book, 8, category: @web_design)
-      FactoryBot.create_list(:book, 4, category: @mobile_development)
+      @web_book = FactoryBot.create(:book, category: @web_design)
+      @mobile_book = FactoryBot.create(:book, category: @mobile_development)
     end
 
     before { visit('/catalog') }
 
     scenario 'show all books(by default)' do
-      expect(page).to have_selector(book_div, count: 12)
+      expect(page).to have_content(@web_book.title)
+      expect(page).to have_content(@mobile_book.title)
     end
 
     scenario 'show Web design books' do
       filter_menu.click_on('Web design').click
-      expect(page).to have_selector(book_div, count: 8)
+      expect(page).to have_content(@web_book.title)
+      expect(page).not_to have_content(@mobile_book.title)
     end
 
     scenario 'show Mobile development books' do
       filter_menu.click_on('Mobile development')
-      expect(page).to have_selector(book_div, count: 4)
+      expect(page).to have_content(@mobile_book.title)
+      expect(page).not_to have_content(@web_book.title)
     end
   end
 end
