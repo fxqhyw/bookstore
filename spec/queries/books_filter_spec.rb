@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe BooksFilter, type: :model do
+RSpec.describe BooksFilter do
   subject { BooksFilter.new(params: {}) }
 
   context 'filter matched' do

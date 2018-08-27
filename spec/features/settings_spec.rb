@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Settings Page', type: :feature do
-  let(:address) { FactoryBot.create(:address) }
+  let(:address) { create(:address) }
 
   before do
     visit '/users/sign_in'

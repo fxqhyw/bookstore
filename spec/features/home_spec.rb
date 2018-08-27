@@ -13,7 +13,7 @@ RSpec.feature 'Home Page', type: :feature do
     let(:shop_icon) { page.find('a.hidden-xs>span.shop-icon') }
 
     before do
-      FactoryBot.create(:order_item)
+      create(:order_item)
       visit('/')
     end
 

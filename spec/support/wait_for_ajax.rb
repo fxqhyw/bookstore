@@ -8,6 +8,8 @@ module WaitForAjax
     end
   end
 
+  private
+
   def finished_all_ajax_requests?
     page.evaluate_script('jQuery.active').zero?
   end

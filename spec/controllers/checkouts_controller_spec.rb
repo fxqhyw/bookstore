@@ -24,10 +24,10 @@ RSpec.describe CheckoutsController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let(:user) { FactoryBot.create(:user) }
-    let(:order) { FactoryBot.create(:order) }
-    let(:valid_address) { FactoryBot.attributes_for(:address, order_id: order.id) }
-    let(:invalid_address) { FactoryBot.attributes_for(:address, zip: 'qwerty', phone: 'no phone(', user_id: user.id) }
+    let(:user) { create(:user) }
+    let(:order) { create(:order) }
+    let(:valid_address) { attributes_for(:address, order_id: order.id) }
+    let(:invalid_address) { attributes_for(:address, zip: 'qwerty', phone: 'no phone(', user_id: user.id) }
     before { sign_in(user) }
 
     describe 'address step' do
@@ -81,9 +81,9 @@ RSpec.describe CheckoutsController, type: :controller do
 
     describe 'delivery step' do
       context 'valid params' do
-        let(:delivery) { FactoryBot.create(:delivery) }
+        let(:delivery) { create(:delivery) }
         before do
-          @order = FactoryBot.create(:order, user: user)
+          @order = create(:order, user: user)
           put :update, params: { id: :delivery, delivery_id: delivery.id }
         end
 
@@ -99,7 +99,7 @@ RSpec.describe CheckoutsController, type: :controller do
 
       context 'invalid params' do
         it 'does not saves delivery to order' do
-          @order = FactoryBot.create(:order, user: user)
+          @order = create(:order, user: user)
           put :update, params: { id: :delivery }
           @order.reload
           expect(@order.delivery).to be_nil
@@ -109,8 +109,8 @@ RSpec.describe CheckoutsController, type: :controller do
 
     describe 'payment step' do
       context 'valid params' do
-        let(:order) { FactoryBot.create(:order) }
-        let(:valid_card) { FactoryBot.attributes_for(:credit_card, order_id: order.id) }
+        let(:order) { create(:order) }
+        let(:valid_card) { attributes_for(:credit_card, order_id: order.id) }
 
         it 'saves credit card to order' do
           expect {
@@ -124,7 +124,7 @@ RSpec.describe CheckoutsController, type: :controller do
         end
       end
       context 'invalid params' do
-        let(:invalid_card) { FactoryBot.attributes_for(:credit_card, cvv: 'cvc', number: 'qwerty') }
+        let(:invalid_card) { attributes_for(:credit_card, cvv: 'cvc', number: 'qwerty') }
 
         it 'does not save card' do
           expect {
@@ -140,7 +140,7 @@ RSpec.describe CheckoutsController, type: :controller do
     end
 
     describe 'confirm step' do
-      before { @order = FactoryBot.create(:order, user: user) }
+      before { @order = create(:order, user: user) }
 
       it 'assigns order total price' do
         put :update, params: { id: :confirm }

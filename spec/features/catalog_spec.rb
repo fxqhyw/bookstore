@@ -7,7 +7,7 @@ RSpec.feature 'Catalog Page', type: :feature do
     let(:shop_icon) { find('a.hidden-xs>span.shop-icon') }
 
     before do
-      @book = FactoryBot.create(:book)
+      @book = create(:book)
       visit('/catalog')
     end
 
@@ -26,10 +26,10 @@ RSpec.feature 'Catalog Page', type: :feature do
     let(:filter_menu) { find('ul.list-inline.pt-10.mb-25.mr-240') }
 
     before(:all) do
-      @web_design = FactoryBot.create(:category, title: 'Web design')
-      @mobile_development = FactoryBot.create(:category, title: 'Mobile development')
-      @web_book = FactoryBot.create(:book, category: @web_design)
-      @mobile_book = FactoryBot.create(:book, category: @mobile_development)
+      @web_design = create(:category, title: 'Web design')
+      @mobile_development = create(:category, title: 'Mobile development')
+      @web_book = create(:book, category: @web_design)
+      @mobile_book = create(:book, category: @mobile_development)
     end
 
     before { visit('/catalog') }

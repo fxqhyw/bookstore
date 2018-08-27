@@ -2,15 +2,15 @@ require 'rails_helper'
 
 RSpec.feature 'Orders Page', type: :feature do
   before do
-    @user = FactoryBot.create(:user)
-    @order_in_queue = FactoryBot.create(:order_with_delivery, :in_queue, user: @user)
-    @order_item_in_queue = FactoryBot.create(:order_item, order: @order_in_queue)
-    FactoryBot.create(:address, order: @order_in_queue)
-    FactoryBot.create(:credit_card, order: @order_in_queue)
-    @order_in_delivery = FactoryBot.create(:order_with_delivery, :in_delivery, user: @user)
-    FactoryBot.create(:order_item, order: @order_in_delivery)
-    @order_delivered = FactoryBot.create(:order_with_delivery, :delivered, user: @user)
-    FactoryBot.create(:order_item, order: @order_delivered)
+    @user = create(:user)
+    @order_in_queue = create(:order_with_delivery, :in_queue, user: @user)
+    @order_item_in_queue = create(:order_item, order: @order_in_queue)
+    create(:address, order: @order_in_queue)
+    create(:credit_card, order: @order_in_queue)
+    @order_in_delivery = create(:order_with_delivery, :in_delivery, user: @user)
+    create(:order_item, order: @order_in_delivery)
+    @order_delivered = create(:order_with_delivery, :delivered, user: @user)
+    create(:order_item, order: @order_delivered)
     visit '/users/sign_in'
     fill_in 'email', with: @user.email
     fill_in 'password', with: 'qwerty123'

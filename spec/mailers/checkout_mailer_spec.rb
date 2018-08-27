@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe CheckoutMailer, type: :mailer do
-  let(:order) { FactoryBot.build(:order_with_delivery) }
+  let(:order) { build(:order_with_delivery) }
 
   describe 'notify' do
     let(:mail) { CheckoutMailer.with(user: order.user, order: order).complete_email }

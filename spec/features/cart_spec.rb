@@ -10,7 +10,7 @@ RSpec.feature 'Cart page', type: :feature do
     let(:minus) { find("#minus_#{@order_item.id}", visible: true) }
 
     before do
-      @order_item = FactoryBot.create(:order_item)
+      @order_item = create(:order_item)
       my_jar = ActionDispatch::Request.new(Rails.application.env_config).cookie_jar
       my_jar.signed[:order_id] = @order_item.order_id
       create_cookie(:order_id, my_jar[:order_id])
@@ -55,7 +55,7 @@ RSpec.feature 'Cart page', type: :feature do
   end
 
   context 'Coupon' do
-    let(:coupon) { FactoryBot.create(:coupon) }
+    let(:coupon) { create(:coupon) }
     before { visit('/cart') }
 
     scenario 'apply valid coupon' do

@@ -18,7 +18,7 @@ RSpec.describe BooksController, type: :controller do
   end
 
   describe 'GET #show' do
-    let(:book) { FactoryBot.create(:book) }
+    let(:book) { create(:book) }
     before { get :show, params: { id: book.id } }
 
     it 'renders :show template' do

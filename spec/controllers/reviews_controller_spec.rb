@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe ReviewsController, type: :controller do
   describe 'POST #create' do
-    let(:user) { FactoryBot.create(:user) }
-    let(:book) { FactoryBot.create(:book) }
+    let(:user) { create(:user) }
+    let(:book) { create(:book) }
     let(:review_params) { { title: 'title', description: 'some description', rating: 5, user_id: user.id, book_id: book.id } }
 
     before { sign_in(user) }

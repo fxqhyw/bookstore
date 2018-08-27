@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe OrderItemsController, type: :controller do
-  let(:order) { FactoryBot.create(:order) }
-  let(:order_item) { FactoryBot.create(:order_item) }
+  let(:order) { create(:order) }
+  let(:order_item) { create(:order_item) }
   describe 'POST #create' do
     context 'order item already exist' do
       it 'increases order item quantity' do
@@ -14,7 +14,7 @@ RSpec.describe OrderItemsController, type: :controller do
 
     context 'order item does not yet exist' do
       it 'creates new order item in the database' do
-        @order_item = FactoryBot.create(:order_item)
+        @order_item = create(:order_item)
         expect {
           post :create, xhr: true, params: { book_id: @order_item.book_id, quantity: 4, order_id: order.id }
         }.to change(OrderItem, :count).by(1)

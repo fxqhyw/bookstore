@@ -27,6 +27,8 @@ RSpec.configure do |config|
 
   config.include Capybara::Webkit::RspecMatchers, type: :feature
 
+  config.include FactoryBot::Syntax::Methods
+
   config.include ShowMeTheCookies, type: :feature
 
   config.infer_spec_type_from_file_location!

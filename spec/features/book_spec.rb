@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Book page', type: :feature do
   subject { page }
-  before(:all) { @book = FactoryBot.create(:book) }
+  before(:all) { @book = create(:book) }
 
   scenario 'show book content' do
     visit book_path(@book)

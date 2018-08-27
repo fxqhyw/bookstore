@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CartsController, type: :controller do
-  let(:order) { FactoryBot.create(:order) }
+  let(:order) { create(:order) }
   before { allow_any_instance_of(ApplicationController).to receive(:current_order).and_return(order) }
 
   describe 'GET #show' do
@@ -14,7 +14,7 @@ RSpec.describe CartsController, type: :controller do
 
   describe 'PUT #update' do
     context 'valid coupon' do
-      let(:coupon) { FactoryBot.create(:coupon) }
+      let(:coupon) { create(:coupon) }
 
       before { put :update, params: { coupon_code: coupon.code, order_id: order.id } }
 

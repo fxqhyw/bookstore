@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OrdersController, type: :controller do
-  let(:order) { FactoryBot.create(:order) }
+  let(:order) { create(:order) }
 
   before { sign_in(order.user) }
 

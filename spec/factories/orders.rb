@@ -9,19 +9,19 @@ FactoryBot.define do
     end
 
     trait :in_queue do
-      total_price { rand(50..250) }
+      total_price { rand(50..450) }
       status 'in_queue'
       number 'R1111111'
     end
 
     trait :in_delivery do
-      total_price { rand(50..250) }
+      total_price { rand(50..450) }
       status 'in_delivery'
       number 'R2222222'
     end
 
     trait :delivered do
-      total_price { rand(50..250) }
+      total_price { rand(50..450) }
       status 'delivered'
       number 'R3333333'
     end

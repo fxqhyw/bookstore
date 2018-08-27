@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Checkout', type: :feature do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
 
   scenario 'try to go to checkout path with empty cart' do
     visit('/checkouts')
@@ -11,7 +11,7 @@ RSpec.feature 'Checkout', type: :feature do
 
   describe 'login step' do
     before do
-      @order_item = FactoryBot.create(:order_item)
+      @order_item = create(:order_item)
       my_jar = ActionDispatch::Request.new(Rails.application.env_config).cookie_jar
       my_jar.signed[:order_id] = @order_item.order_id
       create_cookie(:order_id, my_jar[:order_id])
@@ -53,10 +53,10 @@ RSpec.feature 'Checkout', type: :feature do
 
   describe 'other steps' do
     before do
-      FactoryBot.create_list(:delivery, 3)
-      @user = FactoryBot.create(:user)
-      @address = FactoryBot.create(:address, user: @user)
-      @book = FactoryBot.create(:book)
+      create_list(:delivery, 3)
+      @user = create(:user)
+      @address = create(:address, user: @user)
+      @book = create(:book)
       visit '/users/sign_in'
       fill_in 'email', with: @user.email
       fill_in 'password', with: 'qwerty123'
@@ -119,10 +119,15 @@ RSpec.feature 'Checkout', type: :feature do
       find('.checkbox-icon').click
       click_button('Save and Continue')
       expect(page).to have_current_path('/checkouts/confirm')
-      click_on('Place Order')
-      expect(page).to have_content('Thank You for your Order!')
-      click_on('Back to Store')
-      expect(page).to have_current_path('/catalog')
+      expect(page).to have_content(@address.first_name)
+      expect(page).to have_content(@address.last_name)
+      expect(page).to have_content(@address.address)
+      expect(page).to have_content(@address.city)
+      expect(page).to have_content(@address.phone)
+      expect(page).to have_content(@book.title)
+      expect(page).to have_content('11/22')
+      expect(page).to have_content('*** *** *** 2312')
+      expect(page).to have_link('Place Order')
     end
   end
 end

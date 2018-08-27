@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe OrdersFilter, type: :model do
+RSpec.describe OrdersFilter do
   subject { OrdersFilter.new(params: {}, orders: nil) }
 
   context 'filter matched' do
