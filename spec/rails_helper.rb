@@ -31,8 +31,6 @@ RSpec.configure do |config|
 
   config.include Warden::Test::Helpers
 
-  config.include ShowMeTheCookies, type: :feature
-
   config.infer_spec_type_from_file_location!
 
   config.filter_rails_from_backtrace!

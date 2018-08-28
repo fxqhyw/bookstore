@@ -1,21 +1,19 @@
 require 'rails_helper'
 
 RSpec.feature 'Cart page', type: :feature do
-  subject { page }
+  before do
+    @book = create(:book)
+    visit('/catalog')
+    find("#book#{@book.id}_cart_icon").click
+    wait_for_ajax
+    visit('/cart')
+  end
 
-  context 'update cart' do
-    let(:quantity_input) { find("#quantity_input_#{@order_item.id}") }
+  context 'update cart', js: true do
+    let(:quantity_input) { find("#quantity_input_#{@book.id}") }
     let(:shop_icon) { find('a.hidden-xs>span.shop-icon') }
-    let(:plus) { find("#plus_#{@order_item.id}", visible: true) }
-    let(:minus) { find("#minus_#{@order_item.id}", visible: true) }
-
-    before do
-      @order_item = create(:order_item)
-      my_jar = ActionDispatch::Request.new(Rails.application.env_config).cookie_jar
-      my_jar.signed[:order_id] = @order_item.order_id
-      create_cookie(:order_id, my_jar[:order_id])
-      visit '/cart'
-    end
+    let(:plus) { find("#plus_#{@book.id}") }
+    let(:minus) { find("#minus_#{@book.id}") }
 
     scenario 'change order item quantity', js: true do
       expect(quantity_input).to have_content('1')
@@ -42,8 +40,8 @@ RSpec.feature 'Cart page', type: :feature do
     end
 
     scenario 'redirect to book page when click book details' do
-      click_link(@order_item.book.title, match: :first)
-      expect(page).to have_current_path book_path(@order_item.book)
+      click_link(@book.title, match: :first)
+      expect(page).to have_current_path book_path(@book)
     end
 
     scenario 'delete order item', js: true do
@@ -56,14 +54,6 @@ RSpec.feature 'Cart page', type: :feature do
 
   context 'Coupon', js: true do
     let(:coupon) { create(:coupon) }
-
-    before do
-      book = create(:book)
-      visit('/catalog')
-      find("#book#{book.id}_cart_icon").click
-      wait_for_ajax
-      visit('/cart')
-    end
 
     scenario 'apply valid coupon' do
       fill_in I18n.t('cart.coupon'), with: coupon.code

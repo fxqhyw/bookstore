@@ -5,6 +5,4 @@ class OrdersController < ApplicationController
   def index
     @orders = OrdersFilter.new(orders: current_user.orders.placed, params: params).call
   end
-
-  def show; end
 end

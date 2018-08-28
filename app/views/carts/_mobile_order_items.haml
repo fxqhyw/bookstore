@@ -19,10 +19,10 @@
               %span.in-grey-600= t('cart.quantity')
             %td
               .input-group
-                = link_to order_item_path(id: item.id, quantity: item.quantity - 1), class: 'input-link', id: "item_#{item.id}_minus", method: :put, remote: true do
+                = link_to order_item_path(id: item.id, quantity: item.quantity - 1), class: 'input-link', id: "item_#{item.book_id}_minus", method: :put, remote: true do
                   %i.fa.fa-minus.line-heaght-40
                 %input.form-control.quantity-input{type: "text", value: item.quantity}
-                = link_to order_item_path(id: item.id, quantity: item.quantity + 1), class: 'input-link', id: "item_#{item.id}_plus", method: :put, remote: true do
+                = link_to order_item_path(id: item.id, quantity: item.quantity + 1), class: 'input-link', id: "item_#{item.book_id}_plus", method: :put, remote: true do
                   %i.fa.fa-plus.line-heaght-40
           %tr
             %td

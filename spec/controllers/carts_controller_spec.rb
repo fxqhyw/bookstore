@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe CartsController, type: :controller do
-  let(:order) { create(:order) }
-  before { allow_any_instance_of(ApplicationController).to receive(:current_order).and_return(order) }
-
   describe 'GET #show' do
     before { get :show }
 
@@ -14,9 +11,13 @@ RSpec.describe CartsController, type: :controller do
 
   describe 'PUT #update' do
     context 'valid coupon' do
+      let(:order) { create(:order) }
       let(:coupon) { create(:coupon) }
 
-      before { put :update, params: { coupon_code: coupon.code, order_id: order.id } }
+      before do
+        cookies.signed[:order_id] = order.id
+        put :update, params: { coupon_code: coupon.code }
+      end
 
       it 'redirects to carts#show' do
         expect(response).to redirect_to(cart_path)
