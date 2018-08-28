@@ -1,3 +1,4 @@
 = link_to cart_path, class: 'shop-link pull-right visible-xs', id: 'mobile_cart_quantity' do
   %span.shop-icon
-    %span.shop-quantity= @current_order.items_count
+    - if @current_order
+      %span.shop-quantity= @current_order.items_count

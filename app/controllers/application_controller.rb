@@ -8,12 +8,8 @@ class ApplicationController < ActionController::Base
   private
 
   def current_order
-    if user_signed_in?
-      @current_order = current_user.orders.in_progress.first || current_user.orders.create
-    else
-      @current_order = Order.find_by_id(cookies.signed[:order_id]) || Order.create
-      cookies.signed[:order_id] = { value: @current_order.id, expires: 1.month.from_now }
-    end
+    return @current_order = current_user.orders.in_progress.first if user_signed_in?
+    @current_order = Order.find_by_id(cookies.signed[:order_id])
   end
 
   def categories

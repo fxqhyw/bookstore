@@ -5,7 +5,7 @@ RSpec.feature 'Home Page', type: :feature do
 
   scenario 'click on Get Started link' do
     visit('/')
-    click_link('Get Started')
+    click_link I18n.t('button.get_started')
     expect(page).to have_current_path('/catalog')
   end
 
@@ -18,7 +18,7 @@ RSpec.feature 'Home Page', type: :feature do
     end
 
     scenario 'add latest book to cart', js: true do
-      click_link('Buy Now')
+      click_link I18n.t('button.buy_now')
       expect(shop_icon).to have_content('1')
     end
 

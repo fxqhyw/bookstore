@@ -5,7 +5,7 @@ class AddressesController < ApplicationController
     @address = SettingsAddresser.call(address_params)
 
     if @address.update(address_params)
-      redirect_to address_path, notice: 'Updated!'
+      redirect_to address_path, notice: I18n.t('notice.updated')
     else
       render :edit
     end

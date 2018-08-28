@@ -28,7 +28,7 @@ RSpec.describe CartsController, type: :controller do
       end
 
       it 'shows success message' do
-        expect(flash[:notice]).to eq('Coupon was successfully added')
+        expect(flash[:notice]).to eq I18n.t('notice.coupon_added')
       end
     end
 
@@ -40,7 +40,7 @@ RSpec.describe CartsController, type: :controller do
       end
 
       it 'shows error message' do
-        expect(flash[:alert]).to eq('Coupon is invalid')
+        expect(flash[:alert]).to eq I18n.t('notice.coupon_invalid')
       end
     end
   end

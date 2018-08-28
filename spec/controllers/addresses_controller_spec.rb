@@ -35,7 +35,7 @@ RSpec.describe AddressesController, type: :controller do
 
         it 'shows notice message' do
           put :update, params: { address: valid_params }
-          expect(flash[:notice]).to eq('Updated!')
+          expect(flash[:notice]).to eq I18n.t('notice.updated')
         end
       end
 

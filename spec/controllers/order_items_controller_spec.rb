@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe OrderItemsController, type: :controller do
-  let(:order) { create(:order) }
   let(:order_item) { create(:order_item) }
+
   describe 'POST #create' do
     context 'order item already exist' do
       it 'increases order item quantity' do
-        post :create, xhr: true, params: { book_id: order_item.book_id, quantity: 1, order_id: order_item.order_id }
+        cookies.signed[:order_id] = order_item.order.id
+        post :create, xhr: true, params: { book_id: order_item.book_id, quantity: 1 }
         order_item.reload
         expect(order_item.quantity).to eq(2)
       end
@@ -14,9 +15,9 @@ RSpec.describe OrderItemsController, type: :controller do
 
     context 'order item does not yet exist' do
       it 'creates new order item in the database' do
-        @order_item = create(:order_item)
+        book = create(:book)
         expect {
-          post :create, xhr: true, params: { book_id: @order_item.book_id, quantity: 4, order_id: order.id }
+          post :create, xhr: true, params: { book_id: book.id, quantity: 4 }
         }.to change(OrderItem, :count).by(1)
       end
     end

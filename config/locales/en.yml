@@ -15,7 +15,7 @@ en:
     type_new_passwd: 'Type a new Password'
     confirm_passwd: 'Confirm Password'
     change: 'Change'
-    by_now: 'Buy Now'
+    buy_now: 'Buy Now'
     back_to_results: 'Back to results'
     add_to_cart: 'Add to Cart'
     read_more: 'Read More'
@@ -163,5 +163,12 @@ en:
     waiting: 'Waiting for processing'
     in_delivery: 'In delivery'
     delivered: 'Delivered'
+  
+  notice:
+    reg_message: 'You have successfully registered, your account information has been sent to '
+    empty_cart: 'Cart is empty!'
+    coupon_added: 'Coupon was successfully added'
+    coupon_invalid: 'Coupon is invalid!'
+    updated: 'Updated!'
 
 

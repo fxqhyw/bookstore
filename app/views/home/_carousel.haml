@@ -16,7 +16,7 @@
               %p.lead= latest_book.description
               %p.lead.small= authors_list(latest_book)
               .general-align
-                = link_to t('button.by_now'), order_items_path(book_id: latest_book.id, order_id: @current_order.id, quantity: 1), method: :post, class: 'btn btn-primary', remote: true
+                = link_to t('button.buy_now'), order_items_path(book_id: latest_book.id, quantity: 1), method: :post, class: 'btn btn-primary', remote: true
   %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
     %span.icon-prev{'aria-hidden': "true"}
     %span.sr-only= t('page.home.carusel.prev')

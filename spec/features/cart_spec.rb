@@ -54,21 +54,28 @@ RSpec.feature 'Cart page', type: :feature do
     end
   end
 
-  context 'Coupon' do
+  context 'Coupon', js: true do
     let(:coupon) { create(:coupon) }
-    before { visit('/cart') }
+
+    before do
+      book = create(:book)
+      visit('/catalog')
+      find("#book#{book.id}_cart_icon").click
+      wait_for_ajax
+      visit('/cart')
+    end
 
     scenario 'apply valid coupon' do
       fill_in I18n.t('cart.coupon'), with: coupon.code
       click_button I18n.t('cart.apply_coupon')
-      expect(page).to have_content('Coupon was successfully added')
+      expect(page).to have_content I18n.t('notice.coupon_added')
       expect(page).to have_content(coupon.discount)
     end
 
     scenario 'show error when try to apply invalid coupon' do
       fill_in I18n.t('cart.coupon'), with: 'fake code'
       click_button I18n.t('cart.apply_coupon')
-      expect(page).to have_content('Coupon is invalid')
+      expect(page).to have_content I18n.t('notice.coupon_invalid')
     end
   end
 end
