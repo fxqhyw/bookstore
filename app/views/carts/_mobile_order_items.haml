@@ -1,5 +1,5 @@
 .visible-xs#mobile_item_table
-  - if @current_order
+  - if @current_order&.items_count
     - @current_order.order_items.created.each do |item|
       .general-cart-item.divider-lg-bottom
         = link_to order_item_path(item), method: :delete, class: 'close general-cart-close', remote: true do

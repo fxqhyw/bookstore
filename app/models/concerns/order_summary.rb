@@ -17,7 +17,7 @@ module OrderSummary
 
   def items_count
     count = order_items.collect(&:quantity).compact.sum
-    return if count.zero?
+    return false if count.zero?
     count
   end
 end
