@@ -2,19 +2,16 @@ require 'rails_helper'
 
 RSpec.feature 'Orders Page', type: :feature do
   before do
-    @user = create(:user)
-    @order_in_queue = create(:order_with_delivery, :in_queue, user: @user)
+    user = create(:user)
+    @order_in_queue = create(:order_with_delivery, :in_queue, user: user)
     @order_item_in_queue = create(:order_item, order: @order_in_queue)
     create(:address, order: @order_in_queue)
     create(:credit_card, order: @order_in_queue)
-    @order_in_delivery = create(:order_with_delivery, :in_delivery, user: @user)
+    @order_in_delivery = create(:order_with_delivery, :in_delivery, user: user)
     create(:order_item, order: @order_in_delivery)
-    @order_delivered = create(:order_with_delivery, :delivered, user: @user)
+    @order_delivered = create(:order_with_delivery, :delivered, user: user)
     create(:order_item, order: @order_delivered)
-    visit '/users/sign_in'
-    fill_in 'email', with: @user.email
-    fill_in 'password', with: 'qwerty123'
-    click_button('Back to Store')
+    login_as(user, scope: :user)
     visit('/orders')
   end
 

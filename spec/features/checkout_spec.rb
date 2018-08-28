@@ -54,13 +54,10 @@ RSpec.feature 'Checkout', type: :feature do
   describe 'other steps' do
     before do
       create_list(:delivery, 3)
-      @user = create(:user)
-      @address = create(:address, user: @user)
+      user = create(:user)
+      @address = create(:address, user: user)
       @book = create(:book)
-      visit '/users/sign_in'
-      fill_in 'email', with: @user.email
-      fill_in 'password', with: 'qwerty123'
-      click_button('Back to Store')
+      login_as(user, scope: :user)
       visit('/catalog')
       find("#book#{@book.id}_cart_icon").click
       wait_for_ajax

@@ -29,6 +29,8 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
 
+  config.include Warden::Test::Helpers
+
   config.include ShowMeTheCookies, type: :feature
 
   config.infer_spec_type_from_file_location!

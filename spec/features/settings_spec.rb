@@ -3,12 +3,7 @@ require 'rails_helper'
 RSpec.feature 'Settings Page', type: :feature do
   let(:address) { create(:address) }
 
-  before do
-    visit '/users/sign_in'
-    fill_in 'email', with: address.user.email
-    fill_in 'password', with: 'qwerty123'
-    click_button('Back to Store')
-  end
+  before { login_as(address.user, scope: :user) }
 
   describe 'address tab' do
     before { visit '/settings/address' }
