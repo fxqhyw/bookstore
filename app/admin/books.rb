@@ -31,7 +31,7 @@ ActiveAdmin.register Book do
       f.input :description
       f.input :category, as: :select, collection:
         Category.pluck(:title, :id), include_blank: false
-      f.input :authors, as: :check_boxes, collection: authors, include_blank: false
+      f.input :authors, as: :check_boxes, collection: authors
       f.input :published_at
       f.input :quantity
       f.input :materials

@@ -19,7 +19,7 @@ gem 'aasm'
 gem 'country_select'
 gem 'wicked'
 gem 'draper'
-gem 'ffaker'
+gem 'aws-sdk-s3', require: false
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
@@ -29,6 +29,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'ffaker'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'

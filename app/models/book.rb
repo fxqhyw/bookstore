@@ -2,6 +2,7 @@ class Book < ApplicationRecord
   has_and_belongs_to_many :authors
   has_many :order_items, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many_attached :images, dependent: :destroy
   belongs_to :category
 
   validates :title, :description, :price, :published_at, :height, :width, :depth, :quantity, presence: true

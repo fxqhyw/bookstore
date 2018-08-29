@@ -15,7 +15,7 @@ RSpec.feature 'Cart page', type: :feature do
     let(:plus) { find("#plus_#{@book.id}") }
     let(:minus) { find("#minus_#{@book.id}") }
 
-    scenario 'change order item quantity', js: true do
+    scenario 'change order item quantity' do
       expect(quantity_input).to have_content('1')
       expect(shop_icon).to have_content('1')
       plus.click
@@ -28,7 +28,7 @@ RSpec.feature 'Cart page', type: :feature do
       expect(quantity_input).to have_content('1')
     end
 
-    scenario 'can not decrease item quantity to less than 1', js: true do
+    scenario 'can not decrease item quantity to less than 1'do
       expect(shop_icon).to have_content('1')
       expect(quantity_input).to have_content('1')
       3.times do
@@ -40,11 +40,11 @@ RSpec.feature 'Cart page', type: :feature do
     end
 
     scenario 'redirect to book page when click book details' do
-      click_link(@book.title, match: :first)
+      click_link(@book.title)
       expect(page).to have_current_path book_path(@book)
     end
 
-    scenario 'delete order item', js: true do
+    scenario 'delete order item' do
       expect {
         find('.general-cart-close', match: :first).click
         wait_for_ajax
