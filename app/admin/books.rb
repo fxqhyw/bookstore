@@ -1,5 +1,5 @@
 ActiveAdmin.register Book do
-  permit_params :id, :category_id, :title, :price, :description, :materials, :height, :weight, :depth, :published_at, :active, author_ids: [] 
+  permit_params :category_id, :title, :price, :description, :materials, :height, :weight, :depth, :published_at, images: [], author_ids: [] 
 
   authors = proc do
     Author.all.map { |author| ["#{author.first_name} #{author.last_name}", author.id] }
@@ -7,6 +7,9 @@ ActiveAdmin.register Book do
 
   index do
     selectable_column
+    column 'Image' do |book|
+      image_tag url_for(book.images.first.variant(resize: '60x70')) if book.images.any?
+    end
     column :category
     column :title
     column('Authors') { |book| authors_list(book) }
@@ -26,15 +29,15 @@ ActiveAdmin.register Book do
     f.inputs do
       f.input :title
       f.input :description
-      f.input :category, as: :select, collection:
-        Category.pluck(:title, :id), include_blank: false
-      f.input :authors, as: :check_boxes, collection: authors
+      f.input :category, as: :select, collection: Category.pluck(:title, :id), include_blank: false
       f.input :published_at
       f.input :quantity
       f.input :materials
       f.input :height
       f.input :width
       f.input :depth
+      f.input :images, as: :file, input_html: { multiple: true }
+      f.input :author_ids, as: :check_boxes, collection: authors.call, label: 'Authors'
     end
     f.actions
   end

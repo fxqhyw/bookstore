@@ -20,6 +20,7 @@ gem 'country_select'
 gem 'wicked'
 gem 'draper'
 gem 'aws-sdk-s3', require: false
+gem 'mini_magick'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
