@@ -12,16 +12,20 @@ ActiveAdmin.register Review do
   index do
     selectable_column
     column :title
-    column('Description') { |review| truncate(review.description, length: 75) }
     column('Book') { |review| review.book.title }
     column('User') { |review| review.user.email }
     column :status
     column :created_at
-    column '' do |review|
-      (link_to 'Approve', approve_admin_review_path(review), method: :put) + ' | ' +
-        (link_to 'Reject', reject_admin_review_path(review), method: :put) + ' | ' +
-        (link_to 'Unprocess', unprocess_admin_review_path(review), method: :put)
+    column { |review| link_to 'Show', admin_review_path(review), method: :get }
+  end
+
+  show do
+    panel 'Actions' do
+      span { link_to 'Approve', approve_admin_review_path(review), method: :put }
+      span { link_to 'Reject', reject_admin_review_path(review), method: :put }
+      span { link_to 'Unprocess', unprocess_admin_review_path(review), method: :put }
     end
+    default_main_content
   end
 
   member_action :approve, method: :put do

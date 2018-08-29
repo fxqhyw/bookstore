@@ -7,16 +7,13 @@ ActiveAdmin.register Book do
 
   index do
     selectable_column
-    column :id
     column :category
     column :title
     column('Authors') { |book| authors_list(book) }
-    column('Description') { |book| truncate(book.description, length: 75) }
+    column('Short description') { |book| truncate(book.description, length: 65) }
     column :price
-    column '' do |book|
-      (link_to 'Edit', edit_admin_book_path(book)) + ' | ' +
-        (link_to 'Delete', admin_book_path(book), method: :delete, data: { confirm: 'Are you sure ?' })
-    end
+    column { |book| link_to 'View', edit_admin_book_path(book) }
+    column { |book| link_to 'Delete', admin_book_path(book), method: :delete, data: { confirm: 'Are you sure ?' } }
   end
 
   filter :category
