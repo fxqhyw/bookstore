@@ -8,7 +8,7 @@ local:
 
 amazon:
   service: S3
-  access_key_id: <%= AWS_ACCESS_KEY_ID %>
-  secret_access_key: <%= AWS_ACCESS_SECRET_KEY %>
+  access_key_id: <%=ENV['AWS_ACCESS_KEY_ID'] %>
+  secret_access_key: <%=ENV['AWS_ACCESS_SECRET_KEY'] %>
   region: eu-central-1
   bucket: loker
