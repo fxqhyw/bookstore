@@ -14,28 +14,14 @@ class Order < ApplicationRecord
 
   scope :in_progress, -> { where(status: :in_progress).order(created_at: :desc) }
   scope :in_queue, -> { where(status: :in_queue).order(created_at: :desc) }
-  scope :in_delivery, -> { where(status: :in_delivery).order(created_at: :desc) }
-  scope :delivered, -> { where(status: :delivered).order(created_at: :desc) }
   scope :placed, -> { where.not(status: :in_progress).order(created_at: :desc) }
 
   aasm column: 'status', whiny_transitions: false do
     state :in_progress, initial: true
-    state :in_queue, :in_delivery, :delivered, :canceled
+    state :in_queue
 
     event :confirm do
       transitions from: :in_progress, to: :in_queue
-    end
-
-    event :start_delivery do
-      transitions from: :in_queue, to: :in_delivery
-    end
-
-    event :finish_delivery do
-      transitions from: :in_delivery, to: :delivered
-    end
-
-    event :cancel do
-      transitions from: %i[in_queue in_delivery in_progress], to: :canceled
     end
   end
 end

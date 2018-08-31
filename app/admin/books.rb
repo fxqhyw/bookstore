@@ -8,7 +8,7 @@ ActiveAdmin.register Book do
   index do
     selectable_column
     column 'Image' do |book|
-      image_tag url_for(book.images.first.variant(resize: '60x70')) if book.images.any?
+      image_tag url_for(book.images.first.variant(resize: '50x65!')) if book.images.attached?
     end
     column :category
     column :title
@@ -20,16 +20,16 @@ ActiveAdmin.register Book do
   end
 
   filter :category
+  filter :authors, collection: authors
   filter :title
   filter :price
   filter :published_at
-  filter :authors, collection: authors
 
   show do
     default_main_content
-    panel 'images' do
+    panel 'Images' do
       book.images.each do |image|
-        span { image_tag url_for(image.variant(resize: '200x300')) }
+        span { image_tag url_for(image.variant(resize: '280x350!')) }
       end
     end
   end
@@ -50,8 +50,8 @@ ActiveAdmin.register Book do
     f.inputs 'Images' do
       if book.images.any?
         book.images.each do |image|
-          span { image_tag url_for(image.variant(resize: '200x300')) }
-          span { link_to 'Delete', delete_image_admin_book_path(image), book_id: book.id, method: :delete }
+          span { image_tag url_for(image.variant(resize: '280x350!')) }
+          span { link_to 'Delete', delete_image_admin_book_path(image), data: { confirm: 'Are you sure ?' }, method: :delete }
         end
       end
       f.input :images, as: :file, input_html: { multiple: true }, allow_destroy: true

@@ -1,13 +1,21 @@
 ActiveAdmin.register Review do
+  actions :index, :show
+
   scope :all do |reviews|
     reviews.all
   end
+
   scope :new, default: true do |reviews|
     reviews.where(status: :unprocessed)
   end
+
   scope :processed do |reviews|
     reviews.where.not(status: :unprocessed)
   end
+
+  filter :user, collection: User.pluck(:email, :id)
+  filter :book
+  filter :rating
 
   index do
     selectable_column
@@ -29,20 +37,17 @@ ActiveAdmin.register Review do
   end
 
   member_action :approve, method: :put do
-    review = Review.find(params[:id])
-    review.approve!
+    Review.find(params[:id]).approve!
     redirect_back(fallback_location: admin_reviews_path, notice: 'Approved')
   end
 
   member_action :reject, method: :put do
-    review = Review.find(params[:id])
-    review.reject!
+    Review.find(params[:id]).reject!
     redirect_back(fallback_location: admin_reviews_path, notice: 'Rejected')
   end
 
   member_action :unprocess, method: :put do
-    review = Review.find(params[:id])
-    review.unprocess!
+    Review.find(params[:id]).unprocess!
     redirect_back(fallback_location: admin_reviews_path, notice: 'Unprocessed')
   end
 end
