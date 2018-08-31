@@ -14,4 +14,9 @@ module BooksHelper
   def sort_category_title
     request.GET[:category] ? Category.find(request.GET[:category]).title : I18n.t('button.all')
   end
+
+  def main_image(book)
+    url_for(book.images.first.varianr(resize: '400x380'))
+  end
+
 end

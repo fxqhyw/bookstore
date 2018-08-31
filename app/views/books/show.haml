@@ -34,8 +34,8 @@
       .general-info-wrap.divider-lg
         %p= t('page.book.show.description')        
         %p.lead.small.line-height-2
-          - if @book.description.length > 150
-            = truncate(@book.description, length: 150)
+          - if @book.description.length > 350
+            = truncate(@book.description, length: 350)
             = link_to 'Read More', '#', remote: true, onclick: "$(this).parent().text('#{escape_javascript @book.description}')", class: 'in-gold-500 ml-10'
           - else
             = @book.description
@@ -53,7 +53,7 @@
           %p.lead.small.pull-right= @book.materials
   .mb-80
     - if @reviews.any?
-      %h3.in-gold-500.mb-25= "#{t('review.reviews')} (#{@book.reviews.count})"
+      %h3.in-gold-500.mb-25= "#{t('review.reviews')} (#{@book.reviews.approved.count})"
       = render 'reviews'
     - if can? :create, Review
       = render 'review_form'

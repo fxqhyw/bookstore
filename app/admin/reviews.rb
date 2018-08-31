@@ -21,8 +21,8 @@ ActiveAdmin.register Review do
 
   index do
     column :title
-    column I18n.t('admin.book') { |review| review.book.title }
-    column I18n.t('admin.user') { |review| review.user.email }
+    column(I18n.t('admin.book')) { |review| review.book.title }
+    column(I18n.t('admin.user')) { |review| review.user.email }
     column :status
     column :created_at
     column { |review| link_to I18n.t('admin.show'), admin_review_path(review), method: :get }
