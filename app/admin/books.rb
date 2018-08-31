@@ -7,16 +7,16 @@ ActiveAdmin.register Book do
 
   index do
     selectable_column
-    column 'Image' do |book|
+    column I18n.t('admin.image') do |book|
       image_tag url_for(book.images.first.variant(resize: '50x65!')) if book.images.attached?
     end
     column :category
     column :title
-    column('Authors') { |book| authors_list(book) }
-    column('Short description') { |book| truncate(book.description, length: 65) }
+    column(I18n.t('admin.authors')) { |book| authors_list(book) }
+    column(I18n.t('admin.short_description')) { |book| truncate(book.description, length: 65) }
     column :price
-    column { |book| link_to 'View', edit_admin_book_path(book) }
-    column { |book| link_to 'Delete', admin_book_path(book), method: :delete, data: { confirm: 'Are you sure ?' } }
+    column { |book| link_to I18n.t('admin.view'), edit_admin_book_path(book) }
+    column { |book| link_to I18n.t('admin.delete'), admin_book_path(book), method: :delete, data: { confirm: I18n.t('admin.sure?') } }
   end
 
   filter :category
@@ -27,7 +27,7 @@ ActiveAdmin.register Book do
 
   show do
     default_main_content
-    panel 'Images' do
+    panel I18n.t('admin.images') do
       book.images.each do |image|
         span { image_tag url_for(image.variant(resize: '280x350!')) }
       end
@@ -44,24 +44,24 @@ ActiveAdmin.register Book do
       f.input :category, as: :select, collection: Category.pluck(:title, :id), include_blank: false
     end
 
-    f.inputs 'Dimension' do
+    f.inputs I18n.t('admin.dimension') do
       f.input :height
       f.input :width
       f.input :depth
     end
 
-    f.inputs 'Images' do
+    f.inputs I18n.t('admin.images') do
       if book.images.any?
         book.images.each do |image|
           span { image_tag url_for(image.variant(resize: '280x350!')) }
-          span { link_to 'Delete', delete_image_admin_book_path(image), data: { confirm: 'Are you sure ?' }, method: :delete }
+          span { link_to I18n.t('admin.delete'), delete_image_admin_book_path(image), data: { confirm: I18n.t('admin.sure?') }, method: :delete }
         end
       end
       f.input :images, as: :file, input_html: { multiple: true }, allow_destroy: true
     end
 
-    f.inputs 'Authors' do
-      f.input :author_ids, as: :check_boxes, collection: authors.call, label: 'Authors'
+    f.inputs I18n.t('admin.authors') do
+      f.input :author_ids, as: :check_boxes, collection: authors.call
     end
     f.actions
   end

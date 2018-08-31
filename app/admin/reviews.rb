@@ -21,34 +21,34 @@ ActiveAdmin.register Review do
 
   index do
     column :title
-    column('Book') { |review| review.book.title }
-    column('User') { |review| review.user.email }
+    column I18n.t('admin.book') { |review| review.book.title }
+    column I18n.t('admin.user') { |review| review.user.email }
     column :status
     column :created_at
-    column { |review| link_to 'Show', admin_review_path(review), method: :get }
+    column { |review| link_to I18n.t('admin.show'), admin_review_path(review), method: :get }
   end
 
   show do
-    panel 'Actions' do
-      span { link_to 'Approve', approve_admin_review_path(review), method: :put }
-      span { link_to 'Reject', reject_admin_review_path(review), method: :put }
-      span { link_to 'Unprocess', unprocess_admin_review_path(review), method: :put }
+    panel I18n.t('admin.actions') do
+      span { link_to I18n.t('admin.approve'), approve_admin_review_path(review), method: :put }
+      span { link_to I18n.t('admin.reject'), reject_admin_review_path(review), method: :put }
+      span { link_to I18n.t('admin.unprocess'), unprocess_admin_review_path(review), method: :put }
     end
     default_main_content
   end
 
   member_action :approve, method: :put do
     Review.find(params[:id]).approve!
-    redirect_back(fallback_location: admin_reviews_path, notice: 'Approved')
+    redirect_back(fallback_location: admin_reviews_path, notice: I18n.t('admin.approved'))
   end
 
   member_action :reject, method: :put do
     Review.find(params[:id]).reject!
-    redirect_back(fallback_location: admin_reviews_path, notice: 'Rejected')
+    redirect_back(fallback_location: admin_reviews_path, notice: I18n.t('admin.rejected'))
   end
 
   member_action :unprocess, method: :put do
     Review.find(params[:id]).unprocess!
-    redirect_back(fallback_location: admin_reviews_path, notice: 'Unprocessed')
+    redirect_back(fallback_location: admin_reviews_path, notice: I18n.t('admin.unprocessed'))
   end
 end

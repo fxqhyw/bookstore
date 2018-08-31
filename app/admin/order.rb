@@ -26,14 +26,14 @@ ActiveAdmin.register Order do
     column :created_at
     column :status
     column do |order|
-      link_to 'Change the status', edit_admin_order_path(order) unless order.in_progress?
+      link_to I18n.t('admin.change_status'), edit_admin_order_path(order) unless order.in_progress?
     end
   end
 
-  form title: 'Change the status' do |f|
-    inputs 'Order details' do
+  form title: I18n.t('admin.change_status') do |f|
+    inputs I18n.t('admin.order_details') do
       input :status, as: :select, collection: %w[in_delivery delivered canceled], include_blank: false
-      h3 "Current status: #{f.order.status}"
+      h3 I18n.t('admin.current_status') + f.order.status
     end
     actions
   end
