@@ -3,7 +3,10 @@
     .col-sm-6.col-md-3
       .general-thumb-wrap
         .thumbnail.general-thumbnail
-          %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+          - if bestseller.images.any?
+            %img.img-shadow.general-thumbnail-img{src: icon_book_image(bestseller)}
+          - else
+            %img.img-shadow.general-thumbnail-img{src: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ352GRUKdIFLP3va0Tj7QREidI4lwUABrtUJbQehqIL02O_blo", alt: "design-book"}
           .thumb-hover
             .general-thumb-link-wrap
               = link_to book_path(bestseller), class: 'thumb-hover-link' do
