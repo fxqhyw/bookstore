@@ -1,6 +1,8 @@
 ActiveAdmin.register Review do
   actions :index, :show
 
+  users = proc { User.pluck(:email, :id) }
+
   scope :all do |reviews|
     reviews.all
   end
@@ -13,12 +15,11 @@ ActiveAdmin.register Review do
     reviews.where.not(status: :unprocessed)
   end
 
-  filter :user, collection: User.pluck(:email, :id)
+  filter :user, collection: users
   filter :book
   filter :rating
 
   index do
-    selectable_column
     column :title
     column('Book') { |review| review.book.title }
     column('User') { |review| review.user.email }

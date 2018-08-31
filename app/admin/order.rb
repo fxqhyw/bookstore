@@ -1,6 +1,9 @@
 ActiveAdmin.register Order do
   permit_params :status
 
+  users = proc { User.pluck(:email, :id) }
+  coupons = proc { Coupon.pluck(:code, :id) }
+
   scope :in_progress, default: true do |orders|
     orders.where.not(status: :delivered).where.not(status: :canceled)
   end
@@ -13,9 +16,9 @@ ActiveAdmin.register Order do
     orders.where(status: :canceled)
   end
 
-  filter :user, collection: User.pluck(:email, :id)
+  filter :user, collection: users
   filter :delivery
-  filter :coupon, collection: Coupon.pluck(:code, :id)
+  filter :coupon, collection: coupons
 
   index do
     column :number

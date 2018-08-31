@@ -5,7 +5,7 @@ class Book < ApplicationRecord
   has_many_attached :images, dependent: :destroy
   belongs_to :category
 
-  validates :title, :description, :price, :published_at, :height, :width, :depth, :quantity, presence: true
+  validates :title, :description, :price, :published_at, :materials, :height, :width, :depth, :quantity, presence: true
   validates :price, :height, :width, :depth, :quantity, numericality: { greater_than_or_equal_to: 0.01 }
   validates :published_at, numericality: { less_than_or_equal_to: Time.current.year }
 

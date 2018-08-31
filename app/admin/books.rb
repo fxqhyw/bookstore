@@ -41,10 +41,13 @@ ActiveAdmin.register Book do
       f.input :published_at
       f.input :quantity
       f.input :materials
+      f.input :category, as: :select, collection: Category.pluck(:title, :id), include_blank: false
+    end
+
+    f.inputs 'Dimension' do
       f.input :height
       f.input :width
       f.input :depth
-      f.input :category, as: :select, collection: Category.pluck(:title, :id), include_blank: false
     end
 
     f.inputs 'Images' do
