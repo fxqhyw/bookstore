@@ -1,4 +1,6 @@
 module OrderSummary
+  extend ActiveSupport::Concern
+
   def subtotal
     order_items.sum(&:total_price)
   end
