@@ -16,7 +16,7 @@
         %tr
           %td
             .general-img-wrap-table
-              %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+              = render partial: 'shared/icon_book_image', locals: { book: item.book }
           %td
             =link_to book_path(item.book), class: 'text-as-link' do
               %p.title= item.book.title

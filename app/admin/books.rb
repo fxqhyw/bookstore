@@ -8,7 +8,7 @@ ActiveAdmin.register Book do
   index do
     selectable_column
     column I18n.t('admin.image') do |book|
-      image_tag url_for(book.images.first.variant(resize: '50x65!')) if book.images.attached?
+      image_tag url_for(book.images.first.variant(resize: '50!x65')) if book.images.attached?
     end
     column :category
     column :title
@@ -29,7 +29,7 @@ ActiveAdmin.register Book do
     default_main_content
     panel I18n.t('admin.images') do
       book.images.each do |image|
-        span { image_tag url_for(image.variant(resize: '280x350!')) }
+        span { image_tag url_for(image.variant(resize: '250!x350')) }
       end
     end
   end
@@ -53,7 +53,7 @@ ActiveAdmin.register Book do
     f.inputs I18n.t('admin.images') do
       if book.images.any?
         book.images.each do |image|
-          span { image_tag url_for(image.variant(resize: '280x350!')) }
+          span { image_tag url_for(image.variant(resize: '250!x350')) }
           span { link_to I18n.t('admin.delete'), delete_image_admin_book_path(image), data: { confirm: I18n.t('admin.sure?') }, method: :delete }
         end
       end

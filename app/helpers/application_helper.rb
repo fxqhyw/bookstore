@@ -18,4 +18,8 @@ module ApplicationHelper
   def price_to_euro(price)
     "€#{price}"
   end
+
+  def icon_book_image(book)
+    url_for(book.images.first.variant(resize: '157!x250'))
+  end
 end
