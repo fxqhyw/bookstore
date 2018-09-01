@@ -35,7 +35,7 @@
         %p= t('page.book.show.description')        
         %p.lead.small.line-height-2
           - if @book.description.length > 350
-            = truncate(@book.description, length: 350)
+            = truncate(@book.description, length: 265)
             = link_to 'Read More', '#', remote: true, onclick: "$(this).parent().text('#{escape_javascript @book.description}')", class: 'in-gold-500 ml-10'
           - else
             = @book.description
