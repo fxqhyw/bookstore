@@ -1,5 +1,5 @@
 ActiveAdmin.register Book do
-  permit_params :category_id, :title, :price, :description, :materials, :height, :weight, :depth, :published_at, images: [], author_ids: [] 
+  permit_params :category_id, :title, :price, :description, :materials, :quantity, :height, :width, :depth, :published_at, images: [], author_ids: [] 
 
   authors = proc do
     Author.all.map { |author| ["#{author.first_name} #{author.last_name}", author.id] }
@@ -41,6 +41,7 @@ ActiveAdmin.register Book do
       f.input :published_at
       f.input :quantity
       f.input :materials
+      f.input :price
       f.input :category, as: :select, collection: Category.pluck(:title, :id), include_blank: false
     end
 
@@ -51,7 +52,7 @@ ActiveAdmin.register Book do
     end
 
     f.inputs I18n.t('admin.images') do
-      if book.images.any?
+      unless f.object.new_record?
         book.images.each do |image|
           span { image_tag url_for(image.variant(resize: '250!x350')) }
           span { link_to I18n.t('admin.delete'), delete_image_admin_book_path(image), data: { confirm: I18n.t('admin.sure?') }, method: :delete }
