@@ -18,7 +18,7 @@ class Order < ApplicationRecord
 
   aasm column: 'status', whiny_transitions: false do
     state :in_progress, initial: true
-    state :in_queue, :in_delivery, :delivered
+    state :in_queue, :in_delivery, :delivered, :canceled
 
     event :confirm do
       transitions from: :in_progress, to: :in_queue

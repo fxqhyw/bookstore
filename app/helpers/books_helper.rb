@@ -26,4 +26,8 @@ module BooksHelper
   def slider_image(book)
     url_for(book.images.first.variant(resize: '250x316!'))
   end
+
+  def more_books?(books)
+    books.any? && books.size > 11
+  end
 end

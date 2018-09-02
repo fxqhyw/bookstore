@@ -11,7 +11,7 @@
   = render 'mobile_sort'
   .mb-120
     = render 'books'
-    - if @books.any? && @books.count > 11
+    - if more_books?(@books)
       .text-center
         = link_to t('button.view_more'), catalog_path(page: @books.next_page, category: @category_id, filter: @filter), id: 'view-more-books', class: 'btn btn-primary', remote: true
     

@@ -1,6 +1,8 @@
 ActiveAdmin.register Order do
   permit_params :status
 
+  actions :index, :show, :edit, :update, :destroy
+
   users = proc { User.pluck(:email, :id) }
   coupons = proc { Coupon.pluck(:code, :id) }
 
@@ -21,6 +23,7 @@ ActiveAdmin.register Order do
   filter :coupon, collection: coupons
 
   index do
+    selectable_column
     column :number
     column :user
     column :created_at
