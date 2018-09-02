@@ -20,6 +20,6 @@ module ApplicationHelper
   end
 
   def icon_book_image(book)
-    url_for(book.images.first.variant(resize: '158!x200'))
+    url_for(book.images.first.variant(resize: '158x198!'))
   end
 end

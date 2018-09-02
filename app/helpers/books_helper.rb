@@ -20,10 +20,10 @@ module BooksHelper
   end
 
   def secondary_image(image)
-    url_for(image.variant(resize: '150!x240'))
+    url_for(image.variant(resize: '150x190!'))
   end
 
   def slider_image(book)
-    url_for(book.images.first.variant(resize: '250!x380'))
+    url_for(book.images.first.variant(resize: '250x316!'))
   end
 end
