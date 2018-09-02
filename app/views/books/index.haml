@@ -9,7 +9,9 @@
         = render 'filter'
     = render 'category'
   = render 'mobile_sort'
-  .mb-120#books-container
+  .mb-120
     = render 'books'
-  .text-center#view-more-books-container
-    = link_to t('button.view_more'),catalog_path(page: @books.current_page + 1, category: @category_id, filter: @filter), id: 'view-more-books', class: 'btn btn-primary', remote: true
+    - if @books.any? && @books.count > 11
+      .text-center
+        = link_to t('button.view_more'), catalog_path(page: @books.next_page, category: @category_id, filter: @filter), id: 'view-more-books', class: 'btn btn-primary', remote: true
+    

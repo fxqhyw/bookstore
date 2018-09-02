@@ -1,8 +1,8 @@
-books = "<%= j(render @books) %>"
-$("#view-more-books-container").before("<%= j(render 'books') %>")
+$('#books-container').append('<%= j render(partial: 'books/page', locals: { books: @books }) %>');
 
 <% if @books.last_page? %>
   $("#view-more-books").hide();
 <% else %>
-  $("#view-more-books").attr("href", "<%= catalog_path(page: (@books.current_page + 1)) %>");
+  $('#view-more-books').attr('href', '<%= catalog_path(page: @books.next_page, category: params[:category], filter: params[:filter]) %>');
 <% end %>
+

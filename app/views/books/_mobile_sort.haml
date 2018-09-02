@@ -9,7 +9,7 @@
         = link_to "#{t('button.all')} (#{@categories.sum(&:books_count)})", catalog_path          
       - @categories.each do |category|
         %li
-          = link_to "#{category.title} (#{category.books_count})", catalog_path(category: category.id)
+          = link_to "#{category.title} (#{category.books_count})", catalog_path(category: category.id, filter: @filter)
   %p.lead.small.mb-10= t('page.book.index.sort_by')
   .dropdown
     %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
