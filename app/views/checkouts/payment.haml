@@ -2,7 +2,7 @@
   = render 'progress'
   %h3.general-subtitle= t('payment.credit_card')
   = form_for CreditCard.new, url: wizard_path, method: :put, html: { class: 'max-600 mb-80', id: 'payment_form' } do |f|
-    = f.hidden_field :order_id, value: @current_order.id
+    = f.hidden_field :order_id, value: current_order.id
     .form-group{class: "#{'has-error' if card_error?(:number)}"}
       %label.control-label.input-label= t('payment.card_number')
       = f.text_field :number, value: card_saved_value(:number), placeholder: t('payment.card_number'), class: "form-control", id: 'number'
@@ -24,6 +24,6 @@
           = f.text_field :cvv, value: card_saved_value(:cvv), placeholder: t('payment.cvv'), class: "form-control", id: 'cvv'
           %span.help-block= card_error_message(:cvv)
           %i.fa.fa-question-circle.general-form-help{'data-toggle': 'tooltip', 'data-placement': :top, title: t('payment.hint')}
-    = render partial: 'shared/order_summary', locals: { order: @current_order }
+    = render partial: 'shared/order_summary', locals: { order: current_order }
     .text-center
       = f.submit t('checkout.save_and_continue'), class: 'btn btn-default mb-80'

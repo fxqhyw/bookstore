@@ -8,7 +8,7 @@ class CheckoutsController < ApplicationController
 
   def show
     return redirect_to cart_path, alert: I18n.t('notice.empty_cart') if empty_cart?
-    showable_step = CheckoutStepper.new(steps: steps, current_step: step, order: @current_order,
+    showable_step = CheckoutStepper.new(steps: steps, current_step: step, order: current_order,
                                         edit: params[:edit], user: current_user).call
     jump_to(showable_step) unless step == showable_step
     render_wizard
@@ -26,7 +26,7 @@ class CheckoutsController < ApplicationController
   private
 
   def empty_cart?
-    return true unless @current_order
-    @current_order.order_items.empty?
+    return true unless current_order
+    current_order.order_items.empty?
   end
 end

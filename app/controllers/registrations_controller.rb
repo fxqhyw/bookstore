@@ -1,10 +1,12 @@
 class RegistrationsController < Devise::RegistrationsController
-  after_action :transfer_order_to_user, only: [:create]
+  include OrderTransfer
 
   def create
     super
+    return unless @user.save
+    transfer_order_to_user
     RegistrationMailer.with(email: @user.email, password: @user.password).registration_email.deliver_later
-    flash[:notice] = I18n.t('notice.reg_message') + @user.email if @user.save
+    flash[:notice] = I18n.t('notice.reg_message') + @user.email
   end
 
   protected
@@ -23,11 +25,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   private
-
-  def transfer_order_to_user
-    @current_order.update(user_id: @user.id)
-    cookies.delete :order_id
-  end
 
   def email_params
     params.permit(:email)

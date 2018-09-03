@@ -1,5 +1,5 @@
 .hidden-xs#item_table
-  - if @current_order&.items_count
+  - if current_order&.items_count
     %table.table.table-hover
       %tr.no-hover
         %th.col-pic.pl-0
@@ -12,7 +12,7 @@
         %th.col-total
           %span.in-grey-600= t('cart.subtotal')
         %th.col-close
-      - @current_order.order_items.created.each do |item|
+      - current_order.order_items.created.each do |item|
         %tr
           %td
             .general-img-wrap-table

@@ -29,7 +29,7 @@
     %label.control-label.font-weight-light{for: "phone"}= t('settings.phone')
     = text_field_tag "#{tag}[phone]", "#{address_saved_value(field: :phone, tag: tag)}", placeholder: t('settings.phone_placeholder'), id: "phone", class: "form-control"
     %span.help-block= address_error_message(field: :phone, tag: tag)
-  = hidden_field_tag "#{tag}[order_id]", @current_order.id
+  = hidden_field_tag "#{tag}[order_id]", current_order.id
   - if tag == 'shipping'
     .form-group.checkbox
       %label.font-weight-light.pl-0

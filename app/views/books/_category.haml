@@ -2,8 +2,8 @@
   %li.mr-35
     = link_to catalog_path, class: "filter-link" do
       = t('button.all')
-      %span.badge.general-badge= @categories.sum(&:books_count)
-  - @categories.each do |category|
+      %span.badge.general-badge= categories.sum(&:books_count)
+  - categories.each do |category|
     %li.mr-35
       = link_to catalog_path(category: category.id, filter: @filter), class: "filter-link" do
         = category.title

@@ -18,7 +18,7 @@ module CheckoutsHelper
   end
 
   def checked_delivery?(delivery_id)
-    @current_order.delivery_id == delivery_id
+    current_order.delivery_id == delivery_id
   end
 
   def card_error?(field)
@@ -30,7 +30,7 @@ module CheckoutsHelper
   end
 
   def card_saved_value(field)
-    @current_order.credit_card.try(field) || @credit_card.try(field)
+    current_order.credit_card.try(field) || @credit_card.try(field)
   end
 
   def client_name(address)
@@ -49,8 +49,8 @@ module CheckoutsHelper
   end
 
   def order_address_field(tag, field)
-    return @current_order.billing_address.try(field) if tag == 'billing'
-    @current_order.shipping_address.try(field) if tag == 'shipping'
+    return current_order.billing_address.try(field) if tag == 'billing'
+    current_order.shipping_address.try(field) if tag == 'shipping'
   end
 
   def inputed_address_field(tag, field)

@@ -20,8 +20,8 @@ module CheckoutUpdater
     end
 
     def update_delivery
-      @current_order.delivery_id = params[:delivery_id] if params[:delivery_id]
-      render_wizard @current_order
+      current_order.delivery_id = params[:delivery_id] if params[:delivery_id]
+      render_wizard current_order
     end
 
     def update_credit_card
@@ -31,12 +31,12 @@ module CheckoutUpdater
     end
 
     def confirm_order
-      @current_order.total_price = @current_order.order_total
-      @current_order.number = "#R#{Time.now.nsec}" + @current_order.id.to_s
-      @current_order.confirm
-      @placed_order = @current_order
-      if @current_order.save
-        CheckoutMailer.with(user: current_user, order: @current_order).complete_email.deliver_later
+      current_order.total_price = current_order.order_total
+      current_order.number = "#R#{Time.now.nsec}" + current_order.id.to_s
+      current_order.confirm
+      @placed_order = current_order
+      if current_order.save
+        CheckoutMailer.with(user: current_user, order: current_order).complete_email.deliver_later
         render :complete
       else
         render_wizard
