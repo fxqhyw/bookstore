@@ -8,7 +8,14 @@ class Book < ApplicationRecord
   validates :title, :description, :price, :published_at, :materials, :height, :width, :depth, :quantity, presence: true
   validates :price, :height, :width, :depth, :quantity, numericality: { greater_than_or_equal_to: 0.01 }
   validates :published_at, numericality: { less_than_or_equal_to: Time.current.year }
+  validate :correct_image_type
 
   scope :latest, -> { order(created_at: :desc).limit(3) }
   scope :best_sellers, -> { joins(:order_items).group('id').order(Arel.sql('SUM(order_items.quantity) desc')).limit(4) }
+
+  private
+
+  def correct_image_type
+    errors.add(:image, 'must be a JPEG or PNG') if image.attached? && !image.content_type.in?(%w[image/jpeg image/png])
+  end
 end
