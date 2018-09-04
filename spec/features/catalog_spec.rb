@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.feature 'Catalog Page', type: :feature do
-  subject { page }
-
   context 'links on book icons' do
     let(:shop_icon) { find('a.hidden-xs>span.shop-icon') }
 

@@ -21,7 +21,7 @@ ActiveJob::Base.queue_adapter = :test
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   config.include Devise::Test::ControllerHelpers, type: :controller
 

@@ -48,6 +48,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'transactional_capybara'
   gem 'capybara-webkit', github: 'thoughtbot/capybara-webkit', branch: 'master'
   gem 'database_cleaner'
   gem 'shoulda-matchers'
