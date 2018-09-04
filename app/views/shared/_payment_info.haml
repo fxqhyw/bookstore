@@ -3,6 +3,6 @@
   %p.general-address
   = secret_card_number(order.credit_card.number)
   - if order.in_progress?
-    = link_to 'edit', wizard_path(:payment, edit: true), class: "general-edit"
+    = link_to t('checkout.edit'), wizard_path(:payment, edit: true), class: "general-edit"
   %br
   = order.credit_card.expiration_date

@@ -27,14 +27,14 @@
     .col-sm-6
       .visible-xs
         %p.general-order-number.mb-0= t('checkout.order') + @placed_order.number
-        %p.general-address.mb-30= order_date(@placed_order)
+        %p.general-address.mb-30= @placed_order.created_date
       - if @placed_order.shipping_address
         = render partial: 'shared/shipping_address_info', locals: { order: @placed_order }
       - else
         = render partial: 'shared/billing_address_info', locals: { order: @placed_order }
     .col-sm-6.hidden-xs.text-right
       %p.general-order-number.mb-0= t('checkout.order') + @placed_order.number
-      %p.general-address.mb-30= order_date(@placed_order)
+      %p.general-address.mb-30= @placed_order.created_date
   .visible-xs
     .general-cart-item.divider-lg
       - @placed_order.order_items.each do |item|

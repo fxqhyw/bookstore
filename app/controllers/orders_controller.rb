@@ -3,6 +3,6 @@ class OrdersController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @orders = OrdersFilter.new(orders: current_user.orders.placed, params: params).call
+    @orders = OrdersFilter.new(orders: current_user.orders.placed, params: params).call.decorate
   end
 end

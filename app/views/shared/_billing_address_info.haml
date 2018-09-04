@@ -1,7 +1,7 @@
 %p.general-address
   = client_name(order.billing_address)
   - if order.in_progress?
-    = link_to 'edit', wizard_path(:address, edit: true), class: "general-edit"
+    = link_to t('checkout.edit'), wizard_path(:address, edit: true), class: "general-edit"
   %br
   = order.billing_address.address
   %br
@@ -9,4 +9,4 @@
   %br
   = order.billing_address.country
   %br
-  = "Phone " + order.billing_address.phone
+  = t('checkout.phone') + order.billing_address.phone

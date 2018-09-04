@@ -1,7 +1,7 @@
 %p.general-address
   = client_name(order.shipping_address)
   - if order.in_progress?
-    = link_to 'edit', wizard_path(:address, edit: true), class: "general-edit"
+    = link_to t('checkout.edit'), wizard_path(:address, edit: true), class: "general-edit"
   %br
   = order.shipping_address.address
   %br

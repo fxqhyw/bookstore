@@ -10,6 +10,6 @@ FactoryBot.define do
     depth 0.8
     quantity { rand(111..222) }
     category
-    authors { [FactoryBot.create(:author)] }
+    authors { FactoryBot.create_list(:author, 2) }
   end
 end

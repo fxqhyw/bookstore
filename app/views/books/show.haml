@@ -16,7 +16,7 @@
             %img.img-responsive{src: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ352GRUKdIFLP3va0Tj7QREidI4lwUABrtUJbQehqIL02O_blo"}
     .col-sm-6
       %h1.mt-res-0= @book.title
-      %p.lead.small= authors_list(@book)
+      %p.lead.small= @book.authors_list
       .row
         = form_with url: order_items_path, method: :post, remote: true do |f|
           .col-xs-12.col-md-4
@@ -36,7 +36,7 @@
         %p.lead.small.line-height-2
           - if @book.description.length > 350
             = truncate(@book.description, length: 265)
-            = link_to 'Read More', '#', remote: true, onclick: "$(this).parent().text('#{escape_javascript @book.description}')", class: 'in-gold-500 ml-10'
+            = link_to t('button.read_more'), '#', remote: true, onclick: "$(this).parent().text('#{escape_javascript @book.description}')", class: 'in-gold-500 ml-10'
           - else
             = @book.description
       .general-info-wrap.divider-lg

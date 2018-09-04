@@ -136,6 +136,7 @@ en:
     total: 'Total'
     shipments: 'Shipments'
     place_order: 'Place Order'
+    edit: 'edit'
 
   delivery:
     delivery_method: 'Shipping Method'
