@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Book, type: :model do
   context 'associations' do
     it { is_expected.to have_and_belong_to_many(:authors) }
-    it { is_expected.to belong_to(:category) }
+    it { is_expected.to belong_to(:category).counter_cache(true) }
     it { is_expected.to have_many(:order_items).dependent(:destroy) }
     it { is_expected.to have_many(:reviews).dependent(:destroy) }
   end

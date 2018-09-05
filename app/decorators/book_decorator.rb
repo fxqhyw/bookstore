@@ -1,4 +1,4 @@
-class BookDecorator < Draper::Decorator
+class BookDecorator < ApplicationDecorator
   delegate_all
 
   def dimensions_string

@@ -6,8 +6,8 @@
       %i.fa.fa-angle-down.dropdown-icon.pull-right
     %ul.dropdown-menu
       %li
-        = link_to "#{t('button.all')} (#{categories.sum(&:books_count)})", catalog_path          
-      - categories.each do |category|
+        = link_to "#{t('button.all')} (#{Category.all.sum(&:books_count)})", catalog_path          
+      - Category.all.each do |category|
         %li
           = link_to "#{category.title} (#{category.books_count})", catalog_path(category: category.id, filter: @filter)
   %p.lead.small.mb-10= t('page.book.index.sort_by')

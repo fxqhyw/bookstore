@@ -3,7 +3,7 @@ class Book < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many_attached :images, dependent: :destroy
-  belongs_to :category
+  belongs_to :category, counter_cache: true
 
   validates :title, :description, :price, :published_at, :materials, :height, :width, :depth, :quantity, presence: true
   validates :price, :height, :width, :depth, :quantity, numericality: { greater_than_or_equal_to: 0.01 }
