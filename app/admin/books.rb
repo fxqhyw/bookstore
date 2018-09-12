@@ -1,5 +1,6 @@
 ActiveAdmin.register Book do
-  permit_params :category_id, :title, :price, :description, :materials, :quantity, :height, :width, :depth, :published_at, images: [], author_ids: [] 
+  permit_params :category_id, :title, :price, :description, :materials, :quantity, :height, :width, :depth, :published_at, images: [], author_ids: []
+  decorate_with BookDecorator
 
   authors = proc do
     Author.all.map { |author| ["#{author.first_name} #{author.last_name}", author.id] }
@@ -12,7 +13,7 @@ ActiveAdmin.register Book do
     end
     column :category
     column :title
-    column(I18n.t('admin.authors')) { |book| authors_list(book) }
+    column(I18n.t('admin.authors')) { |book| book.authors_list }
     column(I18n.t('admin.short_description')) { |book| truncate(book.description, length: 65) }
     column :price
     column { |book| link_to I18n.t('admin.view'), edit_admin_book_path(book) }
