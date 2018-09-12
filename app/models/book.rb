@@ -16,6 +16,10 @@ class Book < ApplicationRecord
   private
 
   def correct_images_type
-    errors.add(:images, 'must be a JPEG or PNG') if images.attached? && !images.content_type.in?(%w[image/jpeg image/png])
+    return unless images.attached?
+
+    images.each do |image|
+      errors.add(:images, 'must be a JPEG or PNG') unless image.content_type.in?(%w[image/jpeg image/png])
+    end
   end
 end
