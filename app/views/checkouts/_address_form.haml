@@ -30,10 +30,3 @@
     = text_field_tag "#{tag}[phone]", "#{address_saved_value(field: :phone, tag: tag)}", placeholder: t('settings.phone_placeholder'), id: "phone", class: "form-control"
     %span.help-block= address_error_message(field: :phone, tag: tag)
   = hidden_field_tag "#{tag}[order_id]", current_order.id
-  - if tag == 'shipping'
-    .form-group.checkbox
-      %label.font-weight-light.pl-0
-        = check_box :use_billing, true, id: 'use_billing', class: "checkbox-input", hidden: 'true'
-        %span.checkbox-icon
-          %i.fa.fa-check
-      %span.checkbox-text= t('settings.use_billing')

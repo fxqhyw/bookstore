@@ -5,9 +5,18 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require 'capybara/rails'
+require 'capybara/rspec'
+require 'capybara/webkit/matchers'
+require 'transactional_capybara/rspec'
 require_relative 'support/wait_for_ajax'
 
 ActiveRecord::Migration.maintain_test_schema!
+
+Capybara.javascript_driver = :webkit
+
+Capybara::Webkit.configure do |config|
+  config.allow_unknown_urls
+end
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

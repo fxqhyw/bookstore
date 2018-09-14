@@ -1,6 +1,6 @@
 %main.container.general-main-wrap
   .text-center
-    %h3.general-login-title Log In
+    %h3.general-login-title= t('button.log_in')
     = render 'devise/shared/omniauth'
   = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "general-form" }, id: 'sign_in_form') do |f|
     .form-group.mb-30
@@ -9,15 +9,15 @@
     .form-group.mb-30
       = f.label :password, class: "control-label input-label"
       = f.password_field :password, autocomplete: "off", id: "password", class: "form-control", placeholder: "Password"
-      = link_to 'Forgot password?', new_password_path(resource_name), class: "help-block in-gold-500"
+      = link_to t('button.forgot_password'), new_password_path(resource_name), class: "help-block in-gold-500"
     .form-group.checkbox.text-center.mb-30
       %label.checkbox-label
         = f.check_box :remember_me, hidden: "true", class: "checkbox-input"
         %span.checkbox-icon
           %i.fa.fa-check
-        %span.checkbox-text Remember me
+        %span.checkbox-text= t('button.remember_me')
     .text-center
-      = f.submit 'Back to Store', class: "btn btn-default mb-20"
+      = f.submit t('button.log_in'), class: "btn btn-default mb-20"
   %p.general-sign-text.text-center
     Don’t have an Account?
-    = link_to 'Sign up', new_user_registration_path, class: "in-gold-500"
+    = link_to t('button.sign_up'), new_user_registration_path, class: "in-gold-500"

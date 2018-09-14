@@ -32,7 +32,7 @@ class BooksFilter
   end
 
   def popular
-    @books.joins(:order_items).group('id').order(Arel.sql('SUM(order_items.quantity) desc'))
+    @books.left_outer_joins(:order_items).group('id').order(Arel.sql('COUNT(order_items) desc'))
   end
 
   def low_to_high_price

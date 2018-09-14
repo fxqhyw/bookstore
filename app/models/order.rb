@@ -14,6 +14,9 @@ class Order < ApplicationRecord
 
   scope :in_progress, -> { where(status: :in_progress).order(created_at: :desc) }
   scope :in_queue, -> { where(status: :in_queue).order(created_at: :desc) }
+  scope :in_delivery, -> { where(status: :in_delivery).order(created_at: :desc) }
+  scope :delivered, -> { where(status: :delivered).order(created_at: :desc) }
+  scope :canceled, -> { where(status: :canceled).order(created_at: :desc) }
   scope :placed, -> { where.not(status: :in_progress).order(created_at: :desc) }
 
   aasm column: 'status', whiny_transitions: false do

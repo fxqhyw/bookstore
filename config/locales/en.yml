@@ -29,6 +29,7 @@ en:
     title_Z-A: 'Title Z - A'
     get_started: 'Get Started'
     post: 'Post'
+    remember_me: 'Remember me'
   
   header:
     logo: 'Bookstore'
@@ -164,6 +165,7 @@ en:
     waiting: 'Waiting for processing'
     in_delivery: 'In delivery'
     delivered: 'Delivered'
+    canceled: 'Canceled'
   
   notice:
     reg_message: 'You have successfully registered, your account information has been sent to '

@@ -27,3 +27,10 @@ a.text-as-link {
 .alert-danger, .alert-info {
   text-align: center;
 }
+
+#use_billing_checkbox {
+  display: inline-block;
+  position:relative;
+  left: 60%;
+  top: 50%;
+}

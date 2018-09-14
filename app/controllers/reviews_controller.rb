@@ -2,7 +2,6 @@ class ReviewsController < ApplicationController
   load_and_authorize_resource
 
   def create
-    @review = Review.new(review_params)
     if @review.save
       redirect_to @review.book, notice: I18n.t('review.thanks_message')
     else

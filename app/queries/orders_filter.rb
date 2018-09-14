@@ -9,6 +9,7 @@ class OrdersFilter
     when 'waiting_for_proccesing' then waiting_for_proccesing
     when 'in_delivery' then in_delivery
     when 'delivered' then delivered
+    when 'canceled' then canceled
     else @orders
     end
   end
@@ -25,5 +26,9 @@ class OrdersFilter
 
   def delivered
     @orders.delivered
+  end
+
+  def canceled
+    @orders.canceled
   end
 end

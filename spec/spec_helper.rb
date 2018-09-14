@@ -1,13 +1,3 @@
-require 'capybara/rspec'
-require 'capybara/webkit/matchers'
-require 'transactional_capybara/rspec'
-
-Capybara.javascript_driver = :webkit
-
-Capybara::Webkit.configure do |config|
-  config.allow_unknown_urls
-end
-
 RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
