@@ -1,22 +1,24 @@
 class OrdersFilter
+  FILTERS = {
+    'in_queue' => :in_queue,
+    'in_delivery' => :in_delivery,
+    'delivered' => :delivered,
+    'canceled' => :canceled
+  }.freeze
+
   def initialize(orders:, params:)
     @orders = orders
     @params = params
   end
 
   def call
-    case @params[:filter]
-    when 'waiting_for_proccesing' then waiting_for_proccesing
-    when 'in_delivery' then in_delivery
-    when 'delivered' then delivered
-    when 'canceled' then canceled
-    else @orders
-    end
+    return send(FILTERS[@params[:filter]]) if FILTERS[@params[:filter]]
+    @orders
   end
 
   private
 
-  def waiting_for_proccesing
+  def in_queue
     @orders.in_queue
   end
 

@@ -4,6 +4,6 @@ class CheckoutMailer < ApplicationMailer
   def complete_email
     @user = params[:user]
     @order = params[:order]
-    mail(to: @user.email, subject: 'Thank You for your Order!')
+    mail(to: @user.email, subject: I18n.t('mail.thanks'))
   end
 end

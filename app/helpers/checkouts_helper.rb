@@ -4,13 +4,13 @@ module CheckoutsHelper
   end
 
   def address_error?(field:, tag:)
-    return @billing.errors.include?(field) if @billing && tag == 'billing'
-    @shipping.errors.include?(field) if @shipping && tag == 'shipping'
+    return @billing.errors.include?(field) if billing_address?(tag)
+    @shipping.errors.include?(field) if shipping_address?(tag)
   end
 
   def address_error_message(field:, tag:)
-    return @billing.errors[field].to_sentence if @billing && tag == 'billing'
-    @shipping.errors[field].to_sentence if @shipping && tag == 'shipping'
+    return @billing.errors[field].to_sentence if billing_address?(tag)
+    @shipping.errors[field].to_sentence if shipping_address?(tag)
   end
 
   def address_saved_value(field:, tag:)
@@ -47,6 +47,14 @@ module CheckoutsHelper
   end
 
   private
+
+  def billing_address?(tag)
+    @billing && tag == 'billing'
+  end
+
+  def shipping_address?(tag)
+    @shipping && tag == 'shipping'
+  end
 
   def user_address_field(tag, field)
     return current_user.billing_address.try(field) if tag == 'billing'

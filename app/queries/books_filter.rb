@@ -1,4 +1,12 @@
 class BooksFilter
+  FILTERS = {
+    'newest' => :newest,
+    'popular' => :popular,
+    'low_to_high_price' => :low_to_high_price,
+    'title_a_z' => :title_a_z,
+    'title_z_a' => :title_z_a
+  }.freeze
+
   def initialize(books: Book.all, params:)
     @books = books
     @params = params
@@ -16,15 +24,8 @@ class BooksFilter
   end
 
   def by_filter
-    case @params[:filter]
-    when 'newest' then newest
-    when 'popular' then popular
-    when 'low_to_high_price' then low_to_high_price
-    when 'high_to_low_price' then high_to_low_price
-    when 'title_a_z' then title_a_z
-    when 'title_z_a' then title_z_a
-    else newest
-    end
+    return send(FILTERS[@params[:filter]]) if FILTERS[@params[:filter]]
+    newest
   end
 
   def newest

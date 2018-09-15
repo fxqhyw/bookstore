@@ -1,14 +1,9 @@
 module BooksHelper
+  COUNT_OF_BOOKS_ON_ONE_PAGE = 12
+
   def filter_books_title
-    case request.GET[:filter]
-    when 'newest' then I18n.t('button.newest_first')
-    when 'popular' then I18n.t('button.popular_first')
-    when 'low_to_high_price' then I18n.t('button.low_to_hight')
-    when 'high_to_low_price' then I18n.t('button.hight_to_low')
-    when 'title_a_z' then I18n.t('button.title_A-Z')
-    when 'title_z_a' then I18n.t('button.title_Z-A')
-    else I18n.t('button.newest_first')
-    end
+    return I18n.t("button.#{request.GET[:filter]}") if request.GET[:filter]
+    I18n.t('button.newest')
   end
 
   def sort_category_title
@@ -28,6 +23,6 @@ module BooksHelper
   end
 
   def more_books?(books)
-    books.any? && books.size > 11
+    books.any? && books.size >= COUNT_OF_BOOKS_ON_ONE_PAGE
   end
 end

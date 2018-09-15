@@ -1,10 +1,10 @@
 module ApplicationHelper
   def flash_class(level)
-    case level
-    when 'notice' then 'alert alert-info'
-    when 'success' then 'alert alert-success'
-    when 'alert' then 'alert alert-danger'
-    end
+    {
+      'notice' => 'alert alert-info',
+      'success' => 'alert alert-success',
+      'alert' => 'alert alert-danger'
+    }[level]
   end
 
   def price_to_euro(price)

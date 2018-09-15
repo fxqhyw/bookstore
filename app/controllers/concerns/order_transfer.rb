@@ -8,8 +8,7 @@ module OrderTransfer
       order = Order.find_by_id(cookies.signed[:order_id])
       return unless order
       @user.orders.in_progress.destroy_all
-      @user.orders << order
-      @user.save
+      order.update(user: @user)
       cookies.delete :order_id
     end
   end

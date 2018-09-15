@@ -4,6 +4,6 @@ class RegistrationMailer < ApplicationMailer
   def registration_email
     @email = params[:email]
     @password = params[:password]
-    mail(to: @email, subject: 'Welcome to our Amazing Bookstore!')
+    mail(to: @email, subject: I18n.t('mail.welcome'))
   end
 end

@@ -18,17 +18,12 @@ class CheckoutStepper
   private
 
   def completed?(step)
-    case step
-    when :login
-      @user
-    when :address
-      @order.billing_address
-    when :delivery
-      @order.delivery
-    when :payment
-      @order.credit_card
-    when :confirm
-      @order.in_queue?
-    end
+    {
+      login: @user,
+      address: @order.billing_address,
+      delivery: @order.delivery,
+      payment: @order.credit_card,
+      confirm: @order.in_queue?
+    }[step]
   end
 end
