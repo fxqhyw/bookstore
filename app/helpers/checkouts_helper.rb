@@ -14,7 +14,12 @@ module CheckoutsHelper
   end
 
   def address_saved_value(field:, tag:)
+    return order_address_field('billing', field) || user_address_field('billing', field) || inputed_address_field('billing', field) if hide_address_fields?(tag)
     order_address_field(tag, field) || user_address_field(tag, field) || inputed_address_field(tag, field)
+  end
+
+  def hide_address_fields?(tag)
+    tag == 'shipping' && current_page?('/checkouts/address?edit=true') && !current_order.shipping_address
   end
 
   def checked_delivery?(delivery_id)

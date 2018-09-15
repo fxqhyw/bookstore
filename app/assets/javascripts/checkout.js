@@ -1,5 +1,10 @@
-$(document).ready(function() {
-  $("#use_billing").click(function() {
-    $("#shipping").toggle("slow")
+$(document).on('turbolinks:load', function() {
+  $("#use_billing").change(function(){
+    if(this.checked) {
+      $("#shipping").fadeOut('slow');
+    }
+    else {
+      $("#shipping").fadeIn('slow');
+    }
   });
 });
