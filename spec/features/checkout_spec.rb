@@ -52,6 +52,8 @@ RSpec.feature 'Checkout', type: :feature do
   end
 
   describe 'other steps' do
+    let(:use_billing_checkbox) { page.find('.checkbox-icon') }
+
     before do
       create_list(:delivery, 3)
       user = create(:user)
@@ -82,9 +84,30 @@ RSpec.feature 'Checkout', type: :feature do
       expect(page).to have_content('must consist of only digits')
       expect(page).to have_content("must starts with '+' and consist of only digits")
       expect(page).to have_current_path('/checkouts/address')
-      find('.checkbox-icon').click
+      use_billing_checkbox.click
       click_button I18n.t('checkout.save_and_continue')
       expect(page).to have_current_path('/checkouts/delivery')
+    end
+
+    scenario 'can change my mind about use billing address on address step', js: true do
+      3.times { use_billing_checkbox.click }
+      click_button I18n.t('checkout.save_and_continue')
+      expect(page).to have_current_path('/checkouts/delivery')
+    end
+
+    scenario 'can change my mind about use billing address after passing address step', js: true do
+      expect(page).to have_current_path('/checkouts/address')
+      click_button I18n.t('checkout.save_and_continue')
+      expect(page).to have_css('div.has-error')
+      use_billing_checkbox.click
+      click_button I18n.t('checkout.save_and_continue')
+      expect(page).to have_current_path('/checkouts/delivery')
+      visit '/checkouts/address?edit=true'
+      expect(find('#use_billing', visible: :hidden)).to be_checked
+      expect(page).to have_css('#shipping', visible: :hidden)
+      use_billing_checkbox.click
+      expect(find('#use_billing', visible: :hidden)).not_to be_checked
+      expect(page).to have_css('#shipping')
     end
 
     scenario 'pass all steps from address to complete', js: true do
