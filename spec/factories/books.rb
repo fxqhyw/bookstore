@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :book do
-    title { FFaker::Lorem.unique.word }
-    description { FFaker::Book.description }
+    title { FFaker::Book.unique.title }
+    description { FFaker::Lorem.paragraph }
     published_at { rand(1999..2018) }
     price 39.99
     materials 'Hardcove, glossy paper'

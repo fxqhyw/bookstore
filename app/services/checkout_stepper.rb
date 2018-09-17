@@ -9,8 +9,8 @@ class CheckoutStepper
 
   def call
     return @current_step if @editable && completed?(@current_step)
-    @steps.reverse_each do |step|
-      @step = step unless completed?(step)
+    @steps.each do |step|
+      return @step = step unless completed?(step)
     end
     @step
   end
