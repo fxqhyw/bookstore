@@ -24,8 +24,8 @@ RSpec.feature 'Checkout', type: :feature do
         fill_in 'Enter Email', with: 'myemail@gmail.com'
         click_button I18n.t('checkout.continue')
       end
-      expect(page).to have_current_path('/checkouts/address')
       expect(page).to have_content I18n.t('notice.reg_message') + 'myemail@gmail.com'
+      expect(page).to have_current_path('/checkouts/address')
     end
 
     scenario 'login with password' do

@@ -1,13 +1,13 @@
 FactoryBot.define do
   factory :book do
-    title { FFaker::Book.unique.title }
+    title { FFaker::Lorem.phrase }
     description { FFaker::Lorem.paragraph }
     published_at { rand(1999..2018) }
-    price 39.99
-    materials 'Hardcove, glossy paper'
-    height 6.9
-    width 5.1
-    depth 0.8
+    price { rand(21.99..42.99) }
+    materials { 'Hardcove, glossy paper' }
+    height { rand(7.3..12.3) }
+    width { rand(4.7..8.1) }
+    depth { rand(0.4..1.4) }
     quantity { rand(111..222) }
     category
     authors { FactoryBot.create_list(:author, 2) }

@@ -4,11 +4,11 @@ FactoryBot.define do
     last_name { FFaker::Lorem.word }
     address { FFaker::Lorem.word }
     city { FFaker::Lorem.word }
-    zip '7777'
+    zip { '7777' }
     country { FFaker::Address.country }
-    phone '+387878322332'
-    type 'BillingAddress'
+    phone { '+1234567890' }
+    type { 'BillingAddress' }
     user
-    order nil
+    order { nil }
   end
 end

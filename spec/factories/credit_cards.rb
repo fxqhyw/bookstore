@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :credit_card do
     name { FFaker::Education.major }
     number { Array.new(16) { rand(1..9) }.join }
-    expiration_date '11/22'
-    order nil
+    expiration_date { '11/22' }
+    order { nil }
   end
 end

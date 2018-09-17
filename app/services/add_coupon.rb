@@ -5,18 +5,10 @@ class AddCoupon < Rectify::Command
   end
 
   def call
-    return broadcast(:invalid) unless find_coupon
-    update_order
+    coupon = Coupon.find_by_code(@code)
+    return broadcast(:invalid) unless coupon
+
+    @order.update(coupon: coupon)
     broadcast(:ok)
-  end
-
-  private
-
-  def find_coupon
-    @coupon = Coupon.find_by_code(@code)
-  end
-
-  def update_order
-    @order.update(coupon: @coupon)
   end
 end

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :order do
-    total_price nil
-    status 'in_progress'
+    total_price { nil }
+    status { 'in_progress' }
     user
 
     factory :order_with_delivery do
@@ -10,20 +10,20 @@ FactoryBot.define do
 
     trait :in_queue do
       total_price { rand(50.00..250.00) }
-      status 'in_queue'
-      number 'R1111111'
+      status { 'in_queue' }
+      number { 'R1111111' }
     end
 
     trait :in_delivery do
       total_price { rand(50.00..250.00) }
-      status 'in_delivery'
-      number 'R2222222'
+      status { 'in_delivery' }
+      number { 'R2222222' }
     end
 
     trait :delivered do
       total_price { rand(50.00..250.00) }
-      status 'delivered'
-      number 'R3333333'
+      status { 'delivered' }
+      number { 'R3333333' }
     end
   end
 end
