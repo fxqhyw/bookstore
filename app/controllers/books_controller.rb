@@ -7,7 +7,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id]).decorate
-    @reviews = @book.reviews.approved
+    @reviews = @book.reviews.approved.decorate
   end
 
   private

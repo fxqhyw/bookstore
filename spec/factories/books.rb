@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :book do
-    title { FFaker::Book.title }
+    title { FFaker::Lorem.unique.word }
     description { FFaker::Book.description }
     published_at { rand(1999..2018) }
     price 39.99

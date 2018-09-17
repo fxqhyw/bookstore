@@ -1,5 +1,4 @@
 class Review < ApplicationRecord
-  include ReviewerInfo
   include AASM
 
   belongs_to :book
