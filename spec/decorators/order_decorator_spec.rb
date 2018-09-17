@@ -8,7 +8,7 @@ RSpec.describe OrderDecorator do
   describe '#status_string' do
     context 'status is in_queue' do
       it do
-        expect(order_in_queue.status_string).to eq(I18n.t('orders.waiting'))
+        expect(order_in_queue.status_string).to eq(I18n.t('orders.in_queue'))
       end
     end
 

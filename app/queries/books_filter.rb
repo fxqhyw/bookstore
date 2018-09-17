@@ -2,6 +2,7 @@ class BooksFilter
   FILTERS = {
     'newest' => :newest,
     'popular' => :popular,
+    'high_to_low_price' => :high_to_low_price,
     'low_to_high_price' => :low_to_high_price,
     'title_a_z' => :title_a_z,
     'title_z_a' => :title_z_a

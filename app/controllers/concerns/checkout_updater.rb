@@ -52,7 +52,7 @@ module CheckoutUpdater
     end
 
     def credit_card_params
-      params.require(:credit_card).permit(:number, :name, :expiration_date, :cvv, :order_id)
+      params.require(:credit_card).permit(:number, :name, :expiration_date, :order_id)
     end
   end
 end

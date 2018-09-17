@@ -4,7 +4,7 @@ RSpec.describe OrdersFilter do
   subject { OrdersFilter.new(params: {}, orders: nil) }
 
   context 'filter matched' do
-    %w[waiting_for_proccesing in_delivery delivered].each do |method|
+    %w[in_queue in_delivery delivered].each do |method|
       it "calls #{method} when receive params is '#{method}'" do
         subject.instance_variable_set(:@params, filter: method)
         expect(subject).to receive(method)
