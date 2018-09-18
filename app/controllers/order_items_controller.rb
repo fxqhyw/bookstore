@@ -2,13 +2,8 @@ class OrderItemsController < ApplicationController
   before_action :order_item, only: %i[update destroy]
 
   def create
-    create_order unless current_order
-    @order_item = current_order.order_items.find_by(book_id: params[:book_id])
-    if @order_item
-      @order_item.quantity += params[:quantity].to_i
-      @order_item.save
-    else
-      @order_item = current_order.order_items.create(permited_params)
+    CreateOrderItem.call(order: current_order, user: current_user, params: permited_params) do
+      on(:ok) { render :create }
     end
   end
 
