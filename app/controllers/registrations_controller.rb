@@ -3,7 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
     super
     return unless @user.save
 
-    OrderTransfer.call(user: @user, order_id: cookies.signed[:order_id]) do
+    OrderTransfer.call(@user) do
       on(:ok) { cookies.delete :order_id }
     end
     RegistrationMailer.with(email: @user.email, password: @user.password).registration_email.deliver_later

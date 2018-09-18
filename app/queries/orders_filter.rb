@@ -13,6 +13,7 @@ class OrdersFilter
 
   def call
     return send(FILTERS[@params[:filter]]) if FILTERS[@params[:filter]]
+
     @orders
   end
 

@@ -2,11 +2,9 @@ class ReviewsController < ApplicationController
   load_and_authorize_resource
 
   def create
-    if @review.save
-      redirect_to @review.book, notice: I18n.t('review.thanks_message')
-    else
-      redirect_to @review.book, alert: I18n.t('review.incorrect')
-    end
+    return redirect_to @review.book, notice: I18n.t('review.thanks_message') if @review.save
+
+    redirect_to @review.book, alert: I18n.t('review.incorrect')
   end
 
   private

@@ -1,7 +1,6 @@
 class OrderTransfer < Rectify::Command
-  def initialize(user:, order_id:)
+  def initialize(user)
     @user = user
-    @order_id = order_id
   end
 
   def call
@@ -17,7 +16,7 @@ class OrderTransfer < Rectify::Command
   private
 
   def find_order
-    @order = Order.find_by_id(@order_id)
+    @order = Order.find_by_id(cookies.signed[:order_id])
   end
 
   def delete_user_in_progress_orders

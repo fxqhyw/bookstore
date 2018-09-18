@@ -3,7 +3,7 @@ class SessionsController < Devise::SessionsController
     super
     return unless params[:user][:from_checkout]
 
-    OrderTransfer.call(user: @user, order_id: cookies.signed[:order_id]) do
+    OrderTransfer.call(@user) do
       on(:ok) { cookies.delete :order_id }
     end
   end

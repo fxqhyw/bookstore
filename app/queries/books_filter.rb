@@ -26,6 +26,7 @@ class BooksFilter
 
   def by_filter
     return send(FILTERS[@params[:filter]]) if FILTERS[@params[:filter]]
+
     newest
   end
 
