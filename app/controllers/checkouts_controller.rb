@@ -7,29 +7,18 @@ class CheckoutsController < ApplicationController
   steps :login, :address, :delivery, :payment, :confirm
 
   def show
-    return redirect_to cart_path, alert: I18n.t('notice.empty_cart') if empty_cart?
-
-    showable_step = CheckoutStepper.new(steps: steps, current_step: step, order: current_order,
-                                            edit: params[:edit], user: current_user).call
-    jump_to(showable_step) unless step == showable_step
-    render_wizard
+    CheckoutStepper.call(steps: steps, current_step: step, edit: params[:edit]) do
+      on(:empty_cart) { redirect_to cart_path, alert: I18n.t('notice.empty_cart') }
+      on(:ok) { render_wizard }
+    end
   end
 
   def update
-    #CheckoutUpdater.call(step)
     case step
     when :address then update_addresses
     when :delivery then update_delivery
     when :payment then update_credit_card
     when :confirm then confirm_order
     end
-  end
-
-  private
-
-  def empty_cart?
-    return true unless current_order
-
-    current_order.order_items.empty?
   end
 end

@@ -21,6 +21,5 @@
     %span.step-text.hidden-xs= t('checkout.confirm')
   %li.step-divider
   %li.step.clickable-step{ class: active_step(:complete) }
-    = link_to wizard_path(:complete, edit: true) do
-      %span.step-number 5
+    %span.step-number 5
     %span.step-text.hidden-xs= t('checkout.complete')

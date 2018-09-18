@@ -2,21 +2,24 @@ require 'rails_helper'
 
 RSpec.describe CheckoutsController, type: :controller do
   describe 'GET #show' do
+    let(:order) { create(:order) }
+
     context 'cart is not empty' do
       %i[login address delivery payment confirm].each do |step|
         it "renders #{step} template" do
-          allow(controller).to receive(:empty_cart?) { false }
-          stepper = instance_double(CheckoutStepper, call: step)
-          allow(CheckoutStepper).to receive(:new) { stepper }
+          allow_any_instance_of(CheckoutStepper).to receive(:empty_cart?) { false }
+          allow_any_instance_of(ApplicationController).to receive(:current_order) { order }
+          allow_any_instance_of(CheckoutStepper).to receive(:showable_step) { step }
           get :show, params: { id: step }
           expect(response).to render_template(step)
+          expect(response).to have_http_status 200
         end
       end
     end
 
     context 'cart is empty' do
       it 'redirects to cart path if cart is empty' do
-        allow(controller).to receive(:empty_cart?) { true }
+        allow_any_instance_of(CheckoutStepper).to receive(:empty_cart?) { true }
         get :show, params: { id: :address }
         expect(response).to redirect_to(cart_path)
       end
