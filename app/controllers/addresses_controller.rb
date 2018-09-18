@@ -1,13 +1,14 @@
 class AddressesController < ApplicationController
+  include Rectify::ControllerHelpers
   before_action :authenticate_user!
 
   def update
-    @address = SettingsAddresser.call(address_params)
-
-    if @address.update(address_params)
-      redirect_to address_path, notice: I18n.t('notice.updated')
-    else
-      render :edit
+    SettingsAddresser.call(address_params) do
+      on(:ok) { redirect_to address_path, notice: I18n.t('notice.updated') }
+      on(:invalid) do |address|
+        expose(address: address)
+        render :edit
+      end
     end
   end
 
