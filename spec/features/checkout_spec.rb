@@ -146,7 +146,7 @@ RSpec.feature 'Checkout', type: :feature do
       expect(page).to have_content(@address.phone)
       expect(page).to have_content(@book.title)
       expect(page).to have_content('11/22')
-      expect(page).to have_content('*** *** *** 2312')
+      expect(page).to have_content('**** **** **** 2312')
       click_link I18n.t('checkout.place_order')
       expect(page).to have_content I18n.t('checkout.thanks')
     end

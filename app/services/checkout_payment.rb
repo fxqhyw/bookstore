@@ -6,6 +6,7 @@ class CheckoutPayment
   def call
     credit_card = CreditCard.find_by(order_id: credit_card_params[:order_id]) || CreditCard.new
     credit_card.attributes = credit_card_params
+    credit_card.number = credit_card_params[:number][-4, 4]
     credit_card
   end
 

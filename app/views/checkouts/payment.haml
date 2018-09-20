@@ -5,7 +5,7 @@
     = hidden_field_tag "credit_card[order_id", current_order.id
     .form-group{class: "#{'has-error' if card_error?(:number)}"}
       %label.control-label.input-label= t('payment.card_number')
-      = text_field_tag "credit_card[number]", card_saved_value(:number), placeholder: t('payment.card_number'), class: "form-control", id: 'number', required: true
+      = text_field_tag "credit_card[number]", secret_card_number(card_saved_value(:number)), placeholder: t('payment.card_number'), class: "form-control", id: 'number', required: true, pattern: "[0-9]{13,18}", title: t('payment.number_hint')
       %span.help-block= card_error_message(:number)
     .row
       .col-sm-6

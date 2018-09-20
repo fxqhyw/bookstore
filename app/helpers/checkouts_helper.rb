@@ -43,7 +43,7 @@ module CheckoutsHelper
   end
 
   def secret_card_number(number)
-    '*** *** *** ' + number[-4, 4]
+    '**** **** **** ' + number if number
   end
 
   private
