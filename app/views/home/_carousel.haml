@@ -1,0 +1,28 @@
+#slider.carousel.slide{'data-ride': "carousel"}
+  %ol.carousel-indicators
+    %li.active{'data-target': "#slider", 'data-slide-to': "0"}
+    %li{'data-target': "#slider", 'data-slide-to': "1"}
+    %li{'data-target': "#slider", 'data-slide-to': "2"}
+  .carousel-inner{role: "listbox"}
+    - @latest_books.each do |latest_book|
+      .item{class: "#{'active' if latest_book == @latest_books.first}"}
+        .row
+          .col-sm-5
+            .general-img-wrap
+              - if latest_book.images.any?
+                %img.img-shadow.general-thumbnail-img{src: slider_image(latest_book)}
+              - else
+                %img.img-shadow.general-thumbnail-img{src: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ352GRUKdIFLP3va0Tj7QREidI4lwUABrtUJbQehqIL02O_blo", alt: "design-book"}
+          .col-sm-7
+            .mb-60
+              %h1= link_to latest_book.title, book_path(latest_book), class: 'text-as-link'
+              %p.lead= truncate(latest_book.description, length: 415)
+              %p.lead.small= latest_book.authors_list
+              .general-align
+                = link_to t('button.buy_now'), order_items_path(book_id: latest_book.id, quantity: 1), method: :post, class: 'btn btn-primary', remote: true
+  %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
+    %span.icon-prev{'aria-hidden': "true"}
+    %span.sr-only= t('page.home.carusel.prev')
+  %a.right.carousel-control{href: "#slider", role: "button", 'data-slide': "next"}
+    %span.icon-next{'aria-hidden': "true"}
+    %span.sr-only= t('page.home.carusel.next')

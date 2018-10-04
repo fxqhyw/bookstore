@@ -1,0 +1,59 @@
+%main.container
+  =link_to :back, class: 'general-back-link' do
+    %i.fa.fa-long-arrow-left.mr-15
+      = t('button.back_to_results')
+  .row
+    .col-sm-6
+      .product-gallery
+        - if @book.images.any?
+          .mb-20
+            %img.img-responsive{src: main_image(@book)}
+          .clearfix
+            - @book.images[1..3].each do |image|
+              %img{src: secondary_image(image)}
+        - else
+          .mb-20
+            %img.img-responsive{src: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ352GRUKdIFLP3va0Tj7QREidI4lwUABrtUJbQehqIL02O_blo"}
+    .col-sm-6
+      %h1.mt-res-0= @book.title
+      %p.lead.small= @book.authors_list
+      .row
+        = form_with url: order_items_path, method: :post, remote: true do |f|
+          .col-xs-12.col-md-4
+            %p.h1.in-gold-500.mt-10= price_to_euro(@book.price)
+          .col-xs-5.col-md-3
+            .input-group.general-position
+              %a.input-link.quantity-minus{href: "#"}
+                %i.fa.fa-minus.line-height-40
+              = f.text_field :quantity, value: 1, class: 'form-control quantity-input', id: 'order_item_quantity', min: 1
+              %a.input-link.quantity-plus{href: "#"}
+                %i.fa.fa-plus.line-height-40
+          .col-xs-7.col-md-5
+            = f.hidden_field :book_id, value: @book.id
+            = f.submit t('button.add_to_cart'), class: 'btn btn-default pull-right general-position'
+      .general-info-wrap.divider-lg
+        %p= t('page.book.show.description')        
+        %p.lead.small.line-height-2
+          - if @book.description.length > 350
+            = truncate(@book.description, length: 265)
+            = link_to t('button.read_more'), '#', remote: true, onclick: "$(this).parent().text('#{escape_javascript @book.description}')", class: 'in-gold-500 ml-10'
+          - else
+            = @book.description
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left= t('page.book.show.published_at')
+          %p.lead.small.pull-right= @book.published_at
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left= t('page.book.show.dimension')
+          %p.lead.small.pull-right= @book.dimensions_string
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left= t('page.book.show.materials')
+          %p.lead.small.pull-right= @book.materials
+  .mb-80
+    - if @reviews.any?
+      %h3.in-gold-500.mb-25= "#{t('review.reviews')} (#{@book.reviews.approved.count})"
+      = render 'reviews'
+    - if can? :create, Review
+      = render 'review_form'

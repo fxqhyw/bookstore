@@ -1,0 +1,16 @@
+!!! 5
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    = favicon_link_tag asset_path('https://png.icons8.com/dusk/50/000000/book-shelf.png'), rel:'icon', type: 'image/png'
+    %title Bookstore
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    = render 'layouts/header'
+    = render 'layouts/flash'
+    = yield
+    = render 'layouts/footer'
+    

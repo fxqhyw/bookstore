@@ -1,0 +1,43 @@
+%main.container
+  %h1.general-title-margin= t('settings.settings')
+  = devise_error_messages!
+  %ul.nav.clearfix.mb-20{role: "tablist"}
+    %li.tab-item{role: "presentation"}
+      = link_to t('settings.address'), address_path, class: 'tab-link'
+    %li.tab-item{role: "presentation"}
+      = link_to t('settings.privacy'), privacy_path, class: 'tab-link text-as-link'
+  .tab-content
+    #privacy.tab-pane.fade{role: "tabpanel"}
+    .row.mb-60
+      .col-sm-5
+        %p.in-gold-500.font-18.mb-25 Email
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'general-form-md', id: 'edit_email_form' }) do |f|
+          .form-group.mb-35
+            = f.label :email, 'Enter Email', class: 'control-label input-label'
+            = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', name:"email", type: "email"
+          .general-text-align
+            = f.submit t('settings.save'), class: "btn btn-default mb-35"
+      .col-sm-5.col-sm-offset-1
+        %p.in-gold-500.font-18.mb-25= t('settings.password')
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: "general-form-md, pb-25", id: 'edit_password_form'}) do |f|
+          .form-group.mb-30
+            %label.control-label.font-weight-light{for: "oldPassword"}= t('settings.old_password')
+            = f.password_field :current_password, autocomplete: "off", placeholder: t('settings.old_password'), id: "oldPassword", class: "form-control"
+          .form-group.mb-30
+            %label.control-label.font-weight-light{for: "password"}= t('settings.new_password')
+            = f.password_field :password, autocomplete: "off", placeholder: t('settings.new_password'), id: "password", class: "form-control"
+          .form-group.mb-40
+            %label.control-label.font-weight-light{for: "confirmPassword"}= t('settings.confirm_password')
+            = f.password_field :password_confirmation, autocomplete: "off", placeholder: t('settings.confirm_password'), id: "control-label", class: "form-control"
+          .general-text-align
+            = f.submit t('settings.save'), class: "btn btn-default mb-10"
+      .col-sm-12
+        %p.in-gold-500.font-18.mb-25= t('settings.remove_account')
+        .general-settings-btn
+          = button_to t('settings.please_remove_account'), registration_path(resource_name), disabled: "disabled", class: 'btn btn-default mb-20', id: 'delete', method: :delete
+        .form-group.checkbox.general-settings-checkbox
+          %label.checkbox-label#remove_account
+            %input.checkbox-input{type: "checkbox", hidden: "true", id: 'undestand'}
+            %span.checkbox-icon
+              %i.fa.fa-check
+            %span.checkbox-text= t('settings.im_agree_lost_all_data')

@@ -1,0 +1,13 @@
+%main.container.general-main-wrap
+  .text-center
+    %h3.general-login-title Forgot your password?
+  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { class: "general-form" }) do |f|
+    = devise_error_messages!
+    .form-group.mb-30
+      = f.label :email, class: "control-label input-label"
+      = f.email_field :email, id: "email", class: "form-control", autofocus: true, placeholder: "Enter Email"
+    .text-center
+      = f.submit 'Send me reset password instructions', class: "btn btn-default mb-20"
+  %p.general-sign-text.text-center
+    Don’t have an Account?
+    = link_to 'Sign up', new_user_registration_path, class: "in-gold-500"

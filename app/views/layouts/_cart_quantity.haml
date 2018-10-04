@@ -1,0 +1,6 @@
+= link_to cart_path, class: 'shop-link pull-right hidden-xs', id: 'cart_quantity' do
+  - if current_order&.items_count&.nonzero?
+    %span.shop-icon
+      %span.shop-quantity= current_order.items_count
+  - else
+    %span.shop-icon.bc-transparent

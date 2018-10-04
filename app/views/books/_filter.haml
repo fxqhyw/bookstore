@@ -1,0 +1,13 @@
+%ul.dropdown-menu
+  %li
+    = link_to t('button.newest'), catalog_path(category: @category_id, filter: :newest)
+  %li
+    = link_to t('button.popular'), catalog_path(category: @category_id, filter: :popular)
+  %li
+    = link_to t('button.low_to_high_price'), catalog_path(category: @category_id, filter: :low_to_high_price)
+  %li
+    = link_to t('button.high_to_low_price'), catalog_path(category: @category_id, filter: :high_to_low_price)
+  %li
+    = link_to t('button.title_a_z'), catalog_path(category: @category_id, filter: :title_a_z)
+  %li
+    = link_to t('button.title_z_a'), catalog_path(category: @category_id, filter: :title_z_a)
