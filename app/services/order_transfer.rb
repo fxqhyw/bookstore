@@ -1,4 +1,6 @@
 class OrderTransfer < Rectify::Command
+  attr_reader :user, :order
+
   def initialize(user)
     @user = user
   end
@@ -20,10 +22,10 @@ class OrderTransfer < Rectify::Command
   end
 
   def delete_user_in_progress_orders
-    @user.orders.in_progress.destroy_all
+    user.orders.in_progress.destroy_all
   end
 
   def add_order_to_user
-    @order.update(user: @user)
+    order.update(user: user)
   end
 end

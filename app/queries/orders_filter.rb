@@ -1,4 +1,6 @@
 class OrdersFilter
+  attr_reader :orders, :params
+
   FILTERS = {
     'in_queue' => :in_queue,
     'in_delivery' => :in_delivery,
@@ -12,26 +14,26 @@ class OrdersFilter
   end
 
   def call
-    return send(FILTERS[@params[:filter]]) if FILTERS[@params[:filter]]
+    return send(FILTERS[params[:filter]]) if FILTERS[params[:filter]]
 
-    @orders
+    orders
   end
 
   private
 
   def in_queue
-    @orders.in_queue
+    orders.in_queue
   end
 
   def in_delivery
-    @orders.in_delivery
+    orders.in_delivery
   end
 
   def delivered
-    @orders.delivered
+    orders.delivered
   end
 
   def canceled
-    @orders.canceled
+    orders.canceled
   end
 end

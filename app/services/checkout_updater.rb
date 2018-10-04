@@ -1,4 +1,6 @@
 class CheckoutUpdater < Rectify::Command
+  attr_reader :step, :params, :order, :user
+
   STEPS = {
     address: :update_address,
     delivery: :update_delivery,
@@ -14,15 +16,15 @@ class CheckoutUpdater < Rectify::Command
   end
 
   def call
-    send(STEPS[@step]) if STEPS[@step]
+    send(STEPS[step]) if STEPS[step]
   end
 
   private
 
   def update_address
-    billing = CheckoutAddresser.new(params: @params, type: :billing).call
-    shipping = CheckoutAddresser.new(params: @params, type: :shipping).call
-    return broadcast(:only_billing_address, billing) if @params[:use_billing]['true'] == '1'
+    billing = CheckoutAddresser.new(params: params, type: :billing).call
+    shipping = CheckoutAddresser.new(params: params, type: :shipping).call
+    return broadcast(:only_billing_address, billing) if params[:use_billing]['true'] == '1'
 
     return broadcast(:both_addresses, billing, shipping) if billing.save
 
@@ -31,17 +33,17 @@ class CheckoutUpdater < Rectify::Command
   end
 
   def update_delivery
-    @order.delivery_id = @params[:delivery_id] if @params[:delivery_id]
-    broadcast(:delivery_ok, @order)
+    order.delivery_id = params[:delivery_id] if params[:delivery_id]
+    broadcast(:delivery_ok, order)
   end
 
   def update_credit_card
-    credit_card = CheckoutPayment.new(@params).call
+    credit_card = CheckoutPayment.new(params).call
     broadcast(:payment_ok, credit_card)
   end
 
   def confirm_order
-    placed_order = ConfirmOrder.new(order: @order, user: @user).call
+    placed_order = ConfirmOrder.new(order: order, user: user).call
     broadcast(:confirm_ok, placed_order)
   end
 end

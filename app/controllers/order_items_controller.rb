@@ -2,7 +2,7 @@ class OrderItemsController < ApplicationController
   before_action :order_item, only: %i[update destroy]
 
   def create
-    CreateOrderItem.call(permited_params) do
+    CreateOrderItem.call(params: permited_params, current_order: current_order) do
       on(:ok) { render :create }
     end
   end

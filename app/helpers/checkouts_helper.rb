@@ -5,16 +5,19 @@ module CheckoutsHelper
 
   def address_error?(field:, tag:)
     return @billing.errors.include?(field) if billing_address?(tag)
+
     @shipping.errors.include?(field) if shipping_address?(tag)
   end
 
   def address_error_message(field:, tag:)
     return @billing.errors[field].to_sentence if billing_address?(tag)
+
     @shipping.errors[field].to_sentence if shipping_address?(tag)
   end
 
   def address_saved_value(field:, tag:)
     return order_address_field('billing', field) || user_address_field('billing', field) || inputed_address_field('billing', field) if hide_address_fields?(tag)
+
     order_address_field(tag, field) || user_address_field(tag, field) || inputed_address_field(tag, field)
   end
 

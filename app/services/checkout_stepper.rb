@@ -1,4 +1,6 @@
 class CheckoutStepper < Rectify::Command
+  attr_reader :steps, :current_step, :step, :order, :user, :editable
+
   def initialize(steps:, step:, order:, user:, edit: false)
     @steps = steps
     @current_step = step
@@ -11,34 +13,34 @@ class CheckoutStepper < Rectify::Command
     return broadcast(:empty_cart) if empty_cart?
 
     showable_step
-    return broadcast(:invalid) if @current_step == @step
+    return broadcast(:invalid) if current_step == step
 
-    broadcast(:ok, @step)
+    broadcast(:ok, step)
   end
 
   private
 
   def showable_step
-    return @step = @current_step if @editable && completed?(@current_step)
+    return @step = @current_step if editable && completed?(current_step)
 
-    @steps.reverse_each do |step|
+    steps.reverse_each do |step|
       @step = step unless completed?(step)
     end
   end
 
   def completed?(step)
     {
-      login: @user,
-      address: @order.billing_address,
-      delivery: @order.delivery,
-      payment: @order.credit_card,
-      confirm: @order.in_queue?
+      login: user,
+      address: order.billing_address,
+      delivery: order.delivery,
+      payment: order.credit_card,
+      confirm: order.in_queue?
     }[step]
   end
 
   def empty_cart?
-    return true unless @order
+    return true unless order
 
-    @order.order_items.empty?
+    order.order_items.empty?
   end
 end
